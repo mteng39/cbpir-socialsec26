@@ -1,0 +1,227 @@
+{
+  "16384": {
+    "query_fixtures": [
+      {
+        "expected_literal_alignment_count": 31,
+        "expected_literal_record_count": 16,
+        "pattern": [
+          44
+        ],
+        "pattern_escaped": ",",
+        "pattern_hex": "2c",
+        "source_query_id": "fps-k16-exact-16",
+        "threshold": 0.5
+      },
+      {
+        "expected_literal_alignment_count": 16,
+        "expected_literal_record_count": 16,
+        "pattern": [
+          114,
+          101,
+          46,
+          52
+        ],
+        "pattern_escaped": "re.4",
+        "pattern_hex": "72652e34",
+        "source_query_id": "plaintext-natural-m4",
+        "threshold": 0.5
+      },
+      {
+        "expected_literal_alignment_count": 16,
+        "expected_literal_record_count": 16,
+        "pattern": [
+          103,
+          32,
+          99,
+          111,
+          114,
+          101,
+          46,
+          52
+        ],
+        "pattern_escaped": "g core.4",
+        "pattern_hex": "6720636f72652e34",
+        "source_query_id": "plaintext-natural-m8",
+        "threshold": 0.5
+      },
+      {
+        "expected_literal_alignment_count": 16,
+        "expected_literal_record_count": 16,
+        "pattern": [
+          101,
+          110,
+          101,
+          114,
+          97,
+          116,
+          105,
+          110,
+          103,
+          32,
+          99,
+          111,
+          114,
+          101,
+          46,
+          52
+        ],
+        "pattern_escaped": "enerating core.4",
+        "pattern_hex": "656e65726174696e6720636f72652e34",
+        "source_query_id": "plaintext-natural-m16",
+        "threshold": 0.5
+      }
+    ],
+    "source_sha256": "8a93e238a588cef007dfaee17cf63d4c70717e562d006cec64405c5bc870f320",
+    "source_workload": "data/workloads/formal_16384_input.json"
+  },
+  "32768": {
+    "query_fixtures": [
+      {
+        "expected_literal_alignment_count": 17,
+        "expected_literal_record_count": 17,
+        "pattern": [
+          58
+        ],
+        "pattern_escaped": ":",
+        "pattern_hex": "3a",
+        "source_query_id": "fps-k16-more-17",
+        "threshold": 0.5
+      },
+      {
+        "expected_literal_alignment_count": 16,
+        "expected_literal_record_count": 16,
+        "pattern": [
+          114,
+          101,
+          46,
+          56
+        ],
+        "pattern_escaped": "re.8",
+        "pattern_hex": "72652e38",
+        "source_query_id": "plaintext-natural-m4",
+        "threshold": 0.5
+      },
+      {
+        "expected_literal_alignment_count": 16,
+        "expected_literal_record_count": 16,
+        "pattern": [
+          103,
+          32,
+          99,
+          111,
+          114,
+          101,
+          46,
+          56
+        ],
+        "pattern_escaped": "g core.8",
+        "pattern_hex": "6720636f72652e38",
+        "source_query_id": "plaintext-natural-m8",
+        "threshold": 0.5
+      },
+      {
+        "expected_literal_alignment_count": 16,
+        "expected_literal_record_count": 16,
+        "pattern": [
+          101,
+          110,
+          101,
+          114,
+          97,
+          116,
+          105,
+          110,
+          103,
+          32,
+          99,
+          111,
+          114,
+          101,
+          46,
+          56
+        ],
+        "pattern_escaped": "enerating core.8",
+        "pattern_hex": "656e65726174696e6720636f72652e38",
+        "source_query_id": "plaintext-natural-m16",
+        "threshold": 0.5
+      }
+    ],
+    "source_sha256": "dfa04d5debc3c280b137306d0337f37402c5ba48086efd84efb891cc2ead487f",
+    "source_workload": "data/workloads/formal_32768_input.json"
+  },
+  "8192": {
+    "query_fixtures": [
+      {
+        "expected_literal_alignment_count": 16,
+        "expected_literal_record_count": 16,
+        "pattern": [
+          102
+        ],
+        "pattern_escaped": "f",
+        "pattern_hex": "66",
+        "source_query_id": "fps-k16-exact-16",
+        "threshold": 0.5
+      },
+      {
+        "expected_literal_alignment_count": 17,
+        "expected_literal_record_count": 17,
+        "pattern": [
+          114,
+          101,
+          46,
+          49
+        ],
+        "pattern_escaped": "re.1",
+        "pattern_hex": "72652e31",
+        "source_query_id": "plaintext-natural-m4",
+        "threshold": 0.5
+      },
+      {
+        "expected_literal_alignment_count": 17,
+        "expected_literal_record_count": 17,
+        "pattern": [
+          103,
+          32,
+          99,
+          111,
+          114,
+          101,
+          46,
+          49
+        ],
+        "pattern_escaped": "g core.1",
+        "pattern_hex": "6720636f72652e31",
+        "source_query_id": "plaintext-natural-m8",
+        "threshold": 0.5
+      },
+      {
+        "expected_literal_alignment_count": 17,
+        "expected_literal_record_count": 17,
+        "pattern": [
+          101,
+          110,
+          101,
+          114,
+          97,
+          116,
+          105,
+          110,
+          103,
+          32,
+          99,
+          111,
+          114,
+          101,
+          46,
+          49
+        ],
+        "pattern_escaped": "enerating core.1",
+        "pattern_hex": "656e65726174696e6720636f72652e31",
+        "source_query_id": "plaintext-natural-m16",
+        "threshold": 0.5
+      }
+    ],
+    "source_sha256": "af85645569bcd1e401376a042db3b03519d74e0710b51b5d49f74d72ee8f97eb",
+    "source_workload": "data/workloads/formal_8192_input.json"
+  }
+}

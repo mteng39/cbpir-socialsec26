@@ -1,0 +1,9 @@
+{
+  "command": "<REPOSITORY_ROOT>/code/code_branch/prototypes/.build-cache/pattern-length-v1/release/cbpir_pattern_length_v1",
+  "elapsed_seconds": 18.692476057098247,
+  "maximum_rss_kib": 49700,
+  "maximum_threads": 1,
+  "observed_process_samples": 1665,
+  "return_code": 0,
+  "ring_dimension": 32768
+}

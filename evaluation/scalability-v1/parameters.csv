@@ -1,0 +1,4 @@
+status,n,text_bytes,transform_len,ckks_ring_dimension,ckks_batch_size,fps_multiplicative_depth,fps_first_modulus_bits,fps_scaling_modulus_bits,rfps_multiplicative_depth,rfps_first_modulus_bits,rfps_scaling_modulus_bits,ckks_scaling_technique,ckks_key_switch_technique,bgv_ring_dimension,plaintext_modulus,bgv_multiplicative_depth,record_slots,public_k,reason
+MEASURED,512,13358,16384,32768,16384,2,60,50,1,60,24,FIXEDMANUAL,HYBRID,32768,786433,1,64,16,
+MEASURED,1024,26524,32768,65536,32768,2,60,50,1,60,24,FIXEDMANUAL,HYBRID,65536,786433,1,64,16,
+NOT_RUN,2048,,,131072,65536,2,60,50,1,60,24,FIXEDMANUAL,HYBRID,131072,786433,1,64,16,NOT RUN: pinned corpus has 1331 eligible records

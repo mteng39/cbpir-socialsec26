@@ -1,0 +1,13 @@
+n,s,hierarchy_t,bf_levels,m,ell_raw,ell,compactness,count_additions,encode_hashes,encode_additions_lower,encode_additions_upper,decode_check_bound,pir_requests,ct_ct_multiplications,provenance,ell_rounding
+128,1,6,7,33,11.489125293076057,12,84,127,1792,1708,1792,200,17,0,D,ceil-local-convention
+128,4,4,5,36,48.0,48,240,127,1280,1040,1280,152,20,0,D,ceil-local-convention
+128,8,3,4,40,101.19288512538814,102,408,127,1024,616,1024,136,24,0,D,ceil-local-convention
+128,16,2,3,48,221.70250336881628,222,666,127,768,102,768,128,32,0,D,ceil-local-convention
+256,1,7,8,33,11.489125293076057,12,96,255,4096,4000,4096,233,17,0,D,ceil-local-convention
+256,4,5,6,36,48.0,48,288,255,3072,2784,3072,188,20,0,D,ceil-local-convention
+256,8,4,5,40,101.19288512538814,102,510,255,2560,2050,2560,176,24,0,D,ceil-local-convention
+256,16,3,4,48,221.70250336881628,222,888,255,2048,1160,2048,176,32,0,D,ceil-local-convention
+512,1,8,9,33,11.489125293076057,12,108,511,9216,9108,9216,266,17,0,D,ceil-local-convention
+512,4,6,7,36,48.0,48,336,511,7168,6832,7168,224,20,0,D,ceil-local-convention
+512,8,5,6,40,101.19288512538814,102,612,511,6144,5532,6144,216,24,0,D,ceil-local-convention
+512,16,4,5,48,221.70250336881628,222,1110,511,5120,4010,5120,224,32,0,D,ceil-local-convention

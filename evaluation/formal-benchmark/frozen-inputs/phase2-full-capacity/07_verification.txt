@@ -1,0 +1,537 @@
+PHASE 2 VERIFICATION
+====================
+
+repository: <REPOSITORY_ROOT>
+repository_head: 7f2c3276941102bf0624912c7fb78ae458b71629
+rustc: rustc 1.91.1 (ed61e7d7e 2025-11-07)
+cargo: cargo 1.91.1 (ea2d97820 2025-10-10)
+source_sha256: 2a819ea540909db682005c9cf948387a40729b5c2e9f19d430e29ce704825496
+openfhe_version: 1.5.1
+security: HEStd_128_classic
+timing_scope: diagnostic only; not final benchmark
+p3_diff_sha256_before: d7de996cc0175213f48e32411a7530c424c7d6085f5a6a3738e641a3b0f9c27e
+p3_diff_sha256_after:  d7de996cc0175213f48e32411a7530c424c7d6085f5a6a3738e641a3b0f9c27e
+p3_unchanged_during_phase2: true
+cargo_fmt: unavailable in pinned toolchain; no environment mutation attempted
+reproduction_command: PYTHONDONTWRITEBYTECODE=1 python3 experiments/cbpir-scaling/phase2-full-capacity/run_phase2.py
+
+BUILD
+cargo build --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/Cargo.toml --features native --bin cbpir_phase2_full_capacity
+exit_status=0
+
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.91s
+
+NATIVE CONFIGURATION RUNS
+N=8192: <REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/phase1/debug/cbpir_phase2_full_capacity 8192
+exit_status=0
+N=16384: <REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/phase1/debug/cbpir_phase2_full_capacity 16384
+exit_status=0
+N=32768: <REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/phase1/debug/cbpir_phase2_full_capacity 32768
+exit_status=0
+
+REGRESSION TESTS
+/usr/bin/python3 -m unittest discover -s <REPOSITORY_ROOT>/experiments/cbpir-scaling/phase2-full-capacity -p test_phase2_workload.py -v
+exit_status=0
+
+test_generation_is_byte_for_byte_deterministic (test_phase2_workload.Phase2WorkloadTests.test_generation_is_byte_for_byte_deterministic) ... ok
+test_query_corpus_has_all_required_classes_and_k_values (test_phase2_workload.Phase2WorkloadTests.test_query_corpus_has_all_required_classes_and_k_values) ... ok
+test_real_bytes_and_capacity_constraints_are_not_padded (test_phase2_workload.Phase2WorkloadTests.test_real_bytes_and_capacity_constraints_are_not_padded) ... ok
+test_source_and_nested_prefixes_are_frozen (test_phase2_workload.Phase2WorkloadTests.test_source_and_nested_prefixes_are_frozen) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.514s
+
+OK
+
+cargo test --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-A_bgv_cpir/Cargo.toml --features openfhe-backend -- --test-threads=1
+exit_status=0
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test encrypted_empty_window_query_returns_one_all_zero_response ... ok
+test encrypted_multi_window_query_matches_plaintext_union ... ok
+test encrypted_multi_window_query_rejects_duplicate_and_out_of_range_ids ... ok
+test prototype_p0_a_bgv_retrieves_every_window_including_boundaries ... ok
+test prototype_p0_a_binary_serialization_round_trip_preserves_response ... ok
+test prototype_p0_a_rejects_boundary_and_malformed_inputs_before_ffi ... ok
+test prototype_p0_a_reports_legacy_zero_termination_separately_from_fixed_decode ... ok
+test reports_exact_openfhe_runtime_version ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.21s
+
+
+running 1 test
+test prototype_p0_a_experiment_emits_evidence_classified_json ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.14s
+
+
+running 15 tests
+test fixed_window_oracle_retrieves_a_known_middle_record ... ok
+test fixed_window_oracle_retrieves_every_representative_index ... ok
+test go_derived_decode_fixture_is_exact_and_rejects_non_byte_values ... ok
+test go_derived_heterogeneous_fixture_has_exact_windows_and_tail_padding ... ok
+test go_derived_mask_fixture_is_exact_and_independent_of_other_oracles ... ok
+test go_derived_rounding_fixtures_cover_lengths_eight_nine_and_sixteen ... ok
+test go_derived_selector_fixture_is_exact_and_independent_of_packing ... ok
+test mask_slots_rejects_mismatched_slot_domains ... ok
+test multi_window_selector_covers_first_and_last_without_wraparound ... ok
+test multi_window_selector_encodes_empty_as_all_zero_and_rejects_duplicates ... ok
+test multi_window_selector_matches_repeated_hlf_window_fill ... ok
+test pack_records_rejects_capacity_overflow ... ok
+test window_selector_rejects_index_equal_to_record_count ... ok
+test zero_terminated_codec_truncates_an_interior_zero_byte ... ok
+test zero_width_layout_is_rejected_at_every_public_layout_boundary ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 2 tests
+test every_bgv_profile_runs_full_multi_window_fetch ... ok
+test named_bgv_profiles_have_expected_capacity ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.30s
+
+
+running 19 tests
+test adding_a_second_one_is_rejected ... ok
+test clearing_the_unique_one_is_rejected ... ok
+test generated_one_hot_has_the_requested_invariants ... ok
+test generated_one_hot_selects_the_requested_database_value ... ok
+test one_hot_constructs_first_middle_and_last_selectors ... ok
+test one_hot_rejects_empty_domain ... ok
+test one_hot_rejects_index_equal_to_length ... ok
+test one_hot_rejects_index_greater_than_length ... ok
+test one_hot_selects_the_only_element ... ok
+test replacing_an_entry_with_a_non_binary_value_is_rejected ... ok
+test select_plaintext_handles_zero_and_duplicate_values ... ok
+test select_plaintext_rejects_all_zero_selector ... ok
+test select_plaintext_rejects_empty_inputs ... ok
+test select_plaintext_rejects_length_mismatch_in_both_directions ... ok
+test select_plaintext_rejects_multiple_selected_positions ... ok
+test select_plaintext_rejects_non_binary_selector_value ... ok
+test select_plaintext_selects_first_middle_and_last_elements ... ok
+test select_plaintext_selects_the_only_element ... ok
+test select_plaintext_selects_u64_max_without_overflow ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.47s
+     Running unittests src/lib.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/openfhe_bgv_cpir-357371d031a6b12b)
+     Running unittests src/bin/p0a_experiment.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0a_experiment-d270a33b6681ce4d)
+     Running tests/bgv_cpir.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/bgv_cpir-b629861dcc5fa403)
+     Running tests/experiment_schema.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/experiment_schema-aa2df57634039f0b)
+     Running tests/fixed_window.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/fixed_window-5c74577ba71c409c)
+     Running tests/parameter_profiles.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/parameter_profiles-b0ceaefe38a976b7)
+     Running tests/plaintext_selection.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/plaintext_selection-0e5c0cc3811042b2)
+   Doc-tests openfhe_bgv_cpir
+
+cargo test --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/Cargo.toml -- --test-threads=1
+exit_status=0
+
+running 1 test
+test workloads::tests::rejects_corrupt_schema_and_semantics ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.53s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test default_fps_is_fps14_and_default_rfps_is_rfps13 ... ok
+test layout_has_no_legacy_1024_byte_runtime_ceiling ... ok
+test named_profiles_accept_full_slots_and_reject_smallest_over_capacity_text ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 2 tests
+test ckks_componentwise_product_matches_independent_complex_arithmetic ... ok
+test ckks_config_records_the_direct_complex_execution_contract ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+
+running 4 tests
+test encrypted_fps_accepts_phase1_text_fixture ... ok
+test encrypted_fps_handles_declared_extreme_byte_scores ... ok
+test encrypted_fps_preserves_overlapping_and_boundary_matches ... ok
+test encrypted_fps_reproduces_fixed_p0b_scores_and_matches ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.28s
+
+
+running 7 tests
+test classification_separates_ckks_threshold_crossings ... ok
+test encrypted_rfps_accepts_phase1_text_fixture ... ok
+test encrypted_rfps_handles_declared_extreme_byte_scores ... ok
+test encrypted_rfps_identifies_intrinsic_cancellation ... ok
+test encrypted_rfps_preserves_boundary_and_multiple_true_matches ... ok
+test encrypted_rfps_reproduces_fixed_scores_and_true_match ... ok
+test encrypted_rfps_separates_broad_threshold_from_random_cancellation ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.53s
+
+
+running 2 tests
+test negative_exponent_dft_matches_independently_derived_vector ... ok
+test positive_exponent_normalized_idft_matches_independently_derived_input ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 4 tests
+test explicit_rfps_scale_probe_keeps_default_mapping_reproducible ... ok
+test phase1_fixture_constants_do_not_define_runtime_capacity ... ok
+test retained_parameters_preserve_maximum_magnitude_decisions ... ok
+test text_beyond_phase1_fixture_is_valid_but_pattern_overflow_is_typed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.72s
+
+
+running 1 test
+test experiment_emits_proposal_sized_reproducibility_and_separation_evidence ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 20.72s
+
+
+running 2 tests
+test empty_transform_semantics_are_preserved ... ok
+test fft_matches_naive_dft_and_idft_at_audit_lengths ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.21s
+
+
+running 5 tests
+test feer_fps_layout_reproduces_fixed_and_boundary_scores ... ok
+test feer_rfps_layout_reproduces_fixed_scores_and_cancellation_witness ... ok
+test fps_layout_uses_prefix_square_sentinel_and_reversed_pattern ... ok
+test layout_rejects_unsupported_lengths_and_randomizers ... ok
+test right_rotation_factors_match_a_hand_derived_four_point_vector ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 1 test
+test linked_openfhe_is_1_5_1_and_preserves_complex_slots ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.31s
+
+
+running 5 tests
+test packed_config_is_distinct_from_single_search_transform_limit ... ok
+test packed_trials_match_scalar_ckks_and_independent_exact_scores ... ok
+test packed_true_match_is_preserved_and_neighbor_reordering_is_isolated ... ok
+test packed_validation_rejects_bad_shapes_domains_and_capacity ... ok
+test plaintext_concatenated_blocks_have_exactly_independent_idfts ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.94s
+
+
+running 5 tests
+test all_ckks_profiles_run_retained_server_text_match_paths ... ok
+test explicit_fps_parameters_keep_the_retained_operation_path ... ok
+test fps_repair_parameters_start_from_openfhe_defaults ... ok
+test named_ckks_profiles_preserve_requested_parameters ... ok
+test repaired_named_fps_profiles_pass_the_retained_phase1_fixture ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.09s
+
+
+running 1 test
+test proposal_matrix_and_bgl_preserve_true_matches_and_classify_all_rfps_scores ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 10.10s
+
+
+running 3 tests
+test consecutive_same_config_probes_do_not_accumulate_evaluation_keys ... ok
+test fps_binary_reload_preserves_search_and_protocol_artifact_counts ... ok
+test rfps_binary_reload_preserves_search_and_protocol_artifact_counts ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.67s
+
+
+running 2 tests
+test server_text_ct_pt_packed_reuses_baseline_shape_validation ... ok
+test server_text_ct_pt_packed_rfps_preserves_trial_isolation ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+
+running 1 test
+test focused_report_names_backends_and_preserves_negative_classifications ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.29s
+
+
+running 5 tests
+test server_text_ct_pt_fps_matches_independent_oracle_at_boundaries_and_overlaps ... ok
+test server_text_ct_pt_fps_preserves_scores_without_ciphertext_products ... ok
+test server_text_ct_pt_rfps_preserves_classification_without_ciphertext_products ... ok
+test server_text_ct_pt_rfps_retains_cancellation_and_threshold_only_semantics ... ok
+test server_text_ct_pt_scalar_reuses_baseline_validation_contract ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.73s
+
+
+running 1 test
+test server_text_ct_pt_artifact_sizes_separate_query_response_and_keys ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.26s
+
+
+running 1 test
+test loads_the_canonical_proposal_workload_fixture ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.32s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.51s
+     Running unittests src/lib.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0c_ckks_dft_search-5d00bfd4af6733e9)
+     Running unittests src/bin/p0c_capacity_audit.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0c_capacity_audit-68866ffafb460753)
+     Running unittests src/bin/p0c_experiment.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0c_experiment-ecc8e0901512f75e)
+     Running unittests src/bin/p0c_fps_repair_candidate.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0c_fps_repair_candidate-f9fb80f8806fc6bf)
+     Running unittests src/bin/p0c_rfps_scaling_probe.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0c_rfps_scaling_probe-03f3da3c52087da7)
+     Running unittests src/bin/p0c_server_text_ct_pt.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0c_server_text_ct_pt-6ded6d6b3a1963cb)
+     Running tests/capacity_contract.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/capacity_contract-c57d9c9936e55efb)
+     Running tests/ckks_execution.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/ckks_execution-f248333d3b280cf0)
+     Running tests/ckks_fps.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/ckks_fps-ee7fc9edbc573efc)
+     Running tests/ckks_rfps.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/ckks_rfps-fd3b98289ef00870)
+     Running tests/dft_reference.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/dft_reference-66361574d7f0082c)
+     Running tests/domain_expansion.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/domain_expansion-c0ac556aa68fc554)
+     Running tests/experiment_schema.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/experiment_schema-636365e331089f81)
+     Running tests/fft_equivalence.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/fft_equivalence-5caf6f9f7c54de91)
+     Running tests/layout_reference.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/layout_reference-fa53ce2c4504ed75)
+     Running tests/openfhe_complex_capability.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/openfhe_complex_capability-dd3a1595cc3ecb4d)
+     Running tests/packed_rfps.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/packed_rfps-f74fc61f2693adc9)
+     Running tests/parameter_profiles.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/parameter_profiles-d210d006dc8e186f)
+     Running tests/proposal_workloads.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/proposal_workloads-c0f5a048b9f6e701)
+     Running tests/serialization_roundtrip.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/serialization_roundtrip-abdcd4251c38acc1)
+     Running tests/server_text_ct_pt_packed.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/server_text_ct_pt_packed-9308b09f9271b437)
+     Running tests/server_text_ct_pt_report.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/server_text_ct_pt_report-161605597352e0bc)
+     Running tests/server_text_ct_pt_scalar.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/server_text_ct_pt_scalar-0d3a50cd148fa238)
+     Running tests/server_text_ct_pt_sizes.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/server_text_ct_pt_sizes-f5f7bc6d5ffcc61e)
+     Running tests/workloads.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/workloads-ec79e20dce57dd5f)
+   Doc-tests p0c_ckks_dft_search
+
+cargo test --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/Cargo.toml --features native -- --test-threads=1
+exit_status=0
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 8 tests
+test acceptance_is_inclusive_and_not_score_ranked ... ok
+test boundary_capacity_and_long_pattern_without_in_record_windows ... ok
+test frame_preserves_zero_bytes_and_rejects_corruption ... ok
+test injected_crossings_change_selection_in_both_directions ... ok
+test malformed_catalog_and_request_inputs_fail ... ok
+test malformed_match_contract_and_targets_fail ... ok
+test oracle_distinguishes_semantic_matches_cancellation_threshold_and_ckks_errors ... ok
+test sorted_layout_maps_first_last_and_rejects_guards ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 2 tests
+test k1_default_stays_ct_ct_and_explicit_server_text_ct_pt_reconstructs_exactly ... ok
+test k4_explicit_server_text_ct_pt_keeps_locate_and_p3_fetch_contracts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.68s
+
+
+running 3 tests
+test locate_many_allows_empty_real_selection_and_rejects_boundaries ... ok
+test locate_many_orders_stable_ids_deduplicates_and_truncates ... ok
+test locate_many_rejects_non_multi_capacity ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test every_multi_capacity_uses_one_fetch_for_an_empty_real_selection ... ok
+test k4_pipeline_maps_arbitrary_stable_ids_to_physical_rows_and_back ... ok
+test k4_pipeline_rejects_catalog_that_leaves_too_few_dummy_windows ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.26s
+
+
+running 1 test
+test quick_k4_report_covers_frozen_matrix_and_retains_stage_timings ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 8.01s
+
+
+running 2 tests
+test frozen_k4_fixture_matrix_has_expected_client_decisions ... ok
+test locate_many_propagates_an_injected_match_decision_without_calling_it_fetch_failure ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 3 tests
+test bgv_serialization_roundtrip ... ok
+test native_composition_matches_declared_fixture_outcomes ... ok
+test native_last_physical_real_window_preserves_full_binary_payload ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.08s
+
+
+running 4 tests
+test explicit_phase2_match_profiles_feed_locate_without_changing_semantics ... ok
+test no_dummy_fetch_enforces_profile_capacity_instead_of_catalog_constant ... ok
+test no_dummy_fetch_has_one_constant_size_query_and_response_for_every_cardinality ... ok
+test no_dummy_fetch_rejects_unencoded_physical_window ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.39s
+
+
+running 1 test
+test rate_runner_calls_existing_pipeline_and_retains_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.41s
+
+
+running 2 tests
+test realistic_input_validation_rejects_semantic_drift ... ok
+test realistic_inputs_map_to_existing_pipeline_types ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 1 test
+test frozen_bgl_oracle_has_expected_k4_workload_shape ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+
+running 1 test
+test native_row_retains_a_realistic_multi_record_result ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.76s
+
+
+running 1 test
+test experiment_reports_real_runs_and_explicit_negative_results ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.27s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+   Compiling p0d-ckks-single-record-composition v0.1.0 (<REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.36s
+     Running unittests src/lib.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0d_ckks_single_record_composition-4487ff758bb27d9b)
+     Running unittests src/bin/cbpir_phase1_profile.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/cbpir_phase1_profile-4cb24d4f126dd631)
+     Running unittests src/bin/cbpir_phase2_full_capacity.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/cbpir_phase2_full_capacity-8b0f142989d15b94)
+     Running unittests src/bin/p0d_bgl_k1.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0d_bgl_k1-2ec93c319da354a9)
+     Running unittests src/bin/p0d_bgl_kgt1.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0d_bgl_kgt1-de6532b1ac386dd6)
+     Running unittests src/bin/p0d_experiment.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0d_experiment-6f58708f9bafaf0c)
+     Running unittests src/bin/p0d_kgt1_synthetic.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0d_kgt1_synthetic-e9a500a7f120701f)
+     Running unittests src/bin/p0d_rates.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/p0d_rates-5c6ac581c220c9e1)
+     Running tests/contracts.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/contracts-321ab2484be1db14)
+     Running tests/match_backend_native.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/match_backend_native-89f9f74b40af262a)
+     Running tests/multi_contract.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/multi_contract-e597b1601e5824ca)
+     Running tests/multi_native.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/multi_native-aed225babcfe7a7d)
+     Running tests/multi_report.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/multi_report-6c98c2b4ed97cb62)
+     Running tests/multi_synthetic_contract.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/multi_synthetic_contract-570c0a6fa94936f8)
+     Running tests/native.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/native-4536109c263253d6)
+     Running tests/phase2_native.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/phase2_native-21fd5f87a0aaff7d)
+     Running tests/rates.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/rates-a74e65dae546db0f)
+     Running tests/realistic_contract.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/realistic_contract-443a97cb0b1e7c17)
+     Running tests/realistic_kgt1_contract.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/realistic_kgt1_contract-553bc2ee356f62e7)
+     Running tests/realistic_kgt1_native.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/realistic_kgt1_native-ab95bc469f664442)
+     Running tests/report.rs (code_branch/prototypes/.build-cache/phase1/debug/deps/report-047349a3ea776de7)
+   Doc-tests p0d_ckks_single_record_composition
+
+VERIFICATION GATES
+three_capacity_constraints=true
+no_text_truncation=true
+no_physical_dummy_windows=true
+fps_zero_decision_mismatches=true
+selected_fetch_payloads_exact=true
+unselected_fetch_windows_zero=true
+empty_selector_all_zero=true
+one_query_one_response=true
+serialized_sizes_independent_of_selection_size=true
+profiles_unchanged=true
+p3_implementation_untouched=true
+formal_benchmark_not_started=true

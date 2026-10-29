@@ -1,0 +1,10 @@
+R1.4 pattern-length benchmark verification: PASS
+configurations=24
+measured_executions=480
+warmups_per_configuration=3
+measured_runs_per_configuration=20
+communication_serialized_each_execution=true
+communication_identical_within_each_configuration=true
+all_fetch_exact=true
+all_configurations_successful=true
+online_statistics=median_per_run_sum,sum_of_stage_medians,median_outer_timer

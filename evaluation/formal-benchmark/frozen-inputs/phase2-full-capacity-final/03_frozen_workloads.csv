@@ -1,0 +1,4 @@
+profile,N,n,ell,|T|,L,N_CKKS/2,U_Match,max_serialized_slots,payload_bytes,allocated_fetch_slots,N_BGV,U_Fetch,payload_byte_utilization,limiting_stage,eligible_records,searchable_min,searchable_max,searchable_mean,searchable_median,payload_min,payload_max,payload_mean,payload_median
+CBPIR-13,8192,128,64,3201,4096,4096,1.0,54,3074,8192,8192,1.0,0.375244140625,Fetch,1331,18,40,24.015625,21.0,18,40,24.015625,21.0
+CBPIR-14,16384,256,64,6544,8192,8192,1.0,54,6289,16384,16384,1.0,0.38385009765625,Fetch,1331,18,40,24.56640625,21.0,18,40,24.56640625,21.0
+CBPIR-15,32768,512,64,13358,16384,16384,1.0,54,12847,32768,32768,1.0,0.392059326171875,Fetch,1331,18,40,25.091796875,21.0,18,40,25.091796875,21.0

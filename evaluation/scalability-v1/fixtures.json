@@ -1,0 +1,34 @@
+{
+  "corpus": {
+    "eligible_records": 1331,
+    "n2048_status": "NOT RUN: pinned corpus has 1331 eligible records",
+    "source": "code/docs/project/experiments/search/workloads/source/loghub/BGL_2k.log",
+    "source_sha256": "2a819ea540909db682005c9cf948387a40729b5c2e9f19d430e29ce704825496",
+    "supports_1024": true,
+    "supports_2048": false
+  },
+  "query": {
+    "1024": {
+      "expected_literal_alignment_count": 36,
+      "expected_literal_record_count": 36,
+      "pattern": [
+        58
+      ],
+      "pattern_escaped": ":",
+      "pattern_hex": "3a",
+      "source_query_id": "fps-k16-more-colon",
+      "threshold": 0.5
+    },
+    "512": {
+      "expected_literal_alignment_count": 17,
+      "expected_literal_record_count": 17,
+      "pattern": [
+        58
+      ],
+      "pattern_escaped": ":",
+      "pattern_hex": "3a",
+      "source_query_id": "fps-k16-more-colon",
+      "threshold": 0.5
+    }
+  }
+}

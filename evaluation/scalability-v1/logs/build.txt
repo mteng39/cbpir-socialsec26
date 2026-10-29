@@ -1,0 +1,60 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.47
+   Compiling shlex v2.0.1
+   Compiling find-msvc-tools v0.1.12
+   Compiling cc v1.4.5
+   Compiling syn v3.0.5
+   Compiling hashbrown v0.17.1
+   Compiling equivalent v1.0.2
+   Compiling indexmap v2.14.2
+   Compiling link-cplusplus v1.0.12
+   Compiling autocfg v1.5.1
+   Compiling scratch v1.0.9
+   Compiling num-traits v0.2.19
+   Compiling version_check v0.9.5
+   Compiling termcolor v1.4.1
+   Compiling cxxbridge-flags v1.0.200
+   Compiling unicode-width v0.2.2
+   Compiling codespan-reporting v0.13.1
+   Compiling cxx v1.0.200
+   Compiling generic-array v0.14.7
+   Compiling serde_core v1.0.229
+   Compiling cxx-build v1.0.200
+   Compiling zmij v1.0.23
+   Compiling typenum v1.20.1
+   Compiling openfhe v0.3.2 (https://github.com/iasenovets/openfhe-rs?rev=3e6a46b1377e89e09414cbca7c0c0140c5338397#3e6a46b1)
+   Compiling cxxbridge-macro v1.0.200
+   Compiling foldhash v0.2.0
+   Compiling serde_json v1.0.151
+   Compiling num-integer v0.1.47
+   Compiling memchr v2.8.3
+   Compiling cfg-if v1.0.4
+   Compiling libc v0.2.189
+   Compiling serde v1.0.229
+   Compiling itoa v1.0.18
+   Compiling thiserror v2.0.20
+   Compiling crypto-common v0.1.7
+   Compiling block-buffer v0.10.4
+   Compiling serde_derive v1.0.229
+   Compiling thiserror-impl v2.0.20
+   Compiling openfhe-bgv-cpir v0.1.0 (<REPOSITORY_ROOT>/code/code_branch/prototypes/P0-A_bgv_cpir)
+   Compiling strength_reduce v0.2.4
+   Compiling getrandom v0.4.3
+   Compiling rustix v1.1.4
+   Compiling transpose v0.2.3
+   Compiling digest v0.10.7
+   Compiling primal-check v0.3.4
+   Compiling num-complex v0.4.6
+   Compiling p0c-ckks-dft-search v0.1.0 (<REPOSITORY_ROOT>/code/code_branch/prototypes/P0-C_ckks_dft_search)
+   Compiling linux-raw-sys v0.12.1
+   Compiling cpufeatures v0.2.17
+   Compiling bitflags v2.13.1
+   Compiling sha2 v0.10.9
+   Compiling rustfft v6.4.1
+   Compiling fastrand v2.5.0
+   Compiling p0d-ckks-single-record-composition v0.1.0 (<REPOSITORY_ROOT>/code/code_branch/prototypes/P0-D_ckks_single_record_composition)
+   Compiling once_cell v1.21.4
+   Compiling tempfile v3.27.0
+   Compiling p3-multi-record-cpir v0.1.0 (<REPOSITORY_ROOT>/code/code_branch/prototypes/P3_multi_record_cpir)
+    Finished `release` profile [optimized] target(s) in 3m 30s

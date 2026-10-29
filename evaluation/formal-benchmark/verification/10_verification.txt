@@ -1,0 +1,1210 @@
+Formal benchmark verification
+
+PASS: Exact frozen n/ell/|T|/L used
+PASS: Retained HE parameters and HEStd_128_classic verified at runtime
+PASS: Same per-N frozen database used for FPS and RFPS
+PASS: Setup and six online procedures timed at formal boundaries
+PASS: Context generation and KeyGen excluded
+PASS: Setup excluded from online latency
+PASS: Serialization measured separately
+PASS: Native jobs serial
+PASS: Every measured run correctness checked
+PASS: FPS has zero oracle mismatches
+PASS: RFPS probe coverage and structural classifications preserved
+PASS: Locate alone performs First_K
+PASS: All selected payloads reconstruct exactly
+PASS: No physical dummy windows
+PASS: One Fetch query and response ciphertext
+PASS: Fetch serialized sizes invariant with k/K
+PASS: Original Phase-2 evidence matches immutable manifest
+PASS: External thread samples present and maximum thread count <= 1
+PASS: Controlled Fetch-only k={1,4,8,16} complete
+PASS: p0a_tests
+PASS: p0c_fmt
+PASS: p0c_tests
+PASS: p0d_fmt
+PASS: p0d_tests
+PASS: python_tests
+
+measured_runs_checked=480
+controlled_fetch_runs_checked=240
+benchmark_cells=24
+phase2_files=11
+phase2_final_files=13
+
+Timing fixture / realized selection:
+N=8192 mode=fps pattern=f m=1 tau=0.5 candidates=16 K=1 k=1
+N=8192 mode=fps pattern=f m=1 tau=0.5 candidates=16 K=4 k=4
+N=8192 mode=fps pattern=f m=1 tau=0.5 candidates=16 K=8 k=8
+N=8192 mode=fps pattern=f m=1 tau=0.5 candidates=16 K=16 k=16
+N=8192 mode=rfps pattern=f m=1 tau=0.5 candidates=16 K=1 k=1
+N=8192 mode=rfps pattern=f m=1 tau=0.5 candidates=16 K=4 k=4
+N=8192 mode=rfps pattern=f m=1 tau=0.5 candidates=16 K=8 k=8
+N=8192 mode=rfps pattern=f m=1 tau=0.5 candidates=16 K=16 k=16
+N=16384 mode=fps pattern=, m=1 tau=0.5 candidates=16 K=1 k=1
+N=16384 mode=fps pattern=, m=1 tau=0.5 candidates=16 K=4 k=4
+N=16384 mode=fps pattern=, m=1 tau=0.5 candidates=16 K=8 k=8
+N=16384 mode=fps pattern=, m=1 tau=0.5 candidates=16 K=16 k=16
+N=16384 mode=rfps pattern=, m=1 tau=0.5 candidates=15 K=1 k=1
+N=16384 mode=rfps pattern=, m=1 tau=0.5 candidates=16 K=4 k=4
+N=16384 mode=rfps pattern=, m=1 tau=0.5 candidates=16 K=8 k=8
+N=16384 mode=rfps pattern=, m=1 tau=0.5 candidates=16 K=16 k=16
+N=32768 mode=fps pattern=: m=1 tau=0.5 candidates=17 K=1 k=1
+N=32768 mode=fps pattern=: m=1 tau=0.5 candidates=17 K=4 k=4
+N=32768 mode=fps pattern=: m=1 tau=0.5 candidates=17 K=8 k=8
+N=32768 mode=fps pattern=: m=1 tau=0.5 candidates=17 K=16 k=16
+N=32768 mode=rfps pattern=: m=1 tau=0.5 candidates=15 K=1 k=1
+N=32768 mode=rfps pattern=: m=1 tau=0.5 candidates=0 K=4 k=0
+N=32768 mode=rfps pattern=: m=1 tau=0.5 candidates=16 K=8 k=8
+N=32768 mode=rfps pattern=: m=1 tau=0.5 candidates=14 K=16 k=14
+
+Verification commands:
+
+[p0a_tests]
+command=cargo test --release --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-A_bgv_cpir/Cargo.toml --features openfhe-backend -- --test-threads=1
+return_code=0
+Compiling libc v0.2.189
+   Compiling syn v3.0.3
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.55
+   Compiling serde_core v1.0.229
+   Compiling thiserror v2.0.19
+   Compiling num-traits v0.2.19
+   Compiling rand_core v0.9.5
+   Compiling cxx-build v1.0.200
+   Compiling openfhe-bgv-cpir v0.1.0 (<REPOSITORY_ROOT>/code_branch/prototypes/P0-A_bgv_cpir)
+   Compiling serde_json v1.0.151
+   Compiling cxxbridge-macro v1.0.200
+   Compiling thiserror-impl v2.0.19
+   Compiling openfhe v0.3.2 (https://github.com/iasenovets/openfhe-rs?rev=3e6a46b1377e89e09414cbca7c0c0140c5338397#3e6a46b1)
+   Compiling ppv-lite86 v0.2.21
+   Compiling tempfile v3.27.0
+   Compiling wait-timeout v0.2.1
+   Compiling cxx v1.0.200
+   Compiling fnv v1.0.7
+   Compiling quick-error v1.2.3
+   Compiling bit-vec v0.8.0
+   Compiling bit-set v0.8.0
+   Compiling rusty-fork v0.3.1
+   Compiling rand_chacha v0.9.0
+   Compiling rand v0.9.5
+   Compiling rand_xorshift v0.4.0
+   Compiling unarray v0.1.4
+   Compiling regex-syntax v0.8.11
+   Compiling proptest v1.11.0
+    Finished `release` profile [optimized] target(s) in 3m 06s
+     Running unittests src/lib.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/openfhe_bgv_cpir-10f1881dc9438905)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/p0a_experiment.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0a_experiment-985009216beb0536)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/bgv_cpir.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/bgv_cpir-620d37de4e278d86)
+
+running 9 tests
+test encrypted_empty_window_query_returns_one_all_zero_response ... ok
+test encrypted_multi_window_query_matches_plaintext_union ... ok
+test encrypted_multi_window_query_rejects_duplicate_and_out_of_range_ids ... ok
+test fixed_windows_use_floor_capacity_and_leave_nondivisible_tail_zero ... ok
+test prototype_p0_a_bgv_retrieves_every_window_including_boundaries ... ok
+test prototype_p0_a_binary_serialization_round_trip_preserves_response ... ok
+test prototype_p0_a_rejects_boundary_and_malformed_inputs_before_ffi ... ok
+test prototype_p0_a_reports_legacy_zero_termination_separately_from_fixed_decode ... ok
+test reports_exact_openfhe_runtime_version ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.79s
+
+     Running tests/experiment_schema.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/experiment_schema-1966745cdd85c28d)
+
+running 1 test
+test prototype_p0_a_experiment_emits_evidence_classified_json ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.98s
+
+     Running tests/fixed_window.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/fixed_window-2e76b625c7fc9415)
+
+running 15 tests
+test fixed_window_oracle_retrieves_a_known_middle_record ... ok
+test fixed_window_oracle_retrieves_every_representative_index ... ok
+test go_derived_decode_fixture_is_exact_and_rejects_non_byte_values ... ok
+test go_derived_heterogeneous_fixture_has_exact_windows_and_tail_padding ... ok
+test go_derived_mask_fixture_is_exact_and_independent_of_other_oracles ... ok
+test go_derived_rounding_fixtures_cover_lengths_eight_nine_and_sixteen ... ok
+test go_derived_selector_fixture_is_exact_and_independent_of_packing ... ok
+test mask_slots_rejects_mismatched_slot_domains ... ok
+test multi_window_selector_covers_first_and_last_without_wraparound ... ok
+test multi_window_selector_encodes_empty_as_all_zero_and_rejects_duplicates ... ok
+test multi_window_selector_matches_repeated_hlf_window_fill ... ok
+test pack_records_rejects_capacity_overflow ... ok
+test window_selector_rejects_index_equal_to_record_count ... ok
+test zero_terminated_codec_truncates_an_interior_zero_byte ... ok
+test zero_width_layout_is_rejected_at_every_public_layout_boundary ... ok
+
+test result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/parameter_profiles.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/parameter_profiles-83819014bf2877ec)
+
+running 2 tests
+test every_bgv_profile_runs_full_multi_window_fetch ... ok
+test named_bgv_profiles_have_expected_capacity ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.32s
+
+     Running tests/plaintext_selection.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/plaintext_selection-7b4a925f377a02c9)
+
+running 19 tests
+test adding_a_second_one_is_rejected ... ok
+test clearing_the_unique_one_is_rejected ... ok
+test generated_one_hot_has_the_requested_invariants ... ok
+test generated_one_hot_selects_the_requested_database_value ... ok
+test one_hot_constructs_first_middle_and_last_selectors ... ok
+test one_hot_rejects_empty_domain ... ok
+test one_hot_rejects_index_equal_to_length ... ok
+test one_hot_rejects_index_greater_than_length ... ok
+test one_hot_selects_the_only_element ... ok
+test replacing_an_entry_with_a_non_binary_value_is_rejected ... ok
+test select_plaintext_handles_zero_and_duplicate_values ... ok
+test select_plaintext_rejects_all_zero_selector ... ok
+test select_plaintext_rejects_empty_inputs ... ok
+test select_plaintext_rejects_length_mismatch_in_both_directions ... ok
+test select_plaintext_rejects_multiple_selected_positions ... ok
+test select_plaintext_rejects_non_binary_selector_value ... ok
+test select_plaintext_selects_first_middle_and_last_elements ... ok
+test select_plaintext_selects_the_only_element ... ok
+test select_plaintext_selects_u64_max_without_overflow ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+   Doc-tests openfhe_bgv_cpir
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[p0c_clippy]
+command=cargo clippy --release --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/Cargo.toml --all-targets -- -D warnings
+return_code=101
+Checking p0c-ckks-dft-search v0.1.0 (<REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search)
+error: item in documentation is missing backticks
+  --> src/ckks.rs:39:22
+   |
+39 | /// explicit because OpenFHE includes HYBRID auxiliary moduli in its security
+   |                      ^^^^^^^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#doc_markdown
+   = note: `-D clippy::doc-markdown` implied by `-D clippy::pedantic`
+   = help: to override `-D clippy::pedantic` add `#[allow(clippy::doc_markdown)]`
+help: try
+   |
+39 - /// explicit because OpenFHE includes HYBRID auxiliary moduli in its security
+39 + /// explicit because `OpenFHE` includes HYBRID auxiliary moduli in its security
+   |
+
+error: item in documentation is missing backticks
+  --> src/ckks.rs:84:26
+   |
+84 |     /// Reads the pinned OpenFHE CKKS defaults, then applies only the requested
+   |                          ^^^^^^^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#doc_markdown
+help: try
+   |
+84 -     /// Reads the pinned OpenFHE CKKS defaults, then applies only the requested
+84 +     /// Reads the pinned `OpenFHE` CKKS defaults, then applies only the requested
+   |
+
+error: docs for function returning `Result` missing `# Errors` section
+  --> src/ckks.rs:87:5
+   |
+87 | /     pub fn openfhe_recommended(
+88 | |         ring_dimension: u32,
+89 | |         transform_len: usize,
+90 | |     ) -> Result<Self, CkksError> {
+   | |________________________________^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+   = note: `-D clippy::missing-errors-doc` implied by `-D clippy::pedantic`
+   = help: to override `-D clippy::pedantic` add `#[allow(clippy::missing_errors_doc)]`
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/ckks.rs:113:5
+    |
+113 | /     pub fn fixed_manual(
+114 | |         ring_dimension: u32,
+115 | |         transform_len: usize,
+116 | |         first_modulus_bits: u32,
+117 | |         scaling_modulus_bits: u32,
+118 | |         key_switch_technique: FpsKeySwitchTechnique,
+119 | |     ) -> Result<Self, CkksError> {
+    | |________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/ckks.rs:234:13
+    |
+234 |             pub fn config_for_transform_len(self, transform_len: usize) -> Result<CkksConfig, CkksError> {
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+257 | ckks_profiles!(RfpsProfile, "RFPS", 1, RFPS_SCALING_MODULUS_BITS, Rfps13 => 13, Rfps14 => 14, Rfps15 => 15);
+    | ----------------------------------------------------------------------------------------------------------- in this macro invocation
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+    = note: this error originates in the macro `ckks_profiles` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/ckks.rs:308:5
+    |
+308 | /     pub fn parameters_for_transform_len(
+309 | |         self,
+310 | |         transform_len: usize,
+311 | |     ) -> Result<FpsCkksParameters, CkksError> {
+    | |_____________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/ckks.rs:322:5
+    |
+322 |     pub fn config_for_transform_len(self, transform_len: usize) -> Result<CkksConfig, CkksError> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: item in documentation is missing backticks
+   --> src/server_text_ct_pt.rs:453:13
+    |
+453 | /// Returns OpenFHE's generated FPS context archive for parameter auditing.
+    |             ^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#doc_markdown
+help: try
+    |
+453 - /// Returns OpenFHE's generated FPS context archive for parameter auditing.
+453 + /// Returns `OpenFHE`'s generated FPS context archive for parameter auditing.
+    |
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/server_text_ct_pt.rs:454:1
+    |
+454 | / pub fn server_text_ct_pt_fps_context_json(
+455 | |     profile: FpsProfile,
+456 | |     transform_len: usize,
+457 | | ) -> Result<String, CkksError> {
+    | |______________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: item in documentation is missing backticks
+   --> src/server_text_ct_pt.rs:465:13
+    |
+465 | /// Returns OpenFHE's generated context archive for one FPS repair candidate.
+    |             ^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#doc_markdown
+help: try
+    |
+465 - /// Returns OpenFHE's generated context archive for one FPS repair candidate.
+465 + /// Returns `OpenFHE`'s generated context archive for one FPS repair candidate.
+    |
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/server_text_ct_pt.rs:466:1
+    |
+466 | / pub fn server_text_ct_pt_fps_context_json_with_parameters(
+467 | |     parameters: FpsCkksParameters,
+468 | | ) -> Result<String, CkksError> {
+    | |______________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: item in documentation is missing backticks
+   --> src/server_text_ct_pt.rs:473:13
+    |
+473 | /// Returns OpenFHE's generated RFPS context archive for parameter auditing.
+    |             ^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#doc_markdown
+help: try
+    |
+473 - /// Returns OpenFHE's generated RFPS context archive for parameter auditing.
+473 + /// Returns `OpenFHE`'s generated RFPS context archive for parameter auditing.
+    |
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/server_text_ct_pt.rs:474:1
+    |
+474 | / pub fn server_text_ct_pt_rfps_context_json(
+475 | |     profile: RfpsProfile,
+476 | |     transform_len: usize,
+477 | | ) -> Result<String, CkksError> {
+    | |______________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/server_text_ct_pt.rs:577:1
+    |
+577 | / pub fn server_text_ct_pt_fps_artifact_sizes_with_profile(
+578 | |     text: &[u8],
+579 | |     pattern: &[u8],
+580 | |     decision_threshold: f64,
+581 | |     profile: FpsProfile,
+582 | | ) -> Result<ServerTextCtPtArtifactSizes, CkksError> {
+    | |___________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/server_text_ct_pt.rs:669:1
+    |
+669 | / pub fn server_text_ct_pt_rfps_artifact_sizes_with_profile(
+670 | |     text: &[u8],
+671 | |     pattern: &[u8],
+672 | |     randomizer: &[u8],
+673 | |     decision_threshold: f64,
+674 | |     profile: RfpsProfile,
+675 | | ) -> Result<ServerTextCtPtArtifactSizes, CkksError> {
+    | |___________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/server_text_ct_pt.rs:838:1
+    |
+838 | / pub fn server_text_ct_pt_fps_with_profile(
+839 | |     text: &[u8],
+840 | |     pattern: &[u8],
+841 | |     decision_threshold: f64,
+842 | |     profile: FpsProfile,
+843 | | ) -> Result<ServerTextCtPtFpsResult, CkksError> {
+    | |_______________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/server_text_ct_pt.rs:854:1
+    |
+854 | / pub fn server_text_ct_pt_fps_with_parameters(
+855 | |     text: &[u8],
+856 | |     pattern: &[u8],
+857 | |     decision_threshold: f64,
+858 | |     parameters: FpsCkksParameters,
+859 | | ) -> Result<ServerTextCtPtFpsResult, CkksError> {
+    | |_______________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: casting `usize` to `u32` may truncate the value on targets with 64-bit wide pointers
+   --> src/server_text_ct_pt.rs:862:33
+    |
+862 |     if parameters.batch_size != layout.transform_len as u32 {
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: if this is intentional allow the lint with `#[allow(clippy::cast_possible_truncation)]` ...
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#cast_possible_truncation
+    = note: `-D clippy::cast-possible-truncation` implied by `-D clippy::pedantic`
+    = help: to override `-D clippy::pedantic` add `#[allow(clippy::cast_possible_truncation)]`
+help: ... or use `try_from` and handle the error accordingly
+    |
+862 -     if parameters.batch_size != layout.transform_len as u32 {
+862 +     if parameters.batch_size != u32::try_from(layout.transform_len) {
+    |
+
+error: this argument is passed by value, but not consumed in the function body
+   --> src/server_text_ct_pt.rs:898:13
+    |
+898 |     layout: crate::FpsTimeLayout,
+    |             ^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#needless_pass_by_value
+    = note: `-D clippy::needless-pass-by-value` implied by `-D clippy::pedantic`
+    = help: to override `-D clippy::pedantic` add `#[allow(clippy::needless_pass_by_value)]`
+help: consider taking a reference instead
+    |
+898 |     layout: &crate::FpsTimeLayout,
+    |             +
+
+error: this argument is passed by value, but not consumed in the function body
+   --> src/server_text_ct_pt.rs:899:14
+    |
+899 |     session: ServerTextCtPtSession,
+    |              ^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#needless_pass_by_value
+help: consider taking a reference instead
+    |
+899 |     session: &ServerTextCtPtSession,
+    |              +
+
+error: this function's return value is unnecessarily wrapped by `Result`
+   --> src/server_text_ct_pt.rs:894:1
+    |
+894 | / fn server_text_ct_pt_fps_with_session(
+895 | |     text: &[u8],
+896 | |     pattern: &[u8],
+897 | |     decision_threshold: f64,
+898 | |     layout: crate::FpsTimeLayout,
+899 | |     session: ServerTextCtPtSession,
+900 | | ) -> Result<ServerTextCtPtFpsResult, CkksError> {
+    | |_______________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#unnecessary_wraps
+    = note: `-D clippy::unnecessary-wraps` implied by `-D clippy::pedantic`
+    = help: to override `-D clippy::pedantic` add `#[allow(clippy::unnecessary_wraps)]`
+help: remove `Result` from the return type...
+    |
+900 - ) -> Result<ServerTextCtPtFpsResult, CkksError> {
+900 + ) -> server_text_ct_pt::ServerTextCtPtFpsResult {
+    |
+help: ...and then remove the surrounding `Ok()` from returning expressions
+    |
+1012~     ServerTextCtPtFpsResult {
+1013+         scores,
+1014+         exact_scores,
+1015+         matching_positions,
+1016+         max_abs_error,
+1017+         metrics,
+1018+     }
+    |
+
+error: docs for function returning `Result` missing `# Errors` section
+    --> src/server_text_ct_pt.rs:1038:1
+     |
+1038 | / pub fn server_text_ct_pt_rfps_with_profile(
+1039 | |     text: &[u8],
+1040 | |     pattern: &[u8],
+1041 | |     randomizer: &[u8],
+1042 | |     decision_threshold: f64,
+1043 | |     profile: RfpsProfile,
+1044 | | ) -> Result<ServerTextCtPtRfpsResult, CkksError> {
+     | |________________________________________________^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: this function has too many lines (126/100)
+    --> src/server_text_ct_pt.rs:1048:1
+     |
+1048 | / fn server_text_ct_pt_rfps_with_config(
+1049 | |     text: &[u8],
+1050 | |     pattern: &[u8],
+1051 | |     randomizer: &[u8],
+1052 | |     decision_threshold: f64,
+1053 | |     profile: Option<RfpsProfile>,
+1054 | | ) -> Result<ServerTextCtPtRfpsResult, CkksError> {
+     | |________________________________________________^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#too_many_lines
+     = note: `-D clippy::too-many-lines` implied by `-D clippy::pedantic`
+     = help: to override `-D clippy::pedantic` add `#[allow(clippy::too_many_lines)]`
+
+error: casting `i64` to `f64` causes a loss of precision (`i64` is 64 bits wide, but `f64`'s mantissa is only 52 bits wide)
+    --> src/server_text_ct_pt.rs:1114:52
+     |
+1114 |         .map(|(approximate, exact)| (approximate - *exact as f64).abs())
+     |                                                    ^^^^^^^^^^^^^
+     |
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#cast_precision_loss
+     = note: `-D clippy::cast-precision-loss` implied by `-D clippy::pedantic`
+     = help: to override `-D clippy::pedantic` add `#[allow(clippy::cast_precision_loss)]`
+
+error: an exclusive range would be more readable
+   --> src/staged_server_text_ct_pt.rs:149:8
+    |
+149 |     Ok((pattern_len - 1..=text_len - 1)
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: use: `((pattern_len - 1)..text_len)`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#range_minus_one
+    = note: `-D clippy::range-minus-one` implied by `-D clippy::pedantic`
+    = help: to override `-D clippy::pedantic` add `#[allow(clippy::range_minus_one)]`
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:200:5
+    |
+200 | /     pub fn new(
+201 | |         profile: FpsProfile,
+202 | |         transform_len: usize,
+203 | |         threshold: f64,
+204 | |     ) -> Result<Self, CkksError> {
+    | |________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:218:5
+    |
+218 |     pub fn prepare_server(&self, text: &[u8]) -> Result<ServerTextCtPtFpsServerState, CkksError> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:236:5
+    |
+236 | /     pub fn match_query(
+237 | |         &self,
+238 | |         text_len: usize,
+239 | |         pattern: &[u8],
+240 | |     ) -> Result<ServerTextCtPtFpsQuery, CkksError> {
+    | |__________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:261:5
+    |
+261 | /     pub fn match_response(
+262 | |         &self,
+263 | |         server: &mut ServerTextCtPtFpsServerState,
+264 | |         query: &ServerTextCtPtFpsQuery,
+265 | |     ) -> Result<ServerTextCtPtResponse, CkksError> {
+    | |__________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:299:5
+    |
+299 | /     pub fn recover_scores(
+300 | |         &self,
+301 | |         response: &ServerTextCtPtResponse,
+302 | |         text_len: usize,
+303 | |         pattern_len: usize,
+304 | |         threshold: f64,
+305 | |     ) -> Result<ServerTextCtPtRecoveredScores, CkksError> {
+    | |_________________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:316:5
+    |
+316 | /     pub fn decrypt_idft_scores(
+317 | |         &self,
+318 | |         response: &ServerTextCtPtResponse,
+319 | |         text_len: usize,
+320 | |         pattern_len: usize,
+321 | |     ) -> Result<Vec<f64>, CkksError> {
+    | |____________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:331:5
+    |
+331 | /     pub fn serialize_messages(
+332 | |         &self,
+333 | |         directory: &Path,
+334 | |         query: &ServerTextCtPtFpsQuery,
+335 | |         response: &ServerTextCtPtResponse,
+336 | |     ) -> Result<ServerTextCtPtMessageSizes, CkksError> {
+    | |______________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:346:5
+    |
+346 | /     pub fn new(
+347 | |         profile: RfpsProfile,
+348 | |         transform_len: usize,
+349 | |         threshold: f64,
+350 | |     ) -> Result<Self, CkksError> {
+    | |________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:365:5
+    |
+365 |     pub fn prepare_server(&self, text: &[u8]) -> Result<ServerTextCtPtRfpsServerState, CkksError> {
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:373:5
+    |
+373 | /     pub fn match_query(
+374 | |         &self,
+375 | |         text_len: usize,
+376 | |         pattern: &[u8],
+377 | |         randomizer: &[u8],
+378 | |     ) -> Result<ServerTextCtPtRfpsQuery, CkksError> {
+    | |___________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:414:5
+    |
+414 | /     pub fn match_response(
+415 | |         &self,
+416 | |         server: &mut ServerTextCtPtRfpsServerState,
+417 | |         query: &ServerTextCtPtRfpsQuery,
+418 | |     ) -> Result<ServerTextCtPtResponse, CkksError> {
+    | |__________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:435:5
+    |
+435 | /     pub fn recover_scores(
+436 | |         &self,
+437 | |         response: &ServerTextCtPtResponse,
+438 | |         text_len: usize,
+439 | |         pattern_len: usize,
+440 | |         threshold: f64,
+441 | |     ) -> Result<ServerTextCtPtRecoveredScores, CkksError> {
+    | |_________________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:452:5
+    |
+452 | /     pub fn decrypt_idft_scores(
+453 | |         &self,
+454 | |         response: &ServerTextCtPtResponse,
+455 | |         text_len: usize,
+456 | |         pattern_len: usize,
+457 | |     ) -> Result<Vec<f64>, CkksError> {
+    | |____________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: docs for function returning `Result` missing `# Errors` section
+   --> src/staged_server_text_ct_pt.rs:467:5
+    |
+467 | /     pub fn serialize_messages(
+468 | |         &self,
+469 | |         directory: &Path,
+470 | |         query: &ServerTextCtPtRfpsQuery,
+471 | |         response: &ServerTextCtPtResponse,
+472 | |     ) -> Result<ServerTextCtPtMessageSizes, CkksError> {
+    | |______________________________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#missing_errors_doc
+
+error: could not compile `p0c-ckks-dft-search` (lib) due to 39 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `p0c-ckks-dft-search` (lib test) due to 39 previous errors
+
+[p0c_fmt]
+command=rustfmt --check --edition 2024 <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/build.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/bin/p0c_capacity_audit.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/bin/p0c_experiment.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/bin/p0c_fps_repair_candidate.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/bin/p0c_rfps_scaling_probe.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/bin/p0c_server_text_ct_pt.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/ckks.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/classification.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/layout.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/lib.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/serialization.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/server_text_ct_pt.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/server_text_ct_pt_report.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/staged_server_text_ct_pt.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/transform.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/src/workloads.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/capacity_contract.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/ckks_execution.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/ckks_fps.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/ckks_rfps.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/dft_reference.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/domain_expansion.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/experiment_schema.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/fft_equivalence.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/layout_reference.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/openfhe_complex_capability.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/packed_rfps.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/parameter_profiles.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/proposal_workloads.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/serialization_roundtrip.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/server_text_ct_pt_packed.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/server_text_ct_pt_report.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/server_text_ct_pt_scalar.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/server_text_ct_pt_sizes.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/staged_server_text_ct_pt.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/tests/workloads.rs
+return_code=0
+
+
+[p0c_tests]
+command=cargo test --release --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-C_ckks_dft_search/Cargo.toml -- --test-threads=1
+return_code=0
+Finished `release` profile [optimized] target(s) in 0.71s
+     Running unittests src/lib.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0c_ckks_dft_search-d7ddab8f6c761267)
+
+running 1 test
+test workloads::tests::rejects_corrupt_schema_and_semantics ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.29s
+
+     Running unittests src/bin/p0c_capacity_audit.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0c_capacity_audit-5ef925e26a9d80c1)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/p0c_experiment.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0c_experiment-494ec1edffcd03a9)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/p0c_fps_repair_candidate.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0c_fps_repair_candidate-caa6136a0c7aaf95)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/p0c_rfps_scaling_probe.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0c_rfps_scaling_probe-0d2055cea2fe8213)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/p0c_server_text_ct_pt.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0c_server_text_ct_pt-631cfde9071b84df)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/capacity_contract.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/capacity_contract-383897a30f4472b1)
+
+running 3 tests
+test default_fps_is_fps14_and_default_rfps_is_rfps13 ... ok
+test layout_has_no_legacy_1024_byte_runtime_ceiling ... ok
+test named_profiles_accept_full_slots_and_reject_smallest_over_capacity_text ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/ckks_execution.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/ckks_execution-11c16d3e9a7cce38)
+
+running 2 tests
+test ckks_componentwise_product_matches_independent_complex_arithmetic ... ok
+test ckks_config_records_the_direct_complex_execution_contract ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running tests/ckks_fps.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/ckks_fps-007bc1f9b77b39d7)
+
+running 4 tests
+test encrypted_fps_accepts_phase1_text_fixture ... ok
+test encrypted_fps_handles_declared_extreme_byte_scores ... ok
+test encrypted_fps_preserves_overlapping_and_boundary_matches ... ok
+test encrypted_fps_reproduces_fixed_p0b_scores_and_matches ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.82s
+
+     Running tests/ckks_rfps.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/ckks_rfps-62ab5f1050f8bff5)
+
+running 7 tests
+test classification_separates_ckks_threshold_crossings ... ok
+test encrypted_rfps_accepts_phase1_text_fixture ... ok
+test encrypted_rfps_handles_declared_extreme_byte_scores ... ok
+test encrypted_rfps_identifies_intrinsic_cancellation ... ok
+test encrypted_rfps_preserves_boundary_and_multiple_true_matches ... ok
+test encrypted_rfps_reproduces_fixed_scores_and_true_match ... ok
+test encrypted_rfps_separates_broad_threshold_from_random_cancellation ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.62s
+
+     Running tests/dft_reference.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/dft_reference-e5381826cd25faf9)
+
+running 2 tests
+test negative_exponent_dft_matches_independently_derived_vector ... ok
+test positive_exponent_normalized_idft_matches_independently_derived_input ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/domain_expansion.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/domain_expansion-f6d1a198f69d97c8)
+
+running 4 tests
+test explicit_rfps_scale_probe_keeps_default_mapping_reproducible ... ok
+test phase1_fixture_constants_do_not_define_runtime_capacity ... ok
+test retained_parameters_preserve_maximum_magnitude_decisions ... ok
+test text_beyond_phase1_fixture_is_valid_but_pattern_overflow_is_typed ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.35s
+
+     Running tests/experiment_schema.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/experiment_schema-1087e66195bafe74)
+
+running 1 test
+test experiment_emits_proposal_sized_reproducibility_and_separation_evidence ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 7.69s
+
+     Running tests/fft_equivalence.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/fft_equivalence-7078859684b13218)
+
+running 2 tests
+test empty_transform_semantics_are_preserved ... ok
+test fft_matches_naive_dft_and_idft_at_audit_lengths ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.46s
+
+     Running tests/layout_reference.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/layout_reference-881fab7c903014f5)
+
+running 5 tests
+test feer_fps_layout_reproduces_fixed_and_boundary_scores ... ok
+test feer_rfps_layout_reproduces_fixed_scores_and_cancellation_witness ... ok
+test fps_layout_uses_prefix_square_sentinel_and_reversed_pattern ... ok
+test layout_rejects_unsupported_lengths_and_randomizers ... ok
+test right_rotation_factors_match_a_hand_derived_four_point_vector ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/openfhe_complex_capability.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/openfhe_complex_capability-a457bc86d964db52)
+
+running 1 test
+test linked_openfhe_is_1_5_1_and_preserves_complex_slots ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/packed_rfps.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/packed_rfps-978b61c34324acd6)
+
+running 5 tests
+test packed_config_is_distinct_from_single_search_transform_limit ... ok
+test packed_trials_match_scalar_ckks_and_independent_exact_scores ... ok
+test packed_true_match_is_preserved_and_neighbor_reordering_is_isolated ... ok
+test packed_validation_rejects_bad_shapes_domains_and_capacity ... ok
+test plaintext_concatenated_blocks_have_exactly_independent_idfts ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.57s
+
+     Running tests/parameter_profiles.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/parameter_profiles-312ffbcfd3649abe)
+
+running 5 tests
+test all_ckks_profiles_run_retained_server_text_match_paths ... ok
+test explicit_fps_parameters_keep_the_retained_operation_path ... ok
+test fps_repair_parameters_start_from_openfhe_defaults ... ok
+test named_ckks_profiles_preserve_requested_parameters ... ok
+test repaired_named_fps_profiles_pass_the_retained_phase1_fixture ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.24s
+
+     Running tests/proposal_workloads.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/proposal_workloads-3b679c9e1968652e)
+
+running 1 test
+test proposal_matrix_and_bgl_preserve_true_matches_and_classify_all_rfps_scores ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.57s
+
+     Running tests/serialization_roundtrip.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/serialization_roundtrip-49073315aedc7212)
+
+running 3 tests
+test consecutive_same_config_probes_do_not_accumulate_evaluation_keys ... ok
+test fps_binary_reload_preserves_search_and_protocol_artifact_counts ... ok
+test rfps_binary_reload_preserves_search_and_protocol_artifact_counts ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.49s
+
+     Running tests/server_text_ct_pt_packed.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/server_text_ct_pt_packed-43f2aec198ac173e)
+
+running 2 tests
+test server_text_ct_pt_packed_reuses_baseline_shape_validation ... ok
+test server_text_ct_pt_packed_rfps_preserves_trial_isolation ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/server_text_ct_pt_report.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/server_text_ct_pt_report-0dab5ebb35ce5d62)
+
+running 1 test
+test focused_report_names_backends_and_preserves_negative_classifications ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.79s
+
+     Running tests/server_text_ct_pt_scalar.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/server_text_ct_pt_scalar-7232c480faa0caba)
+
+running 5 tests
+test server_text_ct_pt_fps_matches_independent_oracle_at_boundaries_and_overlaps ... ok
+test server_text_ct_pt_fps_preserves_scores_without_ciphertext_products ... ok
+test server_text_ct_pt_rfps_preserves_classification_without_ciphertext_products ... ok
+test server_text_ct_pt_rfps_retains_cancellation_and_threshold_only_semantics ... ok
+test server_text_ct_pt_scalar_reuses_baseline_validation_contract ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
+
+     Running tests/server_text_ct_pt_sizes.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/server_text_ct_pt_sizes-220cf84ca88b57b6)
+
+running 1 test
+test server_text_ct_pt_artifact_sizes_separate_query_response_and_keys ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running tests/staged_server_text_ct_pt.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/staged_server_text_ct_pt-5dede6282c3e8062)
+
+running 2 tests
+test staged_fps_reuses_server_state_and_serializes_actual_messages ... ok
+test staged_rfps_reuses_server_state_and_preserves_decisions ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running tests/workloads.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/workloads-3d30353721d75565)
+
+running 1 test
+test loads_the_canonical_proposal_workload_fixture ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+   Doc-tests p0c_ckks_dft_search
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[p0d_clippy]
+command=cargo clippy --release --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/Cargo.toml --features native --all-targets -- -D warnings
+return_code=101
+Checking p0d-ckks-single-record-composition v0.1.0 (<REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition)
+error: more than 3 bools in a struct
+   --> src/configurable_fixed_fetch.rs:99:1
+    |
+ 99 | / pub struct ConfigurableFixedFetchTrace {
+100 | |     pub selected_physical_indices: Vec<usize>,
+101 | |     pub outputs: Vec<ReconstructedRecord>,
+102 | |     pub query_ciphertext_count: usize,
+...   |
+110 | |     pub timings: ConfigurableFixedFetchTimings,
+111 | | }
+    | |_^
+    |
+    = help: consider using a state machine or refactoring bools into two-variant enums
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#struct_excessive_bools
+    = note: `-D clippy::struct-excessive-bools` implied by `-D clippy::pedantic`
+    = help: to override `-D clippy::pedantic` add `#[allow(clippy::struct_excessive_bools)]`
+
+error: this function has too many lines (101/100)
+   --> src/phase2_match.rs:100:1
+    |
+100 | / pub fn run_phase2_match(
+101 | |     catalog: &Catalog,
+102 | |     request: &MatchRequest,
+103 | |     profile: Phase2Profile,
+104 | | ) -> Result<Phase2MatchTrace, P0dError> {
+    | |_______________________________________^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#too_many_lines
+    = note: `-D clippy::too-many-lines` implied by `-D clippy::pedantic`
+    = help: to override `-D clippy::pedantic` add `#[allow(clippy::too_many_lines)]`
+
+error: casting `i64` to `f64` causes a loss of precision (`i64` is 64 bits wide, but `f64`'s mantissa is only 52 bits wide)
+   --> src/phase2_match.rs:162:31
+    |
+162 |                 .map(|&score| score as f64)
+    |                               ^^^^^^^^^^^^
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.91.0/index.html#cast_precision_loss
+    = note: `-D clippy::cast-precision-loss` implied by `-D clippy::pedantic`
+    = help: to override `-D clippy::pedantic` add `#[allow(clippy::cast_precision_loss)]`
+
+error: could not compile `p0d-ckks-single-record-composition` (lib test) due to 3 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `p0d-ckks-single-record-composition` (lib) due to 3 previous errors
+
+[p0d_fmt]
+command=rustfmt --check --edition 2024 <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/build.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/probe/src/bin/p0d_bgl_ckks_sizes.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/probe/src/main.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_fixed_frame_audit.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_formal_benchmark.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_phase1_profile.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_phase2_fixed_final.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_phase2_full_capacity.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_rfps15_state_diagnostic.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/p0d_bgl_k1.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/p0d_bgl_kgt1.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/p0d_experiment.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/p0d_kgt1_synthetic.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/p0d_rates.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/configurable_fixed_fetch.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/fetch_stage.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/fixtures.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/formal_benchmark.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/frame.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/layout.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/lib.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/locate.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/match_stage.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/model.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/multi_fetch_stage.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/multi_fixtures.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/multi_locate.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/multi_pipeline.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/multi_report.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/no_dummy_fetch.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/oracle.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/phase2_match.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/pipeline.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/realistic.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/realistic_kgt1.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/src/report.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/contracts.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/final_fixed_native.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/formal_benchmark_native.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/match_backend_native.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/multi_contract.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/multi_native.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/multi_report.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/multi_synthetic_contract.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/native.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/phase2_native.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/rates.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/realistic_contract.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/realistic_kgt1_contract.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/realistic_kgt1_native.rs <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/tests/report.rs
+return_code=0
+
+
+[p0d_tests]
+command=cargo test --release --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/Cargo.toml --features native -- --test-threads=1
+return_code=0
+Compiling p0d-ckks-single-record-composition v0.1.0 (<REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition)
+    Finished `release` profile [optimized] target(s) in 1.77s
+     Running unittests src/lib.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0d_ckks_single_record_composition-9e428cda365e0dc3)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/cbpir_fixed_frame_audit.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/cbpir_fixed_frame_audit-862c1003fb7f627b)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/cbpir_formal_benchmark.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/cbpir_formal_benchmark-44db2db889ac89d6)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/cbpir_phase1_profile.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/cbpir_phase1_profile-42eb903a050591f5)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/cbpir_phase2_fixed_final.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/cbpir_phase2_fixed_final-fbbc94e28b3a1db9)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/cbpir_phase2_full_capacity.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/cbpir_phase2_full_capacity-7ac423d203f2bf88)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/cbpir_rfps15_state_diagnostic.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/cbpir_rfps15_state_diagnostic-6bf270cf76829446)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/p0d_bgl_k1.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0d_bgl_k1-a786dcc7163323aa)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/p0d_bgl_kgt1.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0d_bgl_kgt1-3872b8e68c6c20bb)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/p0d_experiment.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0d_experiment-66d0a61c9aafadd8)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/p0d_kgt1_synthetic.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0d_kgt1_synthetic-24a36991aa2efd7a)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running unittests src/bin/p0d_rates.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/p0d_rates-33f31156e25cf40e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/contracts.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/contracts-91484202f9bb2ffd)
+
+running 8 tests
+test acceptance_is_inclusive_and_not_score_ranked ... ok
+test boundary_capacity_and_long_pattern_without_in_record_windows ... ok
+test frame_preserves_zero_bytes_and_rejects_corruption ... ok
+test injected_crossings_change_selection_in_both_directions ... ok
+test malformed_catalog_and_request_inputs_fail ... ok
+test malformed_match_contract_and_targets_fail ... ok
+test oracle_distinguishes_semantic_matches_cancellation_threshold_and_ckks_errors ... ok
+test sorted_layout_maps_first_last_and_rejects_guards ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/final_fixed_native.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/final_fixed_native-737c65be434536cb)
+
+running 4 tests
+test configurable_fixed_fetch_rejects_nonpolicy_width_and_too_small_window ... ok
+test first_last_and_different_size_fixed_windows_round_trip ... ok
+test fixed_fetch_preserves_one_ciphertext_shape_for_k_zero_through_seventeen ... ok
+test measured_frame_prefix_is_header_plus_payload_for_every_allowed_width ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.37s
+
+     Running tests/formal_benchmark_native.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/formal_benchmark_native-e7b93c84d3c07288)
+
+running 1 test
+test formal_stages_map_stable_ids_and_preserve_fixed_window_fetch ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests/match_backend_native.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/match_backend_native-99143de41a9e27d6)
+
+running 2 tests
+test k1_default_stays_ct_ct_and_explicit_server_text_ct_pt_reconstructs_exactly ... ok
+test k4_explicit_server_text_ct_pt_keeps_locate_and_p3_fetch_contracts ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.38s
+
+     Running tests/multi_contract.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/multi_contract-1d7c41ae38924545)
+
+running 3 tests
+test locate_many_allows_empty_real_selection_and_rejects_boundaries ... ok
+test locate_many_orders_stable_ids_deduplicates_and_truncates ... ok
+test locate_many_rejects_non_multi_capacity ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/multi_native.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/multi_native-a6be77f3f06f25d5)
+
+running 3 tests
+test every_multi_capacity_uses_one_fetch_for_an_empty_real_selection ... ok
+test k4_pipeline_maps_arbitrary_stable_ids_to_physical_rows_and_back ... ok
+test k4_pipeline_rejects_catalog_that_leaves_too_few_dummy_windows ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.57s
+
+     Running tests/multi_report.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/multi_report-7bf39e110ffe627d)
+
+running 1 test
+test quick_k4_report_covers_frozen_matrix_and_retains_stage_timings ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.98s
+
+     Running tests/multi_synthetic_contract.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/multi_synthetic_contract-3c7673922b3b22d5)
+
+running 2 tests
+test frozen_k4_fixture_matrix_has_expected_client_decisions ... ok
+test locate_many_propagates_an_injected_match_decision_without_calling_it_fetch_failure ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/native.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/native-373491e380999f86)
+
+running 3 tests
+test bgv_serialization_roundtrip ... ok
+test native_composition_matches_declared_fixture_outcomes ... ok
+test native_last_physical_real_window_preserves_full_binary_payload ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.64s
+
+     Running tests/phase2_native.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/phase2_native-c7b79380b2d5ff98)
+
+running 4 tests
+test explicit_phase2_match_profiles_feed_locate_without_changing_semantics ... ok
+test no_dummy_fetch_enforces_profile_capacity_instead_of_catalog_constant ... ok
+test no_dummy_fetch_has_one_constant_size_query_and_response_for_every_cardinality ... ok
+test no_dummy_fetch_rejects_unencoded_physical_window ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests/rates.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/rates-6909ab4862107e64)
+
+running 1 test
+test rate_runner_calls_existing_pipeline_and_retains_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests/realistic_contract.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/realistic_contract-688338bd88315a48)
+
+running 2 tests
+test realistic_input_validation_rejects_semantic_drift ... ok
+test realistic_inputs_map_to_existing_pipeline_types ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/realistic_kgt1_contract.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/realistic_kgt1_contract-bb8c90dc24ea8279)
+
+running 1 test
+test frozen_bgl_oracle_has_expected_k4_workload_shape ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/realistic_kgt1_native.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/realistic_kgt1_native-19038139e7c01bd6)
+
+running 1 test
+test native_row_retains_a_realistic_multi_record_result ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests/report.rs (code_branch/prototypes/.build-cache/formal-seven/release/deps/report-1a97e6a8ff9fc9cf)
+
+running 1 test
+test experiment_reports_real_runs_and_explicit_negative_results ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.74s
+
+   Doc-tests p0d_ckks_single_record_composition
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+[python_tests]
+command=/usr/bin/python3 -m unittest -v <REPOSITORY_ROOT>/experiments/cbpir-scaling/formal-seven-procedure-benchmark/test_benchmark_reports.py
+return_code=0
+test_frozen_workloads_and_timing_fixtures_are_exact (experiments.cbpir-scaling.formal-seven-procedure-benchmark.test_benchmark_reports.FormalWorkloadTests.test_frozen_workloads_and_timing_fixtures_are_exact) ... ok
+test_immutable_phase2_manifest_matches_current_tree (experiments.cbpir-scaling.formal-seven-procedure-benchmark.test_benchmark_reports.SummaryTests.test_immutable_phase2_manifest_matches_current_tree) ... ok
+test_required_csv_names_are_fixed (experiments.cbpir-scaling.formal-seven-procedure-benchmark.test_benchmark_reports.SummaryTests.test_required_csv_names_are_fixed) ... ok
+test_rfps_probe_gate_rejects_missing_or_changed_classification (experiments.cbpir-scaling.formal-seven-procedure-benchmark.test_benchmark_reports.SummaryTests.test_rfps_probe_gate_rejects_missing_or_changed_classification) ... ok
+test_summary_uses_sample_stddev_and_nearest_rank_p95 (experiments.cbpir-scaling.formal-seven-procedure-benchmark.test_benchmark_reports.SummaryTests.test_summary_uses_sample_stddev_and_nearest_rank_p95) ... ok
+test_thread_gate_rejects_absent_samples (experiments.cbpir-scaling.formal-seven-procedure-benchmark.test_benchmark_reports.SummaryTests.test_thread_gate_rejects_absent_samples) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 8.053s
+
+OK
+
+Clippy status: advisory. Crate-wide clippy remains nonzero because of retained
+pre-existing pedantic findings outside this benchmark instrumentation. These
+findings are preserved above and were not suppressed or rewritten.

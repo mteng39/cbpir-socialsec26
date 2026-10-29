@@ -1,0 +1,33 @@
+[package]
+name = "cbpir-bgv"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.91.1"
+license = "MIT"
+publish = false
+build = "build.rs"
+
+[features]
+default = []
+openfhe-backend = ["dep:openfhe", "dep:serde_json", "dep:thiserror"]
+
+[dependencies]
+openfhe = { git = "https://github.com/iasenovets/openfhe-rs", rev = "3e6a46b1377e89e09414cbca7c0c0140c5338397", optional = true }
+serde_json = { version = "1", optional = true }
+thiserror = { version = "2", optional = true }
+
+[dev-dependencies]
+proptest = "1"
+tempfile = "3"
+
+[[bin]]
+name = "p0a_experiment"
+path = "src/bin/p0a_experiment.rs"
+required-features = ["openfhe-backend"]
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = "deny"
+pedantic = "deny"

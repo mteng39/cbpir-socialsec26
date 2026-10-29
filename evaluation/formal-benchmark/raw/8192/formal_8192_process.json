@@ -1,0 +1,13 @@
+{
+  "active_benchmark_processes_before": 0,
+  "command": "<REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/formal-seven/release/cbpir_formal_benchmark",
+  "elapsed_seconds": 5.765605252236128,
+  "input": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_8192_input.json",
+  "label": "formal_8192",
+  "maximum_threads": 1,
+  "minimum_threads": 1,
+  "observed_thread_samples": 781,
+  "output": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_8192_output.json",
+  "return_code": 0,
+  "stderr": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_8192_stderr.txt"
+}

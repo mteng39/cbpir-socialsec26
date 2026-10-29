@@ -1,0 +1,6 @@
+# From repository root:
+PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v experiments/cbpir-scaling/search-correctness-v2/test_search_correctness_v2.py
+OMP_NUM_THREADS=1 OMP_DYNAMIC=FALSE PYTHONDONTWRITEBYTECODE=1 python3 experiments/cbpir-scaling/search-correctness-v2/run_search_correctness_v2.py
+
+# Native build used by orchestrator:
+cargo build --release --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/Cargo.toml --features native --bin cbpir_search_correctness_v2

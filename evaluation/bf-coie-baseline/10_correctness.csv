@@ -1,0 +1,13 @@
+n,s,no_false_negative_guarantee,false_positive_bound,abort_if_false_positives_gt_fp,pir_correctness,dummy_requests,provenance
+128,1,True,16,True,assumed from SealPIR,16,P+D
+128,4,True,16,True,assumed from SealPIR,16,P+D
+128,8,True,16,True,assumed from SealPIR,16,P+D
+128,16,True,16,True,assumed from SealPIR,16,P+D
+256,1,True,16,True,assumed from SealPIR,16,P+D
+256,4,True,16,True,assumed from SealPIR,16,P+D
+256,8,True,16,True,assumed from SealPIR,16,P+D
+256,16,True,16,True,assumed from SealPIR,16,P+D
+512,1,True,16,True,assumed from SealPIR,16,P+D
+512,4,True,16,True,assumed from SealPIR,16,P+D
+512,8,True,16,True,assumed from SealPIR,16,P+D
+512,16,True,16,True,assumed from SealPIR,16,P+D

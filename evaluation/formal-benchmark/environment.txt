@@ -1,0 +1,223 @@
+Formal CBPIR benchmark environment
+captured_utc=2026-09-25T12:49:05.835345+00:00
+hostname=<container-id>
+platform=Linux-6.8.0-117-generic-x86_64-with-glibc2.36
+build_profile=release
+OMP_NUM_THREADS=1
+OMP_DYNAMIC=FALSE
+OPENFHE_INSTALL_DIR=<REPOSITORY_ROOT>/code_branch/prototypes/openfhe_runtime/.openfhe/openfhe-1.5.1/install
+OpenFHE-rs_revision=3e6a46b1377e89e09414cbca7c0c0140c5338397
+OpenFHE_revision=1306d14f8c26bb6150d3e6ad54f28dfe1007689e
+active_benchmark_processes_before_each_run=0
+benchmark_process_order=serial
+observed_process_threads=[{"active_benchmark_processes_before": 0, "command": "<REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/formal-seven/release/cbpir_formal_benchmark", "elapsed_seconds": 5.765605252236128, "input": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_8192_input.json", "label": "formal_8192", "maximum_threads": 1, "minimum_threads": 1, "observed_thread_samples": 781, "output": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_8192_output.json", "return_code": 0, "stderr": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_8192_stderr.txt"}, {"active_benchmark_processes_before": 0, "command": "<REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/formal-seven/release/cbpir_formal_benchmark", "elapsed_seconds": 10.537807930260897, "input": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_16384_input.json", "label": "formal_16384", "maximum_threads": 1, "minimum_threads": 1, "observed_thread_samples": 1393, "output": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_16384_output.json", "return_code": 0, "stderr": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_16384_stderr.txt"}, {"active_benchmark_processes_before": 0, "command": "<REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/formal-seven/release/cbpir_formal_benchmark", "elapsed_seconds": 24.688316322863102, "input": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_32768_input.json", "label": "formal_32768", "maximum_threads": 1, "minimum_threads": 1, "observed_thread_samples": 3410, "output": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_32768_output.json", "return_code": 0, "stderr": "experiments/cbpir-scaling/formal-seven-procedure-benchmark/native/formal_32768_stderr.txt"}]
+runtime_profiles={"8192": {"fetch": {"actual_ring_dimension": 8192, "context_generation_ns": 13155410, "key_generation_ns": 3373907, "multiplicative_depth": 1, "plaintext_modulus": 65537, "profile": "BGV-13", "record_slots": 64, "requested_ring_dimension": 8192, "security": "HEStd_128_classic"}, "fps": {"batch_size": 4096, "context_generation_ns": 8477425, "first_modulus_bits": 60, "key_generation_ns": 6711800, "key_switch_technique": "BV", "multiplicative_depth": 2, "ring_dimension": 8192, "scaling_modulus_bits": 50, "scaling_technique": "FIXEDMANUAL", "security": "HEStd_128_classic"}, "openfhe_version": "1.5.1", "rfps": {"batch_size": 4096, "context_generation_ns": 6440646, "first_modulus_bits": 60, "key_generation_ns": 3697400, "key_switch_technique": "HYBRID", "multiplicative_depth": 1, "ring_dimension": 8192, "scaling_modulus_bits": 24, "scaling_technique": "FIXEDMANUAL", "security": "HEStd_128_classic"}}, "16384": {"fetch": {"actual_ring_dimension": 16384, "context_generation_ns": 30131124, "key_generation_ns": 28435142, "multiplicative_depth": 1, "plaintext_modulus": 65537, "profile": "BGV-14", "record_slots": 64, "requested_ring_dimension": 16384, "security": "HEStd_128_classic"}, "fps": {"batch_size": 8192, "context_generation_ns": 41934086, "first_modulus_bits": 60, "key_generation_ns": 22954990, "key_switch_technique": "HYBRID", "multiplicative_depth": 2, "ring_dimension": 16384, "scaling_modulus_bits": 40, "scaling_technique": "FIXEDMANUAL", "security": "HEStd_128_classic"}, "openfhe_version": "1.5.1", "rfps": {"batch_size": 8192, "context_generation_ns": 11163727, "first_modulus_bits": 60, "key_generation_ns": 13611912, "key_switch_technique": "HYBRID", "multiplicative_depth": 1, "ring_dimension": 16384, "scaling_modulus_bits": 24, "scaling_technique": "FIXEDMANUAL", "security": "HEStd_128_classic"}}, "32768": {"fetch": {"actual_ring_dimension": 32768, "context_generation_ns": 23021269, "key_generation_ns": 14089105, "multiplicative_depth": 1, "plaintext_modulus": 65537, "profile": "BGV-15", "record_slots": 64, "requested_ring_dimension": 32768, "security": "HEStd_128_classic"}, "fps": {"batch_size": 16384, "context_generation_ns": 26910125, "first_modulus_bits": 60, "key_generation_ns": 15931875, "key_switch_technique": "HYBRID", "multiplicative_depth": 2, "ring_dimension": 32768, "scaling_modulus_bits": 50, "scaling_technique": "FIXEDMANUAL", "security": "HEStd_128_classic"}, "openfhe_version": "1.5.1", "rfps": {"batch_size": 16384, "context_generation_ns": 9829014, "first_modulus_bits": 60, "key_generation_ns": 11722050, "key_switch_technique": "HYBRID", "multiplicative_depth": 1, "ring_dimension": 32768, "scaling_modulus_bits": 24, "scaling_technique": "FIXEDMANUAL", "security": "HEStd_128_classic"}}}
+commands=["cargo build --release --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/Cargo.toml --features native --bin cbpir_formal_benchmark", "OMP_NUM_THREADS=1 OMP_DYNAMIC=FALSE <REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/formal-seven/release/cbpir_formal_benchmark < native/formal_8192_input.json", "OMP_NUM_THREADS=1 OMP_DYNAMIC=FALSE <REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/formal-seven/release/cbpir_formal_benchmark < native/formal_16384_input.json", "OMP_NUM_THREADS=1 OMP_DYNAMIC=FALSE <REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/formal-seven/release/cbpir_formal_benchmark < native/formal_32768_input.json"]
+
+Thread interpretation: each native process was sampled externally through /proc/<pid>/status. OpenMP used both required environment variables. The maximum observed Threads value is recorded above; no stronger threading claim is made.
+
+[uname] return_code=0
+Linux <container-id> 6.8.0-117-generic #117-Ubuntu SMP PREEMPT_DYNAMIC Tue May  5 19:26:24 UTC 2026 x86_64 GNU/Linux
+
+[os_release] return_code=0
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION="12 (bookworm)"
+
+[cpu] return_code=0
+Architecture:                            x86_64
+CPU op-mode(s):                          32-bit, 64-bit
+Address sizes:                           48 bits physical, 48 bits virtual
+Byte Order:                              Little Endian
+CPU(s):                                  4
+On-line CPU(s) list:                     0-3
+Vendor ID:                               AuthenticAMD
+Model name:                              AMD EPYC Processor (with IBPB)
+CPU family:                              23
+Model:                                   1
+Thread(s) per core:                      1
+Core(s) per socket:                      4
+Socket(s):                               1
+Stepping:                                2
+BogoMIPS:                                5589.49
+Flags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext ssbd ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 rdseed adx smap clflushopt sha_ni xsaveopt xsavec xgetbv1 arat
+Hypervisor vendor:                       KVM
+Virtualization type:                     full
+L1d cache:                               128 KiB (4 instances)
+L1i cache:                               256 KiB (4 instances)
+L2 cache:                                2 MiB (4 instances)
+L3 cache:                                8 MiB (1 instance)
+NUMA node(s):                            1
+NUMA node0 CPU(s):                       0-3
+Vulnerability Gather data sampling:      Not affected
+Vulnerability Indirect target selection: Not affected
+Vulnerability Itlb multihit:             Not affected
+Vulnerability L1tf:                      Not affected
+Vulnerability Mds:                       Not affected
+Vulnerability Meltdown:                  Not affected
+Vulnerability Mmio stale data:           Not affected
+Vulnerability Reg file data sampling:    Not affected
+Vulnerability Retbleed:                  Mitigation; untrained return thunk; SMT disabled
+Vulnerability Spec rstack overflow:      Vulnerable: Safe RET, no microcode
+Vulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:                Mitigation; Retpolines; IBPB conditional; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                     Not affected
+Vulnerability Tsa:                       Not affected
+Vulnerability Tsx async abort:           Not affected
+Vulnerability Vmscape:                   Not affected
+
+[memory] return_code=0
+total        used        free      shared  buff/cache   available
+Mem:           7.8Gi       5.3Gi       237Mi       151Mi       2.7Gi       2.5Gi
+Swap:             0B          0B          0B
+
+[rustc] return_code=0
+rustc 1.91.1 (ed61e7d7e 2025-11-07)
+binary: rustc
+commit-hash: ed61e7d7e242494fb7057f2657300d9e77bb4fcb
+commit-date: 2025-11-07
+host: x86_64-unknown-linux-gnu
+release: 1.91.1
+LLVM version: 21.1.2
+
+[cargo] return_code=0
+cargo 1.91.1 (ea2d97820 2025-10-10)
+
+[git_commit] return_code=0
+7f2c3276941102bf0624912c7fb78ae458b71629
+
+[git_status] return_code=0
+M .github/workflows/SyncToGitee.yml
+ D article_branch_1/.gitignore
+ D article_branch_1/LaTeX/.gitignore
+ D article_branch_1/LaTeX/bibliography.bib
+ D article_branch_1/LaTeX/main.pdf
+ D article_branch_1/LaTeX/main.tex
+ D article_branch_1/LaTeX/sections/appendix/appendix.tex
+ D article_branch_1/LaTeX/sections/conclusion/conclusion.tex
+ D article_branch_1/LaTeX/sections/evaluation/evaluation.tex
+ D article_branch_1/LaTeX/sections/implementation/implementation.tex
+ D article_branch_1/LaTeX/sections/introduction/introduction.tex
+ D article_branch_1/LaTeX/sections/methodology/methodology.tex
+ D article_branch_1/LaTeX/sections/related-work/related-work.tex
+ M code_branch/prototypes/P0-C_ckks_dft_search/Cargo.lock
+ M code_branch/prototypes/P0-C_ckks_dft_search/Cargo.toml
+ M code_branch/prototypes/P0-C_ckks_dft_search/README.md
+ M code_branch/prototypes/P0-C_ckks_dft_search/src/bin/p0c_experiment.rs
+ M code_branch/prototypes/P0-C_ckks_dft_search/src/ckks.rs
+ M code_branch/prototypes/P0-C_ckks_dft_search/src/layout.rs
+ M code_branch/prototypes/P0-C_ckks_dft_search/src/lib.rs
+ M code_branch/prototypes/P0-C_ckks_dft_search/src/server_text_ct_pt.rs
+ M code_branch/prototypes/P0-C_ckks_dft_search/src/transform.rs
+ M code_branch/prototypes/P0-C_ckks_dft_search/tests/ckks_fps.rs
+ M code_branch/prototypes/P0-C_ckks_dft_search/tests/ckks_rfps.rs
+ M code_branch/prototypes/P0-C_ckks_dft_search/tests/domain_expansion.rs
+ M code_branch/prototypes/P0-C_ckks_dft_search/tests/experiment_schema.rs
+ M code_branch/prototypes/P0-C_ckks_dft_search/tests/layout_reference.rs
+ M code_branch/prototypes/P0-D_ckks_single_record_composition/Cargo.lock
+ M code_branch/prototypes/P0-D_ckks_single_record_composition/Cargo.toml
+ M code_branch/prototypes/P0-D_ckks_single_record_composition/README.md
+ M code_branch/prototypes/P0-D_ckks_single_record_composition/src/layout.rs
+ M code_branch/prototypes/P0-D_ckks_single_record_composition/src/lib.rs
+ M code_branch/prototypes/P0-D_ckks_single_record_composition/src/locate.rs
+ M code_branch/prototypes/P0-D_ckks_single_record_composition/src/multi_locate.rs
+ M code_branch/prototypes/P0-D_ckks_single_record_composition/tests/contracts.rs
+ M code_branch/prototypes/P0-D_ckks_single_record_composition/tests/multi_contract.rs
+ D code_branch/prototypes/P0_bgv_cpir/.gitignore
+ D code_branch/prototypes/P0_bgv_cpir/Cargo.lock
+ D code_branch/prototypes/P0_bgv_cpir/Cargo.toml
+ D code_branch/prototypes/P0_bgv_cpir/README.md
+ D code_branch/prototypes/P0_bgv_cpir/bootstrap_openfhe.sh
+ D code_branch/prototypes/P0_bgv_cpir/measure_command.py
+ D code_branch/prototypes/P0_bgv_cpir/openfhe_backend/Cargo.lock
+ D code_branch/prototypes/P0_bgv_cpir/openfhe_backend/Cargo.toml
+ D code_branch/prototypes/P0_bgv_cpir/openfhe_backend/build.rs
+ D code_branch/prototypes/P0_bgv_cpir/openfhe_backend/src/bin/p0a_experiment.rs
+ D code_branch/prototypes/P0_bgv_cpir/openfhe_backend/src/lib.rs
+ D code_branch/prototypes/P0_bgv_cpir/openfhe_backend/tests/bgv_cpir.rs
+ D code_branch/prototypes/P0_bgv_cpir/openfhe_backend/tests/experiment_schema.rs
+ D code_branch/prototypes/P0_bgv_cpir/rust-toolchain.toml
+ D code_branch/prototypes/P0_bgv_cpir/spikes/fheanor_capability/Cargo.toml
+ D code_branch/prototypes/P0_bgv_cpir/spikes/fheanor_capability/README.md
+ D code_branch/prototypes/P0_bgv_cpir/spikes/fheanor_capability/src/lib.rs
+ D code_branch/prototypes/P0_bgv_cpir/spikes/fheanor_capability/tests/capabilities.rs
+ D code_branch/prototypes/P0_bgv_cpir/src/fixed_window.rs
+ D code_branch/prototypes/P0_bgv_cpir/src/lib.rs
+ D code_branch/prototypes/P0_bgv_cpir/src/plaintext.rs
+ D code_branch/prototypes/P0_bgv_cpir/tests/fixed_window.rs
+ D code_branch/prototypes/P0_bgv_cpir/tests/plaintext_selection.rs
+ M code_branch/prototypes/P3_multi_record_cpir/Cargo.lock
+ M code_branch/prototypes/P3_multi_record_cpir/Cargo.toml
+ M code_branch/prototypes/P3_multi_record_cpir/README.md
+ M docs/project/agents/retrieval/blockers.md
+ M docs/project/agents/retrieval/decisions.md
+ M docs/project/agents/retrieval/findings.md
+ M docs/project/agents/retrieval/status.md
+ M docs/project/hlf_pir_(p0-a)audit.md
+ M docs/project/p3_retrieval_evaluation.md
+ M docs/project/thesis_helpers/retrieval/formal_pir_notes.md
+ M docs/project/thesis_helpers/retrieval/retrieval_claim_evidence_matrix.md
+ M docs/project/thesis_helpers/retrieval/retrieval_thesis_bridge.md
+?? .gitignore
+?? .vscode/
+?? code-branch-prototypes-full-tree.txt
+?? code-branch-prototypes-source-tree.txt
+?? code_branch/feanor_samples/
+?? code_branch/prototypes/.build-cache/
+?? code_branch/prototypes/.gitignore
+?? code_branch/prototypes/P0-A_bgv_cpir/
+?? code_branch/prototypes/P0-B_plaintext_dft_search/
+?? code_branch/prototypes/P0-C_ckks_dft_search/src/bin/p0c_capacity_audit.rs
+?? code_branch/prototypes/P0-C_ckks_dft_search/src/bin/p0c_fps_repair_candidate.rs
+?? code_branch/prototypes/P0-C_ckks_dft_search/src/staged_server_text_ct_pt.rs
+?? code_branch/prototypes/P0-C_ckks_dft_search/tests/capacity_contract.rs
+?? code_branch/prototypes/P0-C_ckks_dft_search/tests/fft_equivalence.rs
+?? code_branch/prototypes/P0-C_ckks_dft_search/tests/parameter_profiles.rs
+?? code_branch/prototypes/P0-C_ckks_dft_search/tests/staged_server_text_ct_pt.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_fixed_frame_audit.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_formal_benchmark.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_phase1_profile.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_phase2_fixed_final.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_phase2_full_capacity.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/src/bin/cbpir_rfps15_state_diagnostic.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/src/configurable_fixed_fetch.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/src/formal_benchmark.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/src/no_dummy_fetch.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/src/phase2_match.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/tests/final_fixed_native.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/tests/formal_benchmark_native.rs
+?? code_branch/prototypes/P0-D_ckks_single_record_composition/tests/phase2_native.rs
+?? code_branch/prototypes/P1_plaintext_ntt_search/
+?? code_branch/prototypes/P2_integer_he_private_search/
+?? code_branch/prototypes/P4_substring_pir_composition/
+?? code_branch/prototypes/README.md
+?? code_branch/prototypes/openfhe_runtime/
+?? code_branch/prototypes/private_search_he
+?? docs-project-full-tree.txt
+?? experiments/
+?? exports/
+?? literature/
+?? openfhe-rs-upstream-audit/
+?? openfhe-rs/
+?? retrieval_goal.md
+?? search_goal.md
+?? thesis_branch/
+?? thesis_goal.md
+
+[rustfft] return_code=0
+name = "rustfft"
+version = "6.4.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[openmp_linkage] return_code=0
+linux-vdso.so.1 (0x00007fff96dcd000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x000079fcebc1e000)
+	/lib64/ld-linux-x86-64.so.2 (0x000079fcec252000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x000079fcec16c000)
+	libOPENFHEpke.so.1 => <REPOSITORY_ROOT>/code_branch/prototypes/openfhe_runtime/.openfhe/openfhe-1.5.1/install/lib/libOPENFHEpke.so.1 (0x000079fceb800000)
+	libOPENFHEcore.so.1 => <REPOSITORY_ROOT>/code_branch/prototypes/openfhe_runtime/.openfhe/openfhe-1.5.1/install/lib/libOPENFHEcore.so.1 (0x000079fceb644000)
+	libgomp.so.1 => /lib/x86_64-linux-gnu/libgomp.so.1 (0x000079fcec124000)
+	libstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x000079fceb42a000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x000079fcec102000)
+	libOPENFHEbinfhe.so.1 => <REPOSITORY_ROOT>/code_branch/prototypes/openfhe_runtime/.openfhe/openfhe-1.5.1/install/lib/libOPENFHEbinfhe.so.1 (0x000079fcebbc1000)

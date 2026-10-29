@@ -1,0 +1,13 @@
+model,slope,intercept_seconds,rmse_seconds,source,provenance,fit_role
+server_floor_origin,7.22222222222e-05,0,0.177864562151,Choi et al. Figure 4 (digitized),F,Locate central component
+client_floor_origin,0.00019754069066,0,0.297631884821,Choi et al. Figure 4 (digitized),F,Locate central component
+server_floor_intercept,7.77777777778e-05,-0.916666666667,0.0785674201318,Choi et al. Figure 4 (digitized),F,Locate diagnostic only; unsafe downward extrapolation
+client_floor_intercept,0.000180659051101,0.294053538614,0.208925688451,Choi et al. Figure 4 (digitized),F,Locate diagnostic only; unsafe downward extrapolation
+server_ceil_origin,6.43741633199e-05,0,0.391723271993,Choi et al. Figure 4 (digitized),F,Locate hierarchy sensitivity component
+client_ceil_origin,0.000169795609026,0,0.319857269318,Choi et al. Figure 4 (digitized),F,Locate hierarchy sensitivity component
+server_ceil_intercept,7.77777777778e-05,-2.47222222222,0.0785674201318,Choi et al. Figure 4 (digitized),F,Locate diagnostic only; unsafe downward extrapolation
+client_ceil_intercept,0.000154164324688,0.318979805452,0.220545176198,Choi et al. Figure 4 (digitized),F,Locate diagnostic only; unsafe downward extrapolation
+fetch_origin,0.0744916953036,0,0.397757251481,Choi et al. Figure 4 (digitized),F,Fetch sensitivity
+fetch_intercept,0.0820685857228,-0.71703255675,0.0217228463214,Choi et al. Figure 4 (digitized),F,"Fetch central for K=1,4; sensitivity otherwise"
+figure3_total_origin,0.0012841974026,0,2.77066958947,Choi et al. Figure 3 (text anchor plus digitized points),F,external validation only
+figure3_total_intercept,0.00132052121212,-2.54266666667,2.50823042777,Choi et al. Figure 3 (text anchor plus digitized points),F,external validation only

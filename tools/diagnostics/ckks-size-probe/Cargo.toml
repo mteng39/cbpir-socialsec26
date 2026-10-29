@@ -1,0 +1,27 @@
+[package]
+name = "p0d-ckks-size-probe"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+p0c-ckks-dft-search = { path = "../target/probe_workspace/code_branch/prototypes/P0-C_ckks_dft_search" }
+openfhe = { git = "https://github.com/iasenovets/openfhe-rs", rev = "3e6a46b1377e89e09414cbca7c0c0140c5338397" }
+serde_json = "1"
+
+[workspace]
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = "deny"
+pedantic = "deny"
+
+[[bin]]
+name = "p0d_ckks_size_probe"
+path = "src/main.rs"
+
+[[bin]]
+name = "p0d_bgl_ckks_sizes"
+path = "src/bin/p0d_bgl_ckks_sizes.rs"

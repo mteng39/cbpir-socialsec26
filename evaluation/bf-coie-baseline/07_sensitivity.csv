@@ -1,0 +1,37 @@
+n,s,quantity,central,low,high,source_of_range,provenance
+128,1,Locate_ms,146.0156402376656,129.62133182749594,146.0156402376656,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+128,1,Fetch_ms,678.1334005376356,678.1334005376356,1266.3588201603666,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+128,1,Locate_communication_MiB,8.349418640136719,7.6618194580078125,8.349418640136719,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+128,4,Locate_ms,139.8542102028541,123.14987521567971,139.8542102028541,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+128,4,Fetch_ms,924.3391577060942,924.3391577060942,1489.8339060710196,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+128,4,Locate_communication_MiB,23.673057556152344,23.673057556152344,23.673057556152344,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+128,8,Locate_ms,154.55215734485193,135.1957517220772,154.55215734485193,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+128,8,Fetch_ms,1250.0,1250.0,1787.8006872852231,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+128,8,Locate_communication_MiB,40.175437927246094,39.78252410888672,40.175437927246094,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+128,16,Locate_ms,187.02876664625344,162.5232330407803,187.02876664625344,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+128,16,Fetch_ms,1944.4444444444443,1909.1621863799292,2383.734249713631,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+128,16,Locate_communication_MiB,65.51837921142578,65.22369384765625,65.51837921142578,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+256,1,Locate_ms,314.7861285255861,279.97695142495996,314.7861285255861,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+256,1,Fetch_ms,678.1334005376356,678.1334005376356,1266.3588201603666,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+256,1,Locate_communication_MiB,9.528160095214844,8.742332458496094,9.528160095214844,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+256,4,Locate_ms,278.75838557675826,246.6585651182534,278.75838557675826,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+256,4,Fetch_ms,924.3391577060942,924.3391577060942,1489.8339060710196,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+256,4,Locate_communication_MiB,28.388023376464844,28.388023376464844,28.388023376464844,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+256,8,Locate_ms,285.6346411255094,251.39361870212795,285.6346411255094,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+256,8,Fetch_ms,1250.0,1250.0,1787.8006872852231,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+256,8,Locate_communication_MiB,50.194740295410156,49.70359802246094,50.194740295410156,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+256,16,Locate_ms,323.32724441722684,282.61678729399887,323.32724441722684,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+256,16,Fetch_ms,1944.4444444444443,1909.1621863799292,2383.734249713631,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+256,16,Locate_communication_MiB,87.3250961303711,86.93218231201172,87.3250961303711,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+512,1,Locate_ms,686.9343945912843,611.6102149313931,686.9343945912843,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+512,1,Fetch_ms,726.5715005760381,678.1334005376356,1899.5382302405499,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+512,1,Locate_communication_MiB,10.706901550292969,9.822845458984375,10.706901550292969,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+512,4,Locate_ms,584.0625609506624,518.4853273099837,584.0625609506624,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+512,4,Fetch_ms,990.3633832565295,924.3391577060942,2234.750859106529,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+512,4,Locate_communication_MiB,33.102989196777344,33.102989196777344,33.102989196777344,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+512,8,Locate_ms,564.6282360172779,499.429772161429,564.6282360172779,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+512,8,Fetch_ms,1339.2857142857142,1250.0,2681.701030927835,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+512,8,Locate_communication_MiB,60.21404266357422,59.624671936035156,60.21404266357422,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X
+512,16,Locate_ms,589.0479444104224,518.0688422165616,589.0479444104224,floor versus ceiling paper hierarchy calibration; both use through-origin fits; intercept fits are diagnostic only,F+X
+512,16,Fetch_ms,2083.333333333333,1909.1621863799292,3575.6013745704463,"K=1,4 intercept versus origin request-count fits; K=8,16 Figure 4 anchors versus fits; n=512 also includes parameter-dependent SealPIR geometry factor 1.0 to 1.5",D+F+X
+512,16,Locate_communication_MiB,109.1318130493164,108.64067077636719,109.1318130493164,floor/ceiling ell rounding only; Figure 5 count is unresolved and is not used as a correction,P+D+X

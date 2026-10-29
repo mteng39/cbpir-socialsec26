@@ -1,0 +1,11 @@
+{
+  "command": "<REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/search-correctness-v2/release/cbpir_search_correctness_v2",
+  "elapsed_seconds": 2.9194387067109346,
+  "input": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_8192_input.json",
+  "maximum_threads": 1,
+  "minimum_threads": 1,
+  "observed_thread_samples": 320,
+  "output": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_8192_output.json",
+  "return_code": 0,
+  "stderr": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_8192_stderr.txt"
+}

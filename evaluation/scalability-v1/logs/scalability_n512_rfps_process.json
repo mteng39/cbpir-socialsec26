@@ -1,0 +1,11 @@
+{
+  "command": "<REPOSITORY_ROOT>/code/code_branch/prototypes/.build-cache/scalability-v1/release/cbpir_scalability_v1",
+  "elapsed_seconds": 2.321094739018008,
+  "maximum_rss_kib": 38348,
+  "maximum_threads": 1,
+  "mode": "rfps",
+  "n": 512,
+  "observed_process_samples": 210,
+  "return_code": 0,
+  "ring_dimension": 32768
+}

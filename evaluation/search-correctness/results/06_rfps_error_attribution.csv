@@ -1,0 +1,4 @@
+profile,N,n,runs,exact_semantic_fp_record_instances,ckks_fp_record_instances_vs_exact_rfps,ckks_fn_record_instances_vs_exact_rfps,final_fp_record_instances_vs_literal,final_fn_record_instances_vs_literal,cancellation_alignment_instances,threshold_only_alignment_instances,ckks_fp_alignment_instances_vs_exact_rfps,ckks_fn_alignment_instances_vs_exact_rfps
+CBPIR-13,8192,128,80,0,0,0,0,0,0,0,0,0
+CBPIR-14,16384,256,80,0,0,2,0,2,0,0,0,12
+CBPIR-15,32768,512,80,0,0,217,0,217,0,0,0,217

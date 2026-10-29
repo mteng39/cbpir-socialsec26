@@ -1,0 +1,5 @@
+row_type,profile,N,n,ell,U_Match,U_Fetch,payload_bytes,allocated_fetch_slots,payload_byte_utilization,raw_searchable_min,raw_searchable_max,raw_searchable_mean,raw_searchable_median,raw_payload_min,raw_payload_max,raw_payload_mean,raw_payload_median,serialized_slots_min,serialized_slots_max,serialized_slots_mean,serialized_slots_median,query_bytes,response_bytes
+eligible_pool,ALL,,1331,,,,,,,17,40,25.040570999248686,21,17,40,25.040570999248686,21,31,54,39.040570999248686,35,,
+frozen_configuration,CBPIR-13,8192,128,64,1.0,1.0,3074,8192,0.375244140625,18,40,24.015625,21.0,18,40,24.015625,21.0,32,54,38.015625,35.0,394197,263299
+frozen_configuration,CBPIR-14,16384,256,64,1.0,1.0,6289,16384,0.38385009765625,18,40,24.56640625,21.0,18,40,24.56640625,21.0,32,54,38.56640625,35.0,787413,525443
+frozen_configuration,CBPIR-15,32768,512,64,1.0,1.0,12847,32768,0.392059326171875,18,40,25.091796875,21.0,18,40,25.091796875,21.0,32,54,39.091796875,35.0,1573845,1049731

@@ -1,0 +1,433 @@
+n,K,protocol,metric,table_value,reproduced_value,unrounded_reproduced_value,absolute_difference,relative_difference,provenance,status,evidence
+128,1,BF-COIE,k,1,1,1,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Locate,146.0,146.0,146.0156402376656,-0.0156402376656,-0.000107113440999,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Fetch,678.1,678.1,678.1334005376356,-0.0334005376355,-4.92536388992e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Online,824.1,824.1,824.1490407753012,-0.0490407753011,-5.95047411024e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Locate_comm,8.349,8.349,8.349418640136719,-0.000418640136719,-5.01400342661e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Fetch_comm,5.976,5.976,5.975914001464844,8.59985351562e-05,1.43908588937e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Total_comm,14.325,14.325,14.325332641601562,-0.000332641601563,-2.32205150055e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,1,CBPIR-FPS,k,1,1,1,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Setup,1.764,1.764,1.7636175,0.0003825,0.000216883763061,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Search,13.372,13.372,13.372359000000001,-0.000359000000001,-2.68464225348e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Locate,3.832,3.832,3.831771,0.000229,5.97634879538e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Fetch,5.432,5.432,5.4320695,-6.94999999995e-05,-1.27943871115e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Online,22.308,22.308,22.308410000000002,-0.000410000000002,-1.83787190572e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Search_comm,1.003,1.003,1.0030012130737305,-1.21307373058e-06,-1.20944393164e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Fetch_comm,0.627,0.627,0.6270370483398438,-3.70483398437e-05,-5.90847700975e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Total_comm,1.630,1.630,1.6300382614135742,-3.82614135743e-05,-2.34727088806e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,k,1,1,1,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Setup,2.823,2.823,2.8229345,6.54999999998e-05,2.32028054494e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Search,7.307,7.307,7.306723,0.000277000000001,3.79102916589e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Locate,3.932,3.932,3.9317705,0.0002295,5.83706500672e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Fetch,6.838,6.838,6.8376695000000005,0.0003305,4.83351820382e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Online,19.476,19.476,19.476168,-0.000168000000002,-8.62592682514e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Search_comm,0.752,0.752,0.7524862289428711,-0.000486228942871,-0.000646163244149,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Fetch_comm,0.627,0.627,0.6270370483398438,-3.70483398437e-05,-5.90847700975e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Total_comm,1.380,1.380,1.3795232772827148,0.000476722717285,0.000345570622211,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,1,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,BF-COIE,k,4,4,4,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Locate,139.9,139.9,139.8542102028541,0.0457897971459,0.000327410930851,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Fetch,924.3,924.3,924.3391577060942,-0.0391577060942,-4.23629203283e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Online,1064.2,1064.2,1064.1933679089484,0.00663209105164,6.23203569167e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Locate_comm,23.673,23.673,23.673057556152344,-5.75561523455e-05,-2.43129355847e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Fetch_comm,7.030,7.030,7.030487060546875,-0.000487060546875,-6.92783505154e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Total_comm,30.703,30.704,30.70354461669922,-0.000544616699219,-1.77379096133e-05,P+E,ROUNDING_MISMATCH,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,4,CBPIR-FPS,k,4,4,4,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Setup,1.764,1.764,1.7636175,0.0003825,0.000216883763061,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Search,14.479,14.479,14.478800999999999,0.000199,1.37442319982e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Locate,4.179,4.179,4.179394,-0.000394,-9.42720403963e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Fetch,6.357,6.357,6.357381999999999,-0.000381999999999,-6.00876272653e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Online,28.436,28.436,28.4359915,8.49999999986e-06,2.98916955291e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Search_comm,1.003,1.003,1.0030012130737305,-1.21307373058e-06,-1.20944393164e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Fetch_comm,0.627,0.627,0.6270370483398438,-3.70483398437e-05,-5.90847700975e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Total_comm,1.630,1.630,1.6300382614135742,-3.82614135743e-05,-2.34727088806e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,k,4,4,4,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Setup,2.823,2.823,2.8229345,6.54999999998e-05,2.32028054494e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Search,7.133,7.133,7.132853,0.000147,2.06088643633e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Locate,4.127,4.127,4.126711,0.000289,7.00315578192e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Fetch,7.316,7.316,7.3159220000000005,7.79999999994e-05,1.06616773661e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Online,18.721,18.721,18.721208999999998,-0.000208999999998,-1.11638089184e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Search_comm,0.752,0.752,0.7524862289428711,-0.000486228942871,-0.000646163244149,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Fetch_comm,0.627,0.627,0.6270370483398438,-3.70483398437e-05,-5.90847700975e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Total_comm,1.380,1.380,1.3795232772827148,0.000476722717285,0.000345570622211,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,4,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,BF-COIE,k,8,8,8,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Locate,154.6,154.6,154.55215734485193,0.0478426551481,0.000309556695746,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Fetch,1250.0,1250.0,1250.0,0,0,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Online,1404.6,1404.6,1404.552157344852,0.0478426551479,3.40625692664e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Locate_comm,40.175,40.175,40.175437927246094,-0.000437927246097,-1.09003726827e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Fetch_comm,8.437,8.437,8.43658447265625,0.000415527343749,4.92530294808e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Total_comm,48.612,48.612,48.612022399902344,-2.23999023419e-05,-4.6078935284e-07,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,8,CBPIR-FPS,k,8,8,8,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Setup,1.764,1.764,1.7636175,0.0003825,0.000216883763061,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Search,13.149,13.149,13.149036,-3.60000000015e-05,-2.73784329144e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Locate,3.819,3.819,3.8190465,-4.64999999998e-05,-1.21758140415e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Fetch,5.266,5.266,5.265567,0.000433,8.2232359782e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Online,22.831,22.831,22.830631,0.000368999999999,1.6162496779e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Search_comm,1.003,1.003,1.0030012130737305,-1.21307373058e-06,-1.20944393164e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Fetch_comm,0.627,0.627,0.6270370483398438,-3.70483398437e-05,-5.90847700975e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Total_comm,1.630,1.630,1.6300382614135742,-3.82614135743e-05,-2.34727088806e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,k,8,8,8,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Setup,2.823,2.823,2.8229345,6.54999999998e-05,2.32028054494e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Search,7.265,7.265,7.2645254999999995,0.0004745,6.53174113024e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Locate,4.106,4.106,4.10574,0.00026,6.33259777774e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Fetch,7.624,7.624,7.623707,0.000293,3.8432746694e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Online,19.331,19.331,19.33108,-8.00000000005e-05,-4.13841337372e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Search_comm,0.752,0.752,0.7524862289428711,-0.000486228942871,-0.000646163244149,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Fetch_comm,0.627,0.627,0.6270370483398438,-3.70483398437e-05,-5.90847700975e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Total_comm,1.380,1.380,1.3795232772827148,0.000476722717285,0.000345570622211,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,8,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,BF-COIE,k,16,16,16,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Locate,187.0,187.0,187.02876664625344,-0.0287666462534,-0.000153808672159,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Fetch,1944.4,1944.4,1944.4444444444443,-0.0444444444443,-2.2857142857e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Online,2131.5,2131.5,2131.473211090698,0.026788909302,1.25682599071e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Locate_comm,65.518,65.518,65.51837921142578,-0.000379211425781,-5.78786334987e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Fetch_comm,11.249,11.249,11.248779296875,0.000220703125001,1.96201844819e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Total_comm,76.767,76.767,76.76715850830078,-0.000158508300785,-2.06479312072e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+128,16,CBPIR-FPS,k,16,16,16,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Setup,1.764,1.764,1.7636175,0.0003825,0.000216883763061,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Search,13.815,13.815,13.8147695,0.000230499999999,1.66850413247e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Locate,3.665,3.665,3.6648265,0.0001735,4.73419410168e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Fetch,5.369,5.369,5.3688199999999995,0.00018,3.35269202544e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Online,22.685,22.685,22.6847985,0.000201499999999,8.88260038983e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Search_comm,1.003,1.003,1.0030012130737305,-1.21307373058e-06,-1.20944393164e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Fetch_comm,0.627,0.627,0.6270370483398438,-3.70483398437e-05,-5.90847700975e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Total_comm,1.630,1.630,1.6300382614135742,-3.82614135743e-05,-2.34727088806e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,k,16,16,16,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Setup,2.823,2.823,2.8229345,6.54999999998e-05,2.32028054494e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Search,6.576,6.576,6.5761975,-0.000197500000001,-3.00325530066e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Locate,3.931,3.931,3.9314745,-0.0004745,-0.000120692630717,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Fetch,6.163,6.163,6.1627659999999995,0.000234000000001,3.79699634873e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Online,16.958,16.958,16.957731499999998,0.000268500000001,1.58334857466e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Search_comm,0.752,0.752,0.7524862289428711,-0.000486228942871,-0.000646163244149,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Fetch_comm,0.627,0.627,0.6270370483398438,-3.70483398437e-05,-5.90847700975e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Total_comm,1.380,1.380,1.3795232772827148,0.000476722717285,0.000345570622211,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+128,16,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,BF-COIE,k,1,1,1,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Locate,314.8,314.8,314.7861285255861,0.0138714744139,4.40663458676e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Fetch,678.1,678.1,678.1334005376356,-0.0334005376355,-4.92536388992e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Online,992.9,992.9,992.9195290632217,-0.0195290632217,-1.96683242198e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Locate_comm,9.528,9.528,9.528160095214844,-0.000160095214843,-1.68023220898e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Fetch_comm,5.976,5.976,5.975914001464844,8.59985351562e-05,1.43908588937e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Total_comm,15.504,15.504,15.504074096679688,-7.40966796879e-05,-4.77917476567e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,1,CBPIR-FPS,k,1,1,1,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Setup,4.815,4.815,4.8151589999999995,-0.000158999999999,-3.30207164497e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Search,28.309,28.309,28.309299499999998,-0.000299499999997,-1.05795623801e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Locate,7.316,7.316,7.3162275,-0.0002275,-3.10952605014e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Fetch,12.241,12.241,12.241435500000001,-0.000435500000002,-3.55758930398e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Online,48.031,48.031,48.0313785,-0.000378500000004,-7.88026518963e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Search_comm,2.003,2.003,2.0030012130737305,-1.21307373036e-06,-6.05628055758e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Fetch_comm,1.252,1.252,1.2520370483398438,-3.70483398437e-05,-2.95904501331e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Total_comm,3.255,3.255,3.255038261413574,-3.82614135743e-05,-1.17545203778e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,k,1,1,1,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Setup,3.075,3.075,3.0751965,-0.0001965,-6.38983557636e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Search,12.904,12.904,12.9043765,-0.0003765,-2.91761481076e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Locate,8.212,8.212,8.212315499999999,-0.000315499999999,-3.84179102714e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Fetch,13.678,13.678,13.6784315,-0.000431499999999,-3.15460146143e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Online,34.949,34.949,34.94855700000001,0.00044299999999,1.26757737091e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Search_comm,1.502,1.502,1.502486228942871,-0.000486228942871,-0.000323616239207,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Fetch_comm,1.252,1.252,1.2520370483398438,-3.70483398437e-05,-2.95904501331e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Total_comm,2.755,2.755,2.754523277282715,0.000476722717285,0.000173069046545,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,1,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,BF-COIE,k,4,4,4,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Locate,278.8,278.8,278.75838557675826,0.0416144232418,0.000149284919826,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Fetch,924.3,924.3,924.3391577060942,-0.0391577060942,-4.23629203283e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Online,1203.1,1203.1,1203.0975432828525,0.00245671714742,2.04199332061e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Locate_comm,28.388,28.388,28.388023376464844,-2.33764648421e-05,-8.23462223208e-07,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Fetch_comm,7.030,7.030,7.030487060546875,-0.000487060546875,-6.92783505154e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Total_comm,35.418,35.419,35.41851043701172,-0.000510437011719,-1.44115888958e-05,P+E,ROUNDING_MISMATCH,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,4,CBPIR-FPS,k,4,4,4,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Setup,4.815,4.815,4.8151589999999995,-0.000158999999999,-3.30207164497e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Search,27.010,27.010,27.009974500000002,2.54999999996e-05,9.44095671011e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Locate,7.259,7.259,7.2590520000000005,-5.20000000002e-05,-7.16346983052e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Fetch,10.992,10.992,10.9922555,-0.0002555,-2.32436373044e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Online,46.000,46.000,45.999781,0.000219000000001,4.76089223123e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Search_comm,2.003,2.003,2.0030012130737305,-1.21307373036e-06,-6.05628055758e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Fetch_comm,1.252,1.252,1.2520370483398438,-3.70483398437e-05,-2.95904501331e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Total_comm,3.255,3.255,3.255038261413574,-3.82614135743e-05,-1.17545203778e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,k,4,4,4,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Setup,3.075,3.075,3.0751965,-0.0001965,-6.38983557636e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Search,12.635,12.635,12.634617,0.000382999999999,3.03135425474e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Locate,7.840,7.840,7.8403555,-0.0003555,-4.53423317349e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Fetch,12.749,12.749,12.7491795,-0.0001795,-1.40793374193e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Online,33.773,33.773,33.7726205,0.000379500000001,1.12369130492e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Search_comm,1.502,1.502,1.502486228942871,-0.000486228942871,-0.000323616239207,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Fetch_comm,1.252,1.252,1.2520370483398438,-3.70483398437e-05,-2.95904501331e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Total_comm,2.755,2.755,2.754523277282715,0.000476722717285,0.000173069046545,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,4,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,BF-COIE,k,8,8,8,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Locate,285.6,285.6,285.6346411255094,-0.0346411255094,-0.00012127774619,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Fetch,1250.0,1250.0,1250.0,0,0,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Online,1535.6,1535.6,1535.6346411255095,-0.0346411255096,-2.25581818629e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Locate_comm,50.195,50.195,50.194740295410156,0.000259704589844,5.17394030362e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Fetch_comm,8.437,8.437,8.43658447265625,0.000415527343749,4.92530294808e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Total_comm,58.632,58.631,58.631324768066406,0.000675231933592,1.15165730309e-05,P+E,ROUNDING_MISMATCH,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,8,CBPIR-FPS,k,8,8,8,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Setup,4.815,4.815,4.8151589999999995,-0.000158999999999,-3.30207164497e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Search,26.485,26.485,26.4845805,0.0004195,1.5839405121e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Locate,7.220,7.220,7.21978,0.00022,3.04718426323e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Fetch,11.327,11.327,11.3268205,0.0001795,1.58473421557e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Online,45.687,45.687,45.687365,-0.000365000000002,-7.98907969418e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Search_comm,2.003,2.003,2.0030012130737305,-1.21307373036e-06,-6.05628055758e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Fetch_comm,1.252,1.252,1.2520370483398438,-3.70483398437e-05,-2.95904501331e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Total_comm,3.255,3.255,3.255038261413574,-3.82614135743e-05,-1.17545203778e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,k,8,8,8,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Setup,3.075,3.075,3.0751965,-0.0001965,-6.38983557636e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Search,11.934,11.934,11.933535500000001,0.000464499999998,3.8923921582e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Locate,7.747,7.747,7.746866000000001,0.000133999999999,1.72973173925e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Fetch,12.390,12.390,12.390428,-0.000427999999999,-3.45427938405e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Online,32.361,32.361,32.360583500000004,0.000416499999993,1.28705961063e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Search_comm,1.502,1.502,1.502486228942871,-0.000486228942871,-0.000323616239207,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Fetch_comm,1.252,1.252,1.2520370483398438,-3.70483398437e-05,-2.95904501331e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Total_comm,2.755,2.755,2.754523277282715,0.000476722717285,0.000173069046545,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Search_correct,19/20,19/20,19/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,8,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,BF-COIE,k,16,16,16,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Locate,323.3,323.3,323.32724441722684,-0.0272444172268,-8.4262671016e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Fetch,1944.4,1944.4,1944.4444444444443,-0.0444444444443,-2.2857142857e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Online,2267.8,2267.8,2267.7716888616715,0.0283111383287,1.24841219545e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Locate_comm,87.325,87.325,87.3250961303711,-9.61303710909e-05,-1.1008332696e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Fetch_comm,11.249,11.249,11.248779296875,0.000220703125001,1.96201844819e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Total_comm,98.574,98.574,98.5738754272461,0.000124572753904,1.26375019106e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+256,16,CBPIR-FPS,k,16,16,16,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Setup,4.815,4.815,4.8151589999999995,-0.000158999999999,-3.30207164497e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Search,27.429,27.429,27.428964,3.59999999979e-05,1.31248121504e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Locate,7.119,7.119,7.1188535,0.0001465,2.0579156461e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Fetch,11.962,11.962,11.962284499999999,-0.000284499999999,-2.37830825708e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Online,48.449,48.449,48.448703,0.000296999999996,6.13019506417e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Search_comm,2.003,2.003,2.0030012130737305,-1.21307373036e-06,-6.05628055758e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Fetch_comm,1.252,1.252,1.2520370483398438,-3.70483398437e-05,-2.95904501331e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Total_comm,3.255,3.255,3.255038261413574,-3.82614135743e-05,-1.17545203778e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,k,14--16,14--16,14--16,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Setup,3.075,3.075,3.0751965,-0.0001965,-6.38983557636e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Search,12.894,12.894,12.893639,0.000361,2.79983021085e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Locate,8.135,8.135,8.1345845,0.000415499999999,5.10782081124e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Fetch,13.658,13.658,13.657869999999999,0.00013,9.51832167098e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Online,35.526,35.526,35.52583799999999,0.00016200000001,4.56006132805e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Search_comm,1.502,1.502,1.502486228942871,-0.000486228942871,-0.000323616239207,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Fetch_comm,1.252,1.252,1.2520370483398438,-3.70483398437e-05,-2.95904501331e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Total_comm,2.755,2.755,2.754523277282715,0.000476722717285,0.000173069046545,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Search_correct,19/20,19/20,19/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+256,16,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,BF-COIE,k,1,1,1,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Locate,686.9,686.9,686.9343945912843,-0.0343945912844,-5.00696886852e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Fetch,726.6,726.6,726.5715005760381,0.0284994239619,3.92245277158e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Online,1413.5,1413.5,1413.5058951673225,-0.00589516732248,-4.17059974255e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Locate_comm,10.707,10.707,10.706901550292969,9.8449707032e-05,9.19497639626e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Fetch_comm,5.976,5.976,5.975914001464844,8.59985351562e-05,1.43908588937e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Total_comm,16.683,16.683,16.682815551757812,0.000184448242187,1.10561818306e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,1,CBPIR-FPS,k,1,1,1,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Setup,6.419,6.419,6.418903,9.69999999993e-05,1.51116164241e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Search,56.929,56.929,56.928742,0.000258000000002,4.53198140233e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Locate,14.929,14.929,14.9286225,0.000377500000001,2.52869948316e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Fetch,23.423,23.423,23.4227435,0.000256499999999,1.09508948001e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Online,95.418,95.418,95.41774849999999,0.000251500000019,2.63577797603e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Search_comm,4.003,4.003,4.0030012130737305,-1.21307373036e-06,-3.03041059891e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Fetch_comm,2.502,2.502,2.5020370483398438,-3.7048339844e-05,-1.48072706871e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Total_comm,6.505,6.505,6.505038261413574,-3.82614135743e-05,-5.88181222565e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,k,1,1,1,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Setup,5.784,5.784,5.78355,0.00045,7.78068833156e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Search,28.037,28.037,28.0371035,-0.000103500000002,-3.69153682375e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Locate,16.409,16.409,16.4085415,0.000458500000001,2.79427638343e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Fetch,28.971,28.971,28.9712745,-0.0002745,-9.47490245898e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Online,73.019,73.019,73.01886250000001,0.000137499999994,1.88307507521e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Search_comm,3.002,3.002,3.002486228942871,-0.000486228942871,-0.000161942105907,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Fetch_comm,2.502,2.502,2.5020370483398438,-3.7048339844e-05,-1.48072706871e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Total_comm,5.505,5.505,5.504523277282715,0.000476722717285,8.66056319995e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Search_correct,18/20,18/20,18/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,1,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,BF-COIE,k,4,4,4,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Locate,584.1,584.1,584.0625609506624,0.0374390493376,6.41010943703e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Fetch,990.4,990.4,990.3633832565295,0.0366167434705,3.69730384721e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Online,1574.4,1574.4,1574.4259442071918,-0.0259442071917,-1.6478518591e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Locate_comm,33.103,33.103,33.102989196777344,1.08032226578e-05,3.26351876973e-07,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Fetch_comm,7.030,7.030,7.030487060546875,-0.000487060546875,-6.92783505154e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Total_comm,40.133,40.133,40.13347625732422,-0.000476257324216,-1.18668345887e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,4,CBPIR-FPS,k,4,4,4,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Setup,6.419,6.419,6.418903,9.69999999993e-05,1.51116164241e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Search,63.905,63.905,63.9046425,0.0003575,5.59427274786e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Locate,16.201,16.201,16.2005725,0.000427500000001,2.63879563516e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Fetch,23.814,23.814,23.8139435,5.64999999995e-05,2.37255958886e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Online,101.699,101.699,101.69897699999999,2.3000000013e-05,2.26157633945e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Search_comm,4.003,4.003,4.0030012130737305,-1.21307373036e-06,-3.03041059891e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Fetch_comm,2.502,2.502,2.5020370483398438,-3.7048339844e-05,-1.48072706871e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Total_comm,6.505,6.505,6.505038261413574,-3.82614135743e-05,-5.88181222565e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,k,0--4,0--4,0--4,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Setup,5.784,5.784,5.78355,0.00045,7.78068833156e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Search,32.739,32.739,32.738717,0.000282999999996,8.64419946561e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Locate,17.669,17.669,17.6685685,0.000431500000001,2.44218992615e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Fetch,33.334,33.334,33.334025000000004,-2.50000000008e-05,-7.49984437848e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Online,84.130,84.130,84.1301765,-0.000176500000009,-2.09793925737e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Search_comm,3.002,3.002,3.002486228942871,-0.000486228942871,-0.000161942105907,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Fetch_comm,2.502,2.502,2.5020370483398438,-3.7048339844e-05,-1.48072706871e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Total_comm,5.505,5.505,5.504523277282715,0.000476722717285,8.66056319995e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Search_correct,12/20,12/20,12/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,4,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,BF-COIE,k,8,8,8,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Locate,564.6,564.6,564.6282360172779,-0.0282360172779,-5.00081566538e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Fetch,1339.3,1339.3,1339.2857142857142,0.0142857142857,1.06666666667e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Online,1903.9,1903.9,1903.9139503029921,-0.013950302992,-7.32717095214e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Locate_comm,60.214,60.214,60.21404266357422,-4.26635742201e-05,-7.0853196917e-07,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Fetch_comm,8.437,8.437,8.43658447265625,0.000415527343749,4.92530294808e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Total_comm,68.651,68.651,68.65062713623047,0.000372863769527,5.43132357389e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,8,CBPIR-FPS,k,8,8,8,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Setup,6.419,6.419,6.418903,9.69999999993e-05,1.51116164241e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Search,58.233,58.233,58.232693,0.000306999999999,5.27195264693e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Locate,15.205,15.205,15.2050545,-5.44999999992e-05,-3.58433440664e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Fetch,23.636,23.636,23.635922,7.79999999985e-05,3.30006166032e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Online,96.787,96.787,96.787419,-0.000418999999994,-4.32907504222e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Search_comm,4.003,4.003,4.0030012130737305,-1.21307373036e-06,-3.03041059891e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Fetch_comm,2.502,2.502,2.5020370483398438,-3.7048339844e-05,-1.48072706871e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Total_comm,6.505,6.505,6.505038261413574,-3.82614135743e-05,-5.88181222565e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,k,8,8,8,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Setup,5.784,5.784,5.78355,0.00045,7.78068833156e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Search,32.796,32.796,32.795877000000004,0.000122999999995,3.75047143868e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Locate,16.504,16.504,16.50438,-0.00038,-2.30241911541e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Fetch,28.052,28.052,28.0517045,0.0002955,1.05341192369e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Online,79.355,79.355,79.35545200000001,-0.00045200000001,-5.69589093904e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Search_comm,3.002,3.002,3.002486228942871,-0.000486228942871,-0.000161942105907,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Fetch_comm,2.502,2.502,2.5020370483398438,-3.7048339844e-05,-1.48072706871e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Total_comm,5.505,5.505,5.504523277282715,0.000476722717285,8.66056319995e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Search_correct,13/20,13/20,13/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,8,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,BF-COIE,k,16,16,16,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Setup,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Search,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Locate,589.0,589.0,589.0479444104224,-0.0479444104224,-8.13930527681e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Fetch,2083.3,2083.3,2083.333333333333,-0.0333333333328,-1.59999999998e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Online,2672.4,2672.4,2672.3812777437556,0.0187222562445,7.00583273816e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Search_comm,--,--,--,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Locate_comm,109.132,109.132,109.1318130493164,0.000186950683599,1.71307227815e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Fetch_comm,11.249,11.249,11.248779296875,0.000220703125001,1.96201844819e-05,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Total_comm,120.381,120.381,120.3805923461914,0.000407653808594,3.38637483542e-06,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Search_correct,G,G,G,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,BF-COIE,Fetch_correct,A,A,A,,,P+E,VERIFIED,Choi Fig.4+Algorithms 1/7+historical SealPIR model
+512,16,CBPIR-FPS,k,16,16,16,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Setup,6.419,6.419,6.418903,9.69999999993e-05,1.51116164241e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Search,66.419,66.419,66.4187795,0.000220499999998,3.31984420156e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Locate,17.513,17.513,17.513367000000002,-0.000367000000001,-2.09554222212e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Fetch,27.387,27.387,27.386951500000002,4.84999999983e-05,1.77091634307e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Online,125.389,125.389,125.38938000000002,-0.000380000000021,-3.03055968553e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Search_comm,4.003,4.003,4.0030012130737305,-1.21307373036e-06,-3.03041059891e-07,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Fetch_comm,2.502,2.502,2.5020370483398438,-3.7048339844e-05,-1.48072706871e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Total_comm,6.505,6.505,6.505038261413574,-3.82614135743e-05,-5.88181222565e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Search_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-FPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,k,10--16,10--16,10--16,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Setup,5.784,5.784,5.78355,0.00045,7.78068833156e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Search,32.857,32.857,32.856578,0.000422,1.28436990608e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Locate,16.385,16.385,16.3850015,-1.49999999977e-06,-9.15471383854e-08,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Fetch,29.148,29.148,29.1476105,0.000389500000001,1.33630164984e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Online,84.025,84.025,84.02459999999999,0.000400000000013,4.76051061253e-06,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Search_comm,3.002,3.002,3.002486228942871,-0.000486228942871,-0.000161942105907,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Locate_comm,0,0.000,0.0,0,0,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Fetch_comm,2.502,2.502,2.5020370483398438,-3.7048339844e-05,-1.48072706871e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Total_comm,5.505,5.505,5.504523277282715,0.000476722717285,8.66056319995e-05,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Search_correct,11/20,11/20,11/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs
+512,16,CBPIR-RFPS,Fetch_correct,20/20,20/20,20/20,,,D,VERIFIED,formal-seven-procedure-benchmark raw CSVs

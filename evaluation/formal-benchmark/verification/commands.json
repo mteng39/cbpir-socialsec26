@@ -1,0 +1,6 @@
+[
+  "cargo build --release --locked --manifest-path <REPOSITORY_ROOT>/code_branch/prototypes/P0-D_ckks_single_record_composition/Cargo.toml --features native --bin cbpir_formal_benchmark",
+  "OMP_NUM_THREADS=1 OMP_DYNAMIC=FALSE <REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/formal-seven/release/cbpir_formal_benchmark < native/formal_8192_input.json",
+  "OMP_NUM_THREADS=1 OMP_DYNAMIC=FALSE <REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/formal-seven/release/cbpir_formal_benchmark < native/formal_16384_input.json",
+  "OMP_NUM_THREADS=1 OMP_DYNAMIC=FALSE <REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/formal-seven/release/cbpir_formal_benchmark < native/formal_32768_input.json"
+]

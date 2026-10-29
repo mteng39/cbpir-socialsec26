@@ -1,0 +1,86 @@
+timestamp_utc=2026-09-28T05:13:59.911777+00:00
+hostname=<container-id>
+platform=Linux-6.8.0-117-generic-x86_64-with-glibc2.36
+kernel=6.8.0-117-generic
+cpu_model=AMD EPYC Processor (with IBPB)
+logical_cpu_count=4
+memory=MemTotal:        8131788 kB
+OMP_NUM_THREADS=1
+OMP_DYNAMIC=FALSE
+OpenFHE=1.5.1
+execution=serial native processes
+timing_use=none; correctness-only rerun
+
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+
+[cargo]
+exit=0
+cargo 1.91.1 (ea2d97820 2025-10-10)
+
+[rustc]
+exit=0
+rustc 1.91.1 (ed61e7d7e 2025-11-07)
+binary: rustc
+commit-hash: ed61e7d7e242494fb7057f2657300d9e77bb4fcb
+commit-date: 2025-11-07
+host: x86_64-unknown-linux-gnu
+release: 1.91.1
+LLVM version: 21.1.2
+
+[cmake]
+exit=0
+cmake version 3.25.1
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+
+[compiler]
+exit=0
+c++ (Debian 12.2.0-14+deb12u1) 12.2.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+[process_thread_observations]
+[
+  {
+    "command": "<REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/search-correctness-v2/release/cbpir_search_correctness_v2",
+    "elapsed_seconds": 2.9194387067109346,
+    "input": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_8192_input.json",
+    "maximum_threads": 1,
+    "minimum_threads": 1,
+    "observed_thread_samples": 320,
+    "output": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_8192_output.json",
+    "return_code": 0,
+    "stderr": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_8192_stderr.txt"
+  },
+  {
+    "command": "<REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/search-correctness-v2/release/cbpir_search_correctness_v2",
+    "elapsed_seconds": 5.89526691660285,
+    "input": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_16384_input.json",
+    "maximum_threads": 1,
+    "minimum_threads": 1,
+    "observed_thread_samples": 747,
+    "output": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_16384_output.json",
+    "return_code": 0,
+    "stderr": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_16384_stderr.txt"
+  },
+  {
+    "command": "<REPOSITORY_ROOT>/code_branch/prototypes/.build-cache/search-correctness-v2/release/cbpir_search_correctness_v2",
+    "elapsed_seconds": 9.595786921679974,
+    "input": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_32768_input.json",
+    "maximum_threads": 1,
+    "minimum_threads": 1,
+    "observed_thread_samples": 1357,
+    "output": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_32768_output.json",
+    "return_code": 0,
+    "stderr": "experiments/cbpir-scaling/search-correctness-v2/native/search_correctness_32768_stderr.txt"
+  }
+]

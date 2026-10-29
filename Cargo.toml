@@ -1,0 +1,65 @@
+[package]
+name = "cbpir"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.91.1"
+license = "MIT"
+publish = false
+build = "build.rs"
+autobins = false
+
+[features]
+default = []
+native = ["dep:cbpir-bgv", "dep:cbpir-search", "dep:cbpir-fetch", "dep:tempfile"]
+
+[dependencies]
+cbpir-bgv = { path = "crates/bgv-cpir", features = ["openfhe-backend"], optional = true }
+cbpir-search = { path = "crates/ckks-search", optional = true }
+cbpir-fetch = { path = "crates/multi-fetch", optional = true }
+tempfile = { version = "3", optional = true }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+
+[dev-dependencies]
+tempfile = "3"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "cbpir"
+path = "src/bin/cbpir.rs"
+required-features = ["native"]
+
+[[bin]]
+name = "benchmark"
+path = "src/bin/benchmark.rs"
+required-features = ["native"]
+
+[[bin]]
+name = "pattern_length"
+path = "src/bin/pattern_length.rs"
+required-features = ["native"]
+
+[[bin]]
+name = "scalability"
+path = "src/bin/scalability.rs"
+required-features = ["native"]
+
+[[bin]]
+name = "search_correctness"
+path = "src/bin/search_correctness.rs"
+required-features = ["native"]
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = "deny"
+pedantic = "deny"
+
+[workspace]
+members = [".", "crates/bgv-cpir", "crates/ckks-search", "crates/multi-fetch"]
+default-members = ["."]
+resolver = "3"

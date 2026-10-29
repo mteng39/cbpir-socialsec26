@@ -1,0 +1,16 @@
+R2.10 scalability benchmark verification: PASS
+measured_configurations=4
+measured_executions=80
+warmups_per_configuration=3
+measured_runs_per_configuration=20
+largest_measured_n=1024
+largest_measured_text_bytes=26524
+n2048_status=NOT_RUN_PINNED_CORPUS_HAS_1331_ELIGIBLE_RECORDS
+extended_plaintext_modulus=786433
+control_n512_reproduces_frozen_workload=true
+one_fetch_query_ciphertext=true
+one_fetch_response_ciphertext=true
+communication_serialized_each_execution=true
+communication_identical_within_each_configuration=true
+all_fetch_exact=true
+all_configurations_successful=true

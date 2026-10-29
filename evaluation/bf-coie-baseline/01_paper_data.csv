@@ -1,0 +1,36 @@
+data_id,source_location,evidence_kind,n,s,item_bytes,component,value,unit,uncertainty,provenance,used_for
+text_total_10000_16,Section 7.1 prose p.11,exact_text,10000,16,2,post_search_total,16.7,seconds,reported decimal,P,fit validation
+fig3_total_20000,Figure 3 p.11,figure_extracted,20000,16,2,post_search_total,21.95,seconds,approximately 2 seconds,P,fit validation
+fig3_total_30000,Figure 3 p.11,figure_extracted,30000,16,2,post_search_total,35.31,seconds,approximately 2 seconds,P,fit validation
+fig3_total_40000,Figure 3 p.11,figure_extracted,40000,16,2,post_search_total,48.66,seconds,approximately 2 seconds,P,fit validation
+fig3_total_50000,Figure 3 p.11,figure_extracted,50000,16,2,post_search_total,62.02,seconds,approximately 2 seconds,P,fit validation
+fig3_total_60000,Figure 3 p.11,figure_extracted,60000,16,2,post_search_total,75.38,seconds,approximately 2 seconds,P,fit validation
+fig3_total_70000,Figure 3 p.11,figure_extracted,70000,16,2,post_search_total,88.74,seconds,approximately 2 seconds,P,fit validation
+fig3_total_80000,Figure 3 p.11,figure_extracted,80000,16,2,post_search_total,102.10,seconds,approximately 2 seconds,P,fit validation
+fig3_total_90000,Figure 3 p.11,figure_extracted,90000,16,2,post_search_total,117.37,seconds,approximately 2 seconds,P,fit validation
+fig3_total_100000,Figure 3 p.11,figure_extracted,100000,16,2,post_search_total,132.63,seconds,approximately 2 seconds,P,fit validation
+fig4_server_8,Figure 4 p.12,figure_extracted,10000,8,2,server,14.5833,seconds,approximately 0.14 seconds,P,Locate calibration
+fig4_client_8,Figure 4 p.12,figure_extracted,10000,8,2,client,0.2778,seconds,approximately 0.14 seconds,P,Locate calibration
+fig4_network_8,Figure 4 p.12,figure_extracted,10000,8,2,network,0.4167,seconds,approximately 0.14 seconds,P,validation only
+fig4_pir_8,Figure 4 p.12,figure_extracted,10000,8,2,pir_retrieval,1.2500,seconds,approximately 0.14 seconds,P,Fetch calibration
+fig4_server_16,Figure 4 p.12,figure_extracted,10000,16,2,server,13.0556,seconds,approximately 0.14 seconds,P,Locate calibration
+fig4_client_16,Figure 4 p.12,figure_extracted,10000,16,2,client,0.5556,seconds,approximately 0.14 seconds,P,Locate calibration
+fig4_network_16,Figure 4 p.12,figure_extracted,10000,16,2,network,0.8333,seconds,approximately 0.14 seconds,P,validation only
+fig4_pir_16,Figure 4 p.12,figure_extracted,10000,16,2,pir_retrieval,1.9444,seconds,approximately 0.14 seconds,P,Fetch calibration
+fig4_server_32,Figure 4 p.12,figure_extracted,10000,32,2,server,11.6667,seconds,approximately 0.14 seconds,P,Locate calibration
+fig4_client_32,Figure 4 p.12,figure_extracted,10000,32,2,client,1.1111,seconds,approximately 0.14 seconds,P,Locate calibration
+fig4_network_32,Figure 4 p.12,figure_extracted,10000,32,2,network,1.8056,seconds,approximately 0.14 seconds,P,validation only
+fig4_pir_32,Figure 4 p.12,figure_extracted,10000,32,2,pir_retrieval,3.1944,seconds,approximately 0.14 seconds,P,Fetch calibration
+fig4_server_64,Figure 4 p.12,figure_extracted,10000,64,2,server,10.0000,seconds,approximately 0.14 seconds,P,Locate calibration
+fig4_client_64,Figure 4 p.12,figure_extracted,10000,64,2,client,2.5000,seconds,approximately 0.14 seconds,P,Locate calibration
+fig4_network_64,Figure 4 p.12,figure_extracted,10000,64,2,network,3.6111,seconds,approximately 0.14 seconds,P,validation only
+fig4_pir_64,Figure 4 p.12,figure_extracted,10000,64,2,pir_retrieval,5.8333,seconds,approximately 0.14 seconds,P,Fetch calibration
+fig4_server_128,Figure 4 p.12,figure_extracted,10000,128,2,server,8.3333,seconds,approximately 0.14 seconds,P,Locate calibration
+fig4_client_128,Figure 4 p.12,figure_extracted,10000,128,2,client,4.5833,seconds,approximately 0.14 seconds,P,Locate calibration
+fig4_network_128,Figure 4 p.12,figure_extracted,10000,128,2,network,7.0833,seconds,approximately 0.14 seconds,P,validation only
+fig4_pir_128,Figure 4 p.12,figure_extracted,10000,128,2,pir_retrieval,11.1111,seconds,approximately 0.14 seconds,P,Fetch calibration
+fig5_ciphertexts,Figure 5 p.12,table_in_figure,10000,16,2,bfcoie_fhe_ciphertexts,1323,count,exact displayed integer,P,unresolved limitation only
+fig5_pir_requests,Figure 5 p.12,table_in_figure,10000,16,2,pir_requests,32,count,exact displayed integer,P,protocol validation
+text_ct_size,Section 7.3 prose p.12,approximate_text,10000,16,2,fhe_ciphertext_size,103,KB,approximately,P,communication estimate
+text_pir_size,Section 7.3 prose p.12,approximate_text,10000,16,2,pir_communication_per_request,368.6,KB,approximately,P,communication estimate
+text_batching,Section 7.3 prose p.12,approximate_text,10000,16,2,bfcoie_ciphertexts_with_batching,2,count,exact displayed integer,P,not used main unbatched estimate
