@@ -109,14 +109,12 @@ fn select_pattern(
     for (record_index, record) in records.iter().enumerate() {
         for local_offset in 0..=record.searchable.len() - pattern_length {
             let bytes = record.searchable[local_offset..local_offset + pattern_length].to_vec();
-            let candidate = candidates
-                .entry(bytes)
-                .or_insert_with(|| PatternCandidate {
-                    alignment_positions: Vec::new(),
-                    record_ids: BTreeSet::new(),
-                    first_record_index: record_index,
-                    first_local_offset: local_offset,
-                });
+            let candidate = candidates.entry(bytes).or_insert_with(|| PatternCandidate {
+                alignment_positions: Vec::new(),
+                record_ids: BTreeSet::new(),
+                first_record_index: record_index,
+                first_local_offset: local_offset,
+            });
             candidate
                 .alignment_positions
                 .push(global_start + local_offset);

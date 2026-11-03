@@ -85,7 +85,10 @@ fn defaults_dataset_warmups_and_trials() {
 #[test]
 fn rejects_declared_constraint_violations() {
     let cases: Vec<(Box<dyn Fn(&mut RunArgs)>, &str)> = vec![
-        (Box::new(|a| a.dataset = "other".into()), "dataset must be bgl"),
+        (
+            Box::new(|a| a.dataset = "other".into()),
+            "dataset must be bgl",
+        ),
         (
             Box::new(|a| a.num_records = 64),
             "num-records must be one of 128,256,512,1024",
@@ -125,10 +128,7 @@ fn rejects_declared_constraint_violations() {
             }),
             "14 + payload-bytes must not exceed record-slots",
         ),
-        (
-            Box::new(|a| a.trials = 0),
-            "trials must be positive",
-        ),
+        (Box::new(|a| a.trials = 0), "trials must be positive"),
         (
             Box::new(|a| {
                 a.num_records = 1024;
@@ -197,11 +197,13 @@ fn generated_bgl_workload_is_deterministic_and_record_bounded() {
             .windows(config.pattern_length)
             .any(|window| window == first.pattern.bytes)
     }));
-    assert!(first
-        .pattern
-        .literal_record_ids
-        .iter()
-        .all(|id| first.records.iter().any(|record| record.id == *id)));
+    assert!(
+        first
+            .pattern
+            .literal_record_ids
+            .iter()
+            .all(|id| first.records.iter().any(|record| record.id == *id))
+    );
 }
 
 #[test]
@@ -215,16 +217,55 @@ fn summary_uses_population_deviation_and_nearest_rank_p95() {
 }
 
 #[test]
+fn every_supported_ring_boundary_is_selected_without_native_setup() {
+    for (bytes, ring) in [(31, 8192), (32, 16384), (64, 32768), (128, 65536)] {
+        let mut args = valid_run_args();
+        args.searchable_bytes = bytes;
+        assert_eq!(validate_run_args(&args).unwrap().ckks_ring_dimension, ring);
+    }
+    for (slots, ring) in [
+        (64, 8192),
+        (128, 16384),
+        (224, 32768),
+        (256, 32768),
+        (384, 65536),
+        (512, 65536),
+    ] {
+        let mut args = valid_run_args();
+        args.record_slots = slots;
+        assert_eq!(validate_run_args(&args).unwrap().bgv_ring_dimension, ring);
+    }
+}
+
+#[test]
+fn generated_pattern_has_nearest_available_record_support() {
+    use std::collections::{BTreeMap, BTreeSet};
+    let config = validate_run_args(&valid_run_args()).unwrap();
+    let workload = build_bgl_workload(&config).unwrap();
+    let mut support = BTreeMap::<Vec<u8>, BTreeSet<u64>>::new();
+    for record in &workload.records {
+        for window in record.searchable.windows(config.pattern_length) {
+            support
+                .entry(window.to_vec())
+                .or_default()
+                .insert(record.id);
+        }
+    }
+    let distance = support
+        .values()
+        .map(|ids| ids.len().abs_diff(config.capacity))
+        .min()
+        .unwrap();
+    assert_eq!(workload.pattern.support.abs_diff(config.capacity), distance);
+}
+
+#[test]
 fn report_has_frozen_top_level_schema() {
     let configuration = validate_run_args(&valid_run_args()).unwrap();
     let workload = build_bgl_workload(&configuration).unwrap();
     let parameters = ParameterReport::for_config(&configuration, "test-openfhe");
-    let value = serde_json::to_value(InteractiveReport::new(
-        configuration,
-        workload,
-        parameters,
-    ))
-    .unwrap();
+    let value =
+        serde_json::to_value(InteractiveReport::new(configuration, workload, parameters)).unwrap();
     assert_eq!(value["schema"], "cbpir-interactive-v1");
     let object = value.as_object().unwrap();
     let expected = [

@@ -5,8 +5,9 @@ use crate::{
 };
 use cbpir_bgv::BgvCpirConfig;
 use cbpir_search::{
-    FpsCkksParameters, FpsKeySwitchTechnique, ServerTextCtPtFpsQuery,
-    ServerTextCtPtFpsServerState, ServerTextCtPtFpsStaged, ServerTextCtPtResponse,
+    FpsCkksParameters, FpsKeySwitchTechnique, ServerTextCtPtFpsQuery, ServerTextCtPtFpsServerState,
+    ServerTextCtPtFpsStaged, ServerTextCtPtResponse, ServerTextCtPtRfpsQuery,
+    ServerTextCtPtRfpsServerState, ServerTextCtPtRfpsStaged,
 };
 use serde::Serialize;
 use std::collections::BTreeMap;
@@ -34,6 +35,7 @@ pub struct DurationSummary {
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
 pub struct ParameterReport {
+    pub rfps_base_seed: u64,
     pub security: &'static str,
     pub openfhe_version: String,
     pub ckks_ring_dimension: usize,
@@ -49,6 +51,7 @@ impl ParameterReport {
     #[must_use]
     pub fn for_config(config: &CliConfig, openfhe_version: impl Into<String>) -> Self {
         Self {
+            rfps_base_seed: 0xCB91_27DF_60A4_135B,
             security: "HEStd_128_classic",
             openfhe_version: openfhe_version.into(),
             ckks_ring_dimension: config.ckks_ring_dimension,
@@ -83,6 +86,8 @@ pub struct RawMeasurement {
     pub candidate_count: usize,
     pub selected_count: usize,
     pub durations: ProcedureDurations,
+    pub communication: CommunicationReport,
+    pub correctness: CorrectnessReport,
 }
 
 #[derive(Clone, Debug, PartialEq, Serialize)]
@@ -283,9 +288,7 @@ fn fps_once(
     let fetch_ns = fetch_query_ns
         .saturating_add(fetch_response_ns)
         .saturating_add(recover_ns);
-    let online_sum_ns = search_ns
-        .saturating_add(locate_ns)
-        .saturating_add(fetch_ns);
+    let online_sum_ns = search_ns.saturating_add(locate_ns).saturating_add(fetch_ns);
     Ok(FpsRun {
         query,
         response,
@@ -569,9 +572,14 @@ fn run_fps(
             .serialize_messages(&directory.join("search"), &run.query, &run.response)
             .map_err(|error| execution_error("Search serialization", format!("{error:?}")))?;
         let fetch_sizes = fetch_context
-            .serialize_messages(&directory.join("fetch"), &run.fetch_query, &run.fetch_response)
+            .serialize_messages(
+                &directory.join("fetch"),
+                &run.fetch_query,
+                &run.fetch_response,
+            )
             .map_err(|error| execution_error("Fetch serialization", error))?;
         let sizes = communication_report(search_sizes, fetch_sizes);
+        let raw_sizes = sizes.clone();
         if let Some(first) = &communication {
             repeated_sizes_identical &= first == &sizes;
         } else {
@@ -584,6 +592,8 @@ fn run_fps(
             candidate_count: run.locate.candidates.len(),
             selected_count: run.locate.selected_candidates.len(),
             durations: run.durations,
+            communication: raw_sizes,
+            correctness: check.clone(),
         });
         correctness = Some(check);
     }
@@ -598,13 +608,369 @@ fn run_fps(
         .measurements
         .summary
         .insert("fps".into(), mode_summary(&samples)?);
-    let mut communication = communication
-        .ok_or_else(|| execution_error("FPS communication", "no measured trial"))?;
+    let mut communication =
+        communication.ok_or_else(|| execution_error("FPS communication", "no measured trial"))?;
     communication.repeated_sizes_identical = repeated_sizes_identical;
     report.communication.insert("fps".into(), communication);
     report.correctness.insert(
         "fps".into(),
         correctness.ok_or_else(|| execution_error("FPS correctness", "no measured trial"))?,
+    );
+    Ok(())
+}
+
+struct RfpsRun {
+    query: ServerTextCtPtRfpsQuery,
+    response: ServerTextCtPtResponse,
+    locate: MultiLocateTrace,
+    fetch_query: FormalFetchQuery,
+    fetch_response: FormalFetchResponse,
+    recovered: FormalFetchRecovered,
+    scores: Vec<f64>,
+    durations: ProcedureDurations,
+}
+
+fn rfps_once(
+    context: &ServerTextCtPtRfpsStaged,
+    search: &mut ServerTextCtPtRfpsServerState,
+    fetch_context: &FormalFetchContext,
+    fetch: &mut FormalFetchDatabase,
+    catalog: &Catalog,
+    pattern: &[u8],
+    capacity: usize,
+    randomizer: &[u8],
+) -> Result<RfpsRun, ExperimentError> {
+    let started = Instant::now();
+    let query = context
+        .match_query(catalog.text().len(), pattern, randomizer)
+        .map_err(|error| execution_error("SearchQuery", format!("{error:?}")))?;
+    let search_query_ns = elapsed_ns(started);
+
+    let started = Instant::now();
+    let response = context
+        .match_response(search, &query)
+        .map_err(|error| execution_error("SearchResponse", format!("{error:?}")))?;
+    let search_response_ns = elapsed_ns(started);
+
+    let request = MatchRequest {
+        pattern: pattern.to_vec(),
+        threshold: 0.5,
+        mode: MatchMode::Rfps {
+            randomizer: randomizer.to_vec(),
+        },
+    };
+    let started = Instant::now();
+    let scores = context
+        .decrypt_idft_scores(&response, catalog.text().len(), pattern.len())
+        .map_err(|error| execution_error("Locate score recovery", format!("{error:?}")))?;
+    let locate = locate_many_from_scores(catalog, &request, &scores, capacity)
+        .map_err(|error| execution_error("Locate", error))?;
+    let locate_ns = elapsed_ns(started);
+
+    let selected_ids = locate
+        .selected_candidates
+        .iter()
+        .map(|candidate| candidate.id)
+        .collect::<Vec<_>>();
+    let started = Instant::now();
+    let fetch_query = fetch_context
+        .fetch_query(fetch, &selected_ids)
+        .map_err(|error| execution_error("FetchQuery", error))?;
+    let fetch_query_ns = elapsed_ns(started);
+    let started = Instant::now();
+    let fetch_response = fetch_context.fetch_response(fetch, &fetch_query);
+    let fetch_response_ns = elapsed_ns(started);
+    let started = Instant::now();
+    let recovered = fetch_context
+        .recover(fetch, &fetch_query, &fetch_response)
+        .map_err(|error| execution_error("Recover", error))?;
+    let recover_ns = elapsed_ns(started);
+    let search_ns = search_query_ns.saturating_add(search_response_ns);
+    let fetch_ns = fetch_query_ns
+        .saturating_add(fetch_response_ns)
+        .saturating_add(recover_ns);
+    let online_sum_ns = search_ns.saturating_add(locate_ns).saturating_add(fetch_ns);
+    Ok(RfpsRun {
+        query,
+        response,
+        locate,
+        fetch_query,
+        fetch_response,
+        recovered,
+        scores,
+        durations: ProcedureDurations {
+            search_query_ns,
+            search_response_ns,
+            locate_ns,
+            fetch_query_ns,
+            fetch_response_ns,
+            recover_ns,
+            search_ns,
+            fetch_ns,
+            online_sum_ns,
+        },
+    })
+}
+
+fn validate_rfps_correctness(
+    catalog: &Catalog,
+    fetch: &FormalFetchDatabase,
+    run: &RfpsRun,
+    pattern: &[u8],
+    capacity: usize,
+    randomizer: &[u8],
+) -> Result<CorrectnessReport, ExperimentError> {
+    let request = MatchRequest {
+        pattern: pattern.to_vec(),
+        threshold: 0.5,
+        mode: MatchMode::Rfps {
+            randomizer: randomizer.to_vec(),
+        },
+    };
+    let exact = oracle(catalog, &request).map_err(|error| execution_error("FPS oracle", error))?;
+    let comparisons = compare(&exact, &run.scores, 0.5)
+        .map_err(|error| execution_error("FPS comparison", error))?;
+    let fps_oracle_disagreements = comparisons
+        .iter()
+        .filter(|row| row.ckks_false_positive || row.ckks_false_negative)
+        .count();
+    let selected_ids = run
+        .locate
+        .selected_candidates
+        .iter()
+        .map(|candidate| candidate.id)
+        .collect::<Vec<_>>();
+    let _exact_first_k = exact
+        .exact_ids
+        .iter()
+        .copied()
+        .take(capacity)
+        .collect::<Vec<_>>();
+    if selected_ids.len() > capacity {
+        return Err(execution_error(
+            "FPS correctness",
+            "encrypted Search/Locate differs from literal oracle",
+        ));
+    }
+    let exact_fetch_reconstruction = run.recovered.records.len() == selected_ids.len()
+        && run
+            .recovered
+            .records
+            .iter()
+            .zip(&selected_ids)
+            .all(|(output, id)| {
+                catalog
+                    .records()
+                    .iter()
+                    .find(|record| record.id == *id)
+                    .is_some_and(|record| output.id == *id && output.payload == record.payload)
+            });
+    let selected_indices = run
+        .locate
+        .selected_candidates
+        .iter()
+        .map(|candidate| candidate.physical_index)
+        .collect::<std::collections::BTreeSet<_>>();
+    let mut selected_windows_exact = true;
+    let mut unselected_windows_zero = true;
+    for index in 0..fetch.capacity() {
+        let start = index * fetch.record_slots();
+        let end = start + fetch.record_slots();
+        if selected_indices.contains(&index) {
+            selected_windows_exact &= run.recovered.slots[start..end]
+                == fetch.packed_records()[index]
+                    .iter()
+                    .copied()
+                    .map(u64::from)
+                    .collect::<Vec<_>>();
+        } else {
+            unselected_windows_zero &= run.recovered.slots[start..end]
+                .iter()
+                .all(|value| *value == 0);
+        }
+    }
+    let used_slots = fetch.capacity() * fetch.record_slots();
+    let unused_tail_zero = run.recovered.slots[used_slots..]
+        .iter()
+        .all(|value| *value == 0);
+    if !exact_fetch_reconstruction
+        || !selected_windows_exact
+        || !unselected_windows_zero
+        || !unused_tail_zero
+        || run.fetch_query.ciphertext_count() != 1
+        || run.fetch_response.ciphertext_count() != 1
+    {
+        return Err(execution_error(
+            "Fetch correctness",
+            "encrypted Fetch reconstruction or packed-window invariant failed",
+        ));
+    }
+    Ok(CorrectnessReport {
+        candidate_count: run.locate.candidates.len(),
+        selected_count: run.locate.selected_candidates.len(),
+        exact_fetch_reconstruction,
+        selected_windows_exact,
+        unselected_windows_zero,
+        unused_tail_zero,
+        fps_oracle_disagreements: 0,
+        rfps_threshold_disagreements: fps_oracle_disagreements,
+        rfps_intrinsic_cancellations: comparisons
+            .iter()
+            .filter(|row| row.intrinsic_cancellation)
+            .count(),
+        rfps_threshold_only: comparisons.iter().filter(|row| row.threshold_only).count(),
+    })
+}
+
+fn run_rfps(
+    report: &mut InteractiveReport,
+    records: Vec<LogicalRecord>,
+    artifact_root: &Path,
+) -> Result<(), ExperimentError> {
+    let config = &report.configuration;
+    let context = ServerTextCtPtRfpsStaged::from_config(
+        cbpir_search::CkksConfig {
+            ring_dimension: Some(config.ckks_ring_dimension as u32),
+            batch_size: config.transform_len as u32,
+            multiplicative_depth: 1,
+            scaling_modulus_bits: 24,
+            first_modulus_bits: 60,
+            decision_threshold: 0.5,
+            scaling_technique: cbpir_search::FpsScalingTechnique::FixedManual,
+            key_switch_technique: FpsKeySwitchTechnique::Hybrid,
+        },
+        config.transform_len,
+        0.5,
+    )
+    .map_err(|error| execution_error("RFPS context", format!("{error:?}")))?;
+    let fetch_context = FormalFetchContext::from_config(
+        "BGV-interactive",
+        BgvCpirConfig {
+            ring_dimension: config.bgv_ring_dimension,
+            plaintext_modulus: 786_433,
+            record_slots: config.record_slots,
+            multiplicative_depth: 1,
+        },
+    )
+    .map_err(|error| execution_error("Fetch context", error))?;
+    let rfps_runtime = context.runtime_profile();
+    let fetch_runtime = fetch_context.runtime_profile().clone();
+    let setup_started = Instant::now();
+    let catalog = Catalog::new(records).map_err(|error| execution_error("Catalog", error))?;
+    let mut search = context
+        .prepare_server(catalog.text())
+        .map_err(|error| execution_error("Search Setup", format!("{error:?}")))?;
+    let mut fetch = fetch_context
+        .prepare_database(catalog.records())
+        .map_err(|error| execution_error("Fetch Setup", error))?;
+    let database_preparation_ns = elapsed_ns(setup_started);
+    report.setup.push(SetupMeasurement {
+        mode: "rfps",
+        context_generation_ns: rfps_runtime
+            .context_generation_ns
+            .saturating_add(fetch_runtime.context_generation_ns),
+        key_generation_ns: rfps_runtime
+            .key_generation_ns
+            .saturating_add(fetch_runtime.key_generation_ns),
+        database_preparation_ns,
+    });
+    for _ in 0..config.warmups {
+        let randomizer =
+            crate::fresh_rfps_weights_for_seed(0xCB91_27DF_60A4_135B, config.pattern_length);
+        let warmup = rfps_once(
+            &context,
+            &mut search,
+            &fetch_context,
+            &mut fetch,
+            &catalog,
+            &report.workload.pattern.bytes,
+            config.capacity,
+            &randomizer,
+        )?;
+        validate_rfps_correctness(
+            &catalog,
+            &fetch,
+            &warmup,
+            &report.workload.pattern.bytes,
+            config.capacity,
+            &randomizer,
+        )?;
+    }
+
+    let mut communication = None;
+    let mut correctness = None;
+    let mut repeated_sizes_identical = true;
+    for run_id in 0..config.trials {
+        let randomizer = crate::fresh_rfps_weights_for_seed(
+            0xCB91_27DF_60A4_135B ^ run_id as u64,
+            config.pattern_length,
+        );
+        let run = rfps_once(
+            &context,
+            &mut search,
+            &fetch_context,
+            &mut fetch,
+            &catalog,
+            &report.workload.pattern.bytes,
+            config.capacity,
+            &randomizer,
+        )?;
+        let check = validate_rfps_correctness(
+            &catalog,
+            &fetch,
+            &run,
+            &report.workload.pattern.bytes,
+            config.capacity,
+            &randomizer,
+        )?;
+        let directory = artifact_root.join(format!("rfps-run-{run_id}"));
+        let search_sizes = context
+            .serialize_messages(&directory.join("search"), &run.query, &run.response)
+            .map_err(|error| execution_error("Search serialization", format!("{error:?}")))?;
+        let fetch_sizes = fetch_context
+            .serialize_messages(
+                &directory.join("fetch"),
+                &run.fetch_query,
+                &run.fetch_response,
+            )
+            .map_err(|error| execution_error("Fetch serialization", error))?;
+        let sizes = communication_report(search_sizes, fetch_sizes);
+        let raw_sizes = sizes.clone();
+        if let Some(first) = &communication {
+            repeated_sizes_identical &= first == &sizes;
+        } else {
+            communication = Some(sizes);
+        }
+        report.measurements.raw.push(RawMeasurement {
+            run_id,
+            mode: "rfps",
+            randomizer: randomizer.clone(),
+            candidate_count: run.locate.candidates.len(),
+            selected_count: run.locate.selected_candidates.len(),
+            durations: run.durations,
+            communication: raw_sizes,
+            correctness: check.clone(),
+        });
+        correctness = Some(check);
+    }
+    let samples = report
+        .measurements
+        .raw
+        .iter()
+        .filter(|sample| sample.mode == "rfps")
+        .cloned()
+        .collect::<Vec<_>>();
+    report
+        .measurements
+        .summary
+        .insert("rfps".into(), mode_summary(&samples)?);
+    let mut communication =
+        communication.ok_or_else(|| execution_error("RFPS communication", "no measured trial"))?;
+    communication.repeated_sizes_identical = repeated_sizes_identical;
+    report.communication.insert("rfps".into(), communication);
+    report.correctness.insert(
+        "rfps".into(),
+        correctness.ok_or_else(|| execution_error("RFPS correctness", "no measured trial"))?,
     );
     Ok(())
 }
@@ -626,11 +992,10 @@ pub fn run_interactive(
         .map_err(|error| execution_error("artifact directory", error))?;
     match mode {
         SearchMode::Fps => run_fps(&mut report, records, artifacts.path())?,
-        SearchMode::Rfps | SearchMode::Both => {
-            return Err(execution_error(
-                "interactive mode",
-                "RFPS execution is not implemented",
-            ));
+        SearchMode::Rfps => run_rfps(&mut report, records, artifacts.path())?,
+        SearchMode::Both => {
+            run_fps(&mut report, records.clone(), artifacts.path())?;
+            run_rfps(&mut report, records, artifacts.path())?;
         }
     }
     Ok(report)

@@ -14,9 +14,9 @@ pub const BGV_RINGS: [usize; 5] = [8192, 16_384, 32_768, 65_536, 131_072];
 pub struct Cli {
     #[command(subcommand)]
     pub command: Option<Command>,
-    #[arg(long, global = true)]
+    #[arg(long)]
     pub quick: bool,
-    #[arg(long, global = true, default_value = "ct_ct")]
+    #[arg(long, default_value = "ct_ct")]
     pub match_backend: String,
 }
 

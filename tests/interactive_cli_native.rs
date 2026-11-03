@@ -1,13 +1,11 @@
 #![cfg(feature = "native")]
 
-use cbpir::{
-    Cli, Command, build_bgl_workload, run_interactive, validate_run_args,
-};
+use cbpir::{Cli, Command, build_bgl_workload, run_interactive, validate_run_args};
 use clap::Parser;
 
 #[test]
 #[ignore = "constructs native CKKS and BGV contexts"]
-fn minimal_fps_run_reports_exact_search_and_fetch() {
+fn both_modes_run_sequentially_and_reconstruct_exact_payloads() {
     let cli = Cli::try_parse_from([
         "cbpir",
         "run",
@@ -24,7 +22,7 @@ fn minimal_fps_run_reports_exact_search_and_fetch() {
         "--pattern-length",
         "1",
         "--search-mode",
-        "fps",
+        "both",
         "--warmups",
         "0",
         "--trials",
@@ -37,7 +35,9 @@ fn minimal_fps_run_reports_exact_search_and_fetch() {
     let workload = build_bgl_workload(&config).unwrap();
     let report = run_interactive(config, workload).unwrap();
 
-    assert_eq!(report.measurements.raw.len(), 1);
+    assert_eq!(report.measurements.raw.len(), 2);
+    assert_eq!(report.measurements.raw[1].mode, "rfps");
+    assert!(report.correctness["rfps"].exact_fetch_reconstruction);
     let raw = &report.measurements.raw[0];
     assert_eq!(raw.mode, "fps");
     assert!(raw.durations.search_query_ns > 0);
