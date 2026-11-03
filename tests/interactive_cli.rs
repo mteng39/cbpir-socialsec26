@@ -1,8 +1,8 @@
 #![cfg(feature = "native")]
 
 use cbpir::{
-    Cli, Command, RunArgs, SearchMode, build_bgl_workload, resize_by_repetition,
-    validate_run_args,
+    Cli, Command, InteractiveReport, ParameterReport, RunArgs, SearchMode, build_bgl_workload,
+    resize_by_repetition, summarize_ns, validate_run_args,
 };
 use clap::Parser;
 
@@ -202,4 +202,41 @@ fn generated_bgl_workload_is_deterministic_and_record_bounded() {
         .literal_record_ids
         .iter()
         .all(|id| first.records.iter().any(|record| record.id == *id)));
+}
+
+#[test]
+fn summary_uses_population_deviation_and_nearest_rank_p95() {
+    let summary = summarize_ns(&[10, 20, 30, 40]).unwrap();
+    assert_eq!(summary.mean_ns, 25.0);
+    assert_eq!(summary.median_ns, 25.0);
+    assert!((summary.standard_deviation_ns - 125_f64.sqrt()).abs() < 1e-12);
+    assert_eq!(summary.p95_ns, 40);
+    assert!(summarize_ns(&[]).is_err());
+}
+
+#[test]
+fn report_has_frozen_top_level_schema() {
+    let configuration = validate_run_args(&valid_run_args()).unwrap();
+    let workload = build_bgl_workload(&configuration).unwrap();
+    let parameters = ParameterReport::for_config(&configuration, "test-openfhe");
+    let value = serde_json::to_value(InteractiveReport::new(
+        configuration,
+        workload,
+        parameters,
+    ))
+    .unwrap();
+    assert_eq!(value["schema"], "cbpir-interactive-v1");
+    let object = value.as_object().unwrap();
+    let expected = [
+        "schema",
+        "configuration",
+        "workload",
+        "parameters",
+        "setup",
+        "measurements",
+        "communication",
+        "correctness",
+    ];
+    assert_eq!(object.len(), expected.len());
+    assert!(expected.iter().all(|key| object.contains_key(*key)));
 }

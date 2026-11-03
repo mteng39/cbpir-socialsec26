@@ -28,6 +28,8 @@ mod cli;
 #[cfg(feature = "native")]
 mod fetch_stage;
 #[cfg(feature = "native")]
+mod experiment_cli;
+#[cfg(feature = "native")]
 mod formal_benchmark;
 #[cfg(feature = "native")]
 mod match_stage;
@@ -49,6 +51,8 @@ pub use configurable_fixed_fetch::*;
 pub use cli::*;
 #[cfg(feature = "native")]
 pub use formal_benchmark::*;
+#[cfg(feature = "native")]
+pub use experiment_cli::*;
 #[cfg(feature = "native")]
 pub use multi_fetch_stage::{MultiFetchPreparation, MultiFetchTimings, MultiFetchTrace};
 #[cfg(feature = "native")]
