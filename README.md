@@ -121,24 +121,14 @@ Table 2 uses 65537. Fresh timings vary; retained data reproduce published totals
 BF-COIE values are derived estimates. See [REPRODUCE.md](REPRODUCE.md) for
 validation and experiment commands.
 
-## Repository Structure
-
-| Path | Purpose |
-|---|---|
-| `src/` | Primary crate, interactive CLI, protocol, benchmark binaries |
-| `crates/ckks-search/` | CKKS FPS/RFPS Search |
-| `crates/bgv-cpir/` | BGV packed retrieval |
-| `crates/multi-fetch/` | Multi-record Fetch |
-| `openfhe/` | Pinned dependency bootstrap |
-| `scripts/` | Campaign drivers and validators |
-| `data/` | Pinned BGL fixture and workloads |
-| `evaluation/` | Retained raw results and summaries |
-| `paper/`, `slides/` | Publication information and presentation |
-
 ## Acknowledgements
 
-Built with OpenFHE, OpenFHE-rs, and the Loghub BGL dataset. Upstream software
-and data retain their respective licenses.
+Search builds on Aurel Feer's [Privacy Preserving String Search using
+Homomorphic Encryption](https://doi.org/10.3929/ethz-b-000666357).
+Implemented using [OpenFHE](https://github.com/openfheorg/openfhe-development)
+and [OpenFHE-rs](https://github.com/iasenovets/openfhe-rs), with the
+[Loghub BGL dataset](https://github.com/logpai/loghub). Upstream software and
+data retain their respective licenses.
 
 ## Citing
 
@@ -156,10 +146,5 @@ and data retain their respective licenses.
 Original software and project documentation are available under the
 [MIT License](LICENSE).
 
-This license does not cover:
-
-- the Loghub input under `data/source/loghub/`, which retains its upstream
-  license;
-- the conference slides under `slides/`;
-- the paper and any future manuscript copy under `paper/`; or
-- third-party dependencies, which remain under their own licenses.
+This license does not cover the Loghub input, conference slides, paper, or
+third-party dependencies, which retain their respective licenses.
