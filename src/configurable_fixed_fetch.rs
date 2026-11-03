@@ -96,6 +96,10 @@ pub struct ConfigurableFixedFetchTimings {
 }
 
 #[derive(Clone, Debug, Serialize)]
+#[allow(
+    clippy::struct_excessive_bools,
+    reason = "Independent correctness checks are reported separately"
+)]
 pub struct ConfigurableFixedFetchTrace {
     pub selected_physical_indices: Vec<usize>,
     pub outputs: Vec<ReconstructedRecord>,

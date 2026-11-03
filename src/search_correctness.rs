@@ -44,6 +44,10 @@ fn difference(left: &BTreeSet<RecordId>, right: &BTreeSet<RecordId>) -> Vec<Reco
     left.difference(right).copied().collect()
 }
 
+#[allow(
+    clippy::cast_precision_loss,
+    reason = "Metrics are floating-point ratios of record counts"
+)]
 pub fn record_set_metrics(ground_truth: &[RecordId], candidates: &[RecordId]) -> RecordSetMetrics {
     let ground_truth = record_set(ground_truth);
     let candidates = record_set(candidates);
@@ -54,21 +58,21 @@ pub fn record_set_metrics(ground_truth: &[RecordId], candidates: &[RecordId]) ->
     let false_negative_ids = difference(&ground_truth, &candidates);
     let false_positive_ids = difference(&candidates, &ground_truth);
     let tp = true_positive_ids.len();
-    let fn_count = false_negative_ids.len();
-    let fp_count = false_positive_ids.len();
-    let recall = if tp + fn_count == 0 {
+    let missed = false_negative_ids.len();
+    let extra = false_positive_ids.len();
+    let recall = if tp + missed == 0 {
         1.0
     } else {
-        tp as f64 / (tp + fn_count) as f64
+        tp as f64 / (tp + missed) as f64
     };
-    let precision = (tp + fp_count != 0).then(|| tp as f64 / (tp + fp_count) as f64);
+    let precision = (tp + extra != 0).then(|| tp as f64 / (tp + extra) as f64);
     RecordSetMetrics {
         true_positive_ids,
         false_negative_ids,
         false_positive_ids,
         tp,
-        fn_count,
-        fp_count,
+        fn_count: missed,
+        fp_count: extra,
         recall,
         precision,
     }
@@ -97,6 +101,10 @@ fn splitmix64(state: &mut u64) -> u64 {
     value ^ (value >> 31)
 }
 
+/// Generate deterministic weights from the seed.
+///
+/// # Panics
+/// Panics if conversion of a remainder in 0..30 to u8 fails, which cannot occur.
 pub fn fresh_rfps_weights_for_seed(mut seed: u64, length: usize) -> Vec<u8> {
     let rejection_limit = u64::MAX - (u64::MAX % 30);
     (0..length)
@@ -119,10 +127,9 @@ pub fn formal_rfps_seed_schedule(ring_dimension: usize) -> Result<Vec<FormalRfps
     for source_public_k in [1_usize, 4, 8, 16] {
         invocation += 3;
         for source_run in 0..20 {
-            let seed = FORMAL_RFPS_SEED
-                ^ ring
-                ^ (u64::try_from(source_public_k).unwrap() << 32)
-                ^ invocation;
+            let public_k = u64::try_from(source_public_k)
+                .map_err(|_| P0dError::Request("public K exceeds u64"))?;
+            let seed = FORMAL_RFPS_SEED ^ ring ^ (public_k << 32) ^ invocation;
             seeds.push(FormalRfpsSeed {
                 source_public_k,
                 source_run,

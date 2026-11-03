@@ -96,6 +96,10 @@ fn require_member(value: usize, allowed: &[usize], label: &str) -> Result<(), Co
     }
 }
 
+#[allow(
+    clippy::too_many_lines,
+    reason = "Keep validation constraints and derived parameter checks together"
+)]
 pub fn validate_run_args(args: &RunArgs) -> Result<CliConfig, ConfigError> {
     if args.dataset != "bgl" {
         return Err(ConfigError(format!(

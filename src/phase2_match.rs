@@ -97,6 +97,11 @@ fn mismatch_details(
         .collect()
 }
 
+#[allow(
+    clippy::too_many_lines,
+    clippy::cast_precision_loss,
+    reason = "Preserve the measured search path and floating-point score comparison"
+)]
 pub fn run_phase2_match(
     catalog: &Catalog,
     request: &MatchRequest,
