@@ -24,6 +24,8 @@ pub use fixtures::*;
 #[cfg(feature = "native")]
 mod configurable_fixed_fetch;
 #[cfg(feature = "native")]
+mod cli;
+#[cfg(feature = "native")]
 mod fetch_stage;
 #[cfg(feature = "native")]
 mod formal_benchmark;
@@ -41,6 +43,8 @@ mod phase2_match;
 mod pipeline;
 #[cfg(feature = "native")]
 pub use configurable_fixed_fetch::*;
+#[cfg(feature = "native")]
+pub use cli::*;
 #[cfg(feature = "native")]
 pub use formal_benchmark::*;
 #[cfg(feature = "native")]
