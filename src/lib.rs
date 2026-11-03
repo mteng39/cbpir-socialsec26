@@ -42,6 +42,8 @@ mod phase2_match;
 #[cfg(feature = "native")]
 mod pipeline;
 #[cfg(feature = "native")]
+mod workload_cli;
+#[cfg(feature = "native")]
 pub use configurable_fixed_fetch::*;
 #[cfg(feature = "native")]
 pub use cli::*;
@@ -61,3 +63,5 @@ pub mod multi_report;
 pub use pipeline::*;
 #[cfg(feature = "native")]
 pub mod report;
+#[cfg(feature = "native")]
+pub use workload_cli::*;

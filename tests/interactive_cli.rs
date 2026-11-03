@@ -1,6 +1,9 @@
 #![cfg(feature = "native")]
 
-use cbpir::{Cli, Command, RunArgs, SearchMode, validate_run_args};
+use cbpir::{
+    Cli, Command, RunArgs, SearchMode, build_bgl_workload, resize_by_repetition,
+    validate_run_args,
+};
 use clap::Parser;
 
 fn valid_args() -> [&'static str; 20] {
@@ -155,4 +158,48 @@ fn selects_smallest_supported_search_and_fetch_rings() {
     assert_eq!(config.transform_len, 4096);
     assert_eq!(config.ckks_ring_dimension, 8192);
     assert_eq!(config.bgv_ring_dimension, 8192);
+}
+
+#[test]
+fn repeat_resize_has_exact_deterministic_size() {
+    assert_eq!(resize_by_repetition(b"abc", 2).unwrap(), b"ab");
+    assert_eq!(resize_by_repetition(b"abc", 8).unwrap(), b"abcabcab");
+    assert!(resize_by_repetition(b"", 1).is_err());
+}
+
+#[test]
+fn generated_bgl_workload_is_deterministic_and_record_bounded() {
+    let config = validate_run_args(&valid_run_args()).unwrap();
+    let first = build_bgl_workload(&config).unwrap();
+    let second = build_bgl_workload(&config).unwrap();
+    assert_eq!(first, second);
+    assert_eq!(
+        first.source_sha256,
+        "2a819ea540909db682005c9cf948387a40729b5c2e9f19d430e29ce704825496"
+    );
+    assert_eq!(first.source_line_count, 2000);
+    assert_eq!(first.eligible_record_count, 1331);
+    assert_eq!(first.records.len(), config.num_records);
+    assert!(first.records.windows(2).all(|pair| pair[0].id < pair[1].id));
+    assert!(first.records.iter().all(|record| {
+        record.searchable.len() == config.searchable_bytes
+            && record.payload.len() == config.payload_bytes
+    }));
+    assert_eq!(first.pattern.bytes.len(), config.pattern_length);
+    assert!(!first.pattern.literal_record_ids.is_empty());
+    assert_eq!(
+        first.pattern.literal_record_ids.len(),
+        first.pattern.support
+    );
+    assert!(first.records.iter().any(|record| {
+        record
+            .searchable
+            .windows(config.pattern_length)
+            .any(|window| window == first.pattern.bytes)
+    }));
+    assert!(first
+        .pattern
+        .literal_record_ids
+        .iter()
+        .all(|id| first.records.iter().any(|record| record.id == *id)));
 }
