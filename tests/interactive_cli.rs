@@ -1,4 +1,8 @@
 #![cfg(feature = "native")]
+#![allow(
+    clippy::float_cmp,
+    reason = "Fixtures use exactly representable values to test specified statistics"
+)]
 
 use cbpir::{
     Cli, Command, InteractiveReport, ParameterReport, RunArgs, SearchMode, build_bgl_workload,
@@ -73,9 +77,7 @@ fn defaults_dataset_warmups_and_trials() {
         "both",
     ])
     .unwrap();
-    let args = match cli.command.unwrap() {
-        Command::Run(args) => args,
-    };
+    let Command::Run(args) = cli.command.unwrap();
     assert_eq!(args.dataset, "bgl");
     assert_eq!(args.warmups, 1);
     assert_eq!(args.trials, 5);
@@ -84,7 +86,8 @@ fn defaults_dataset_warmups_and_trials() {
 
 #[test]
 fn rejects_declared_constraint_violations() {
-    let cases: Vec<(Box<dyn Fn(&mut RunArgs)>, &str)> = vec![
+    type InvalidCase = (Box<dyn Fn(&mut RunArgs)>, &'static str);
+    let cases: Vec<InvalidCase> = vec![
         (
             Box::new(|a| a.dataset = "other".into()),
             "dataset must be bgl",
@@ -214,6 +217,38 @@ fn summary_uses_population_deviation_and_nearest_rank_p95() {
     assert!((summary.standard_deviation_ns - 125_f64.sqrt()).abs() < 1e-12);
     assert_eq!(summary.p95_ns, 40);
     assert!(summarize_ns(&[]).is_err());
+}
+
+#[test]
+fn count_summary_uses_count_units() {
+    let summary = cbpir::summarize_counts(&[1, 3, 5]).unwrap();
+    assert_eq!(summary.mean, 3.0);
+    assert_eq!(summary.median, 3.0);
+    assert_eq!(summary.p95, 5);
+}
+
+#[test]
+fn correctness_summary_covers_every_trial() {
+    let row = cbpir::CorrectnessReport {
+        measured_trials: 1,
+        candidate_count: 3,
+        selected_count: 1,
+        exact_fetch_reconstruction: true,
+        selected_windows_exact: true,
+        unselected_windows_zero: true,
+        unused_tail_zero: true,
+        fps_oracle_disagreements: 0,
+        rfps_threshold_disagreements: 2,
+        rfps_intrinsic_cancellations: 1,
+        rfps_threshold_only: 0,
+    };
+    let mut second = row.clone();
+    second.exact_fetch_reconstruction = false;
+    let result = cbpir::aggregate_correctness(&[row, second]).unwrap();
+    assert_eq!(result.measured_trials, 2);
+    assert_eq!(result.candidate_count, 6);
+    assert_eq!(result.rfps_threshold_disagreements, 4);
+    assert!(!result.exact_fetch_reconstruction);
 }
 
 #[test]

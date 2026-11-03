@@ -58,19 +58,21 @@ are temporary and stay below `target/reproduction/interactive/`.
 ## Options
 
 ```text
-cbpir run [OPTIONS]
-  --dataset <DATASET>          bgl (default)
-  --num-records <N>            128,256,512,1024
-  --searchable-bytes <BYTES>   Exact searchable bytes per record
-  --payload-bytes <BYTES>      Exact retrieved payload bytes per record
-  --record-slots <SLOTS>       64,128,224,256,384,512
-  --capacity <K>               1,4,8,16
-  --pattern-length <M>         1,4,8,16 bytes
-  --search-mode <MODE>         fps,rfps,both
-  --warmups <COUNT>            Default 1
-  --trials <COUNT>             Default 5
-  --output <PATH>              Optional JSON file
-  --help
+Usage: cbpir run [OPTIONS] --num-records <NUM_RECORDS> --searchable-bytes <SEARCHABLE_BYTES> --payload-bytes <PAYLOAD_BYTES> --record-slots <RECORD_SLOTS> --capacity <CAPACITY> --pattern-length <PATTERN_LENGTH> --search-mode <SEARCH_MODE>
+
+Options:
+      --dataset <DATASET>                    [default: bgl]
+      --num-records <NUM_RECORDS>
+      --searchable-bytes <SEARCHABLE_BYTES>
+      --payload-bytes <PAYLOAD_BYTES>
+      --record-slots <RECORD_SLOTS>
+      --capacity <CAPACITY>
+      --pattern-length <PATTERN_LENGTH>
+      --search-mode <SEARCH_MODE>            [possible values: fps, rfps, both]
+      --warmups <WARMUPS>                    [default: 1]
+      --trials <TRIALS>                      [default: 5]
+      --output <OUTPUT>
+  -h, --help                                 Print help
 ```
 
 Options without defaults are required. CBPIR has one client per execution;
@@ -110,6 +112,9 @@ workload, source checksum, selected pattern, HE parameters, and RFPS seed.
   per-run Online sums and the R1.3 sum of independent stage medians.
 - Summaries give mean, median, population standard deviation, and nearest-rank
   p95. Warmups are excluded.
+- Candidate and selected counts have summaries in count units. Top-level
+  correctness counts sum across measured trials; its flags require every trial
+  to pass. Each raw row retains its own correctness results.
 - Communication counts serialized Search and Fetch query/response bytes per
   execution. Repeated-size equality is checked; raw rows preserve variation.
 - Correctness checks exact reconstruction separately from Search decisions.

@@ -1,3 +1,5 @@
+use std::io::Write;
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<_> = std::env::args().skip(1).collect();
     if args
@@ -24,7 +26,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
                 std::fs::write(path, &bytes)?;
             }
-            use std::io::Write;
             std::io::stdout().lock().write_all(&bytes)?;
             return Ok(());
         }

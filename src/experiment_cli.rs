@@ -1,3 +1,12 @@
+#![allow(
+    clippy::too_many_lines,
+    reason = "Keep timed procedures and their validation visible in one execution path"
+)]
+#![allow(
+    clippy::cast_precision_loss,
+    reason = "Summary statistics use floating-point nanoseconds; raw integer samples remain authoritative"
+)]
+
 use crate::{
     Catalog, CliConfig, FormalFetchContext, FormalFetchDatabase, FormalFetchQuery,
     FormalFetchRecovered, FormalFetchResponse, GeneratedWorkload, LogicalRecord, MatchMode,
@@ -16,6 +25,51 @@ use std::path::Path;
 use std::time::Instant;
 
 pub const INTERACTIVE_SCHEMA: &str = "cbpir-interactive-v1";
+
+#[derive(Clone, Debug, PartialEq, Serialize)]
+pub struct CountSummary {
+    pub mean: f64,
+    pub median: f64,
+    pub standard_deviation: f64,
+    pub p95: u64,
+}
+
+pub fn summarize_counts(samples: &[usize]) -> Result<CountSummary, ExperimentError> {
+    let values = samples
+        .iter()
+        .map(|value| {
+            u64::try_from(*value).map_err(|error| execution_error("count conversion", error))
+        })
+        .collect::<Result<Vec<_>, _>>()?;
+    let summary = summarize_ns(&values)?;
+    Ok(CountSummary {
+        mean: summary.mean_ns,
+        median: summary.median_ns,
+        standard_deviation: summary.standard_deviation_ns,
+        p95: summary.p95_ns,
+    })
+}
+
+/// Counts sum across trials; correctness flags require every trial to pass.
+pub fn aggregate_correctness(
+    rows: &[CorrectnessReport],
+) -> Result<CorrectnessReport, ExperimentError> {
+    let mut result = rows.first().cloned().ok_or(ExperimentError::EmptySample)?;
+    for row in &rows[1..] {
+        result.measured_trials += row.measured_trials;
+        result.candidate_count += row.candidate_count;
+        result.selected_count += row.selected_count;
+        result.fps_oracle_disagreements += row.fps_oracle_disagreements;
+        result.rfps_threshold_disagreements += row.rfps_threshold_disagreements;
+        result.rfps_intrinsic_cancellations += row.rfps_intrinsic_cancellations;
+        result.rfps_threshold_only += row.rfps_threshold_only;
+        result.exact_fetch_reconstruction &= row.exact_fetch_reconstruction;
+        result.selected_windows_exact &= row.selected_windows_exact;
+        result.unselected_windows_zero &= row.unselected_windows_zero;
+        result.unused_tail_zero &= row.unused_tail_zero;
+    }
+    Ok(result)
+}
 
 #[derive(Debug, thiserror::Error)]
 pub enum ExperimentError {
@@ -92,6 +146,8 @@ pub struct RawMeasurement {
 
 #[derive(Clone, Debug, PartialEq, Serialize)]
 pub struct ModeSummary {
+    pub candidate_count: CountSummary,
+    pub selected_count: CountSummary,
     pub search: DurationSummary,
     pub locate: DurationSummary,
     pub fetch: DurationSummary,
@@ -126,7 +182,12 @@ pub struct CommunicationReport {
 }
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize)]
+#[allow(
+    clippy::struct_excessive_bools,
+    reason = "Independent correctness checks must remain separately observable"
+)]
 pub struct CorrectnessReport {
+    pub measured_trials: usize,
     pub candidate_count: usize,
     pub selected_count: usize,
     pub exact_fetch_reconstruction: bool,
@@ -179,8 +240,8 @@ pub fn summarize_ns(samples: &[u64]) -> Result<DurationSummary, ExperimentError>
     sorted.sort_unstable();
     let len = sorted.len();
     let mean_ns = sorted.iter().map(|value| *value as f64).sum::<f64>() / len as f64;
-    let median_ns = if len % 2 == 0 {
-        (sorted[len / 2 - 1] as f64 + sorted[len / 2] as f64) / 2.0
+    let median_ns = if len.is_multiple_of(2) {
+        f64::midpoint(sorted[len / 2 - 1] as f64, sorted[len / 2] as f64)
     } else {
         sorted[len / 2] as f64
     };
@@ -266,12 +327,12 @@ fn fps_once(
         .map_err(|error| execution_error("Locate", error))?;
     let locate_ns = elapsed_ns(started);
 
+    let started = Instant::now();
     let selected_ids = locate
         .selected_candidates
         .iter()
         .map(|candidate| candidate.id)
         .collect::<Vec<_>>();
-    let started = Instant::now();
     let fetch_query = fetch_context
         .fetch_query(fetch, &selected_ids)
         .map_err(|error| execution_error("FetchQuery", error))?;
@@ -337,6 +398,18 @@ fn mode_summary(samples: &[RawMeasurement]) -> Result<ModeSummary, ExperimentErr
             .collect::<Vec<_>>(),
     )?;
     Ok(ModeSummary {
+        candidate_count: summarize_counts(
+            &samples
+                .iter()
+                .map(|sample| sample.candidate_count)
+                .collect::<Vec<_>>(),
+        )?,
+        selected_count: summarize_counts(
+            &samples
+                .iter()
+                .map(|sample| sample.selected_count)
+                .collect::<Vec<_>>(),
+        )?,
         median_online_per_run_ns: online_per_run.median_ns,
         r1_3_sum_of_stage_medians_ns: search.median_ns + locate.median_ns + fetch.median_ns,
         search,
@@ -437,6 +510,7 @@ fn validate_fps_correctness(
         ));
     }
     Ok(CorrectnessReport {
+        measured_trials: 1,
         candidate_count: run.locate.candidates.len(),
         selected_count: run.locate.selected_candidates.len(),
         exact_fetch_reconstruction,
@@ -548,7 +622,7 @@ fn run_fps(
     }
 
     let mut communication = None;
-    let mut correctness = None;
+    let mut correctness = Vec::new();
     let mut repeated_sizes_identical = true;
     for run_id in 0..config.trials {
         let run = fps_once(
@@ -595,7 +669,7 @@ fn run_fps(
             communication: raw_sizes,
             correctness: check.clone(),
         });
-        correctness = Some(check);
+        correctness.push(check);
     }
     let samples = report
         .measurements
@@ -612,10 +686,9 @@ fn run_fps(
         communication.ok_or_else(|| execution_error("FPS communication", "no measured trial"))?;
     communication.repeated_sizes_identical = repeated_sizes_identical;
     report.communication.insert("fps".into(), communication);
-    report.correctness.insert(
-        "fps".into(),
-        correctness.ok_or_else(|| execution_error("FPS correctness", "no measured trial"))?,
-    );
+    report
+        .correctness
+        .insert("fps".into(), aggregate_correctness(&correctness)?);
     Ok(())
 }
 
@@ -630,6 +703,10 @@ struct RfpsRun {
     durations: ProcedureDurations,
 }
 
+#[allow(
+    clippy::too_many_arguments,
+    reason = "Explicit stage state plus RFPS randomizer defines the measured procedure"
+)]
 fn rfps_once(
     context: &ServerTextCtPtRfpsStaged,
     search: &mut ServerTextCtPtRfpsServerState,
@@ -667,12 +744,12 @@ fn rfps_once(
         .map_err(|error| execution_error("Locate", error))?;
     let locate_ns = elapsed_ns(started);
 
+    let started = Instant::now();
     let selected_ids = locate
         .selected_candidates
         .iter()
         .map(|candidate| candidate.id)
         .collect::<Vec<_>>();
-    let started = Instant::now();
     let fetch_query = fetch_context
         .fetch_query(fetch, &selected_ids)
         .map_err(|error| execution_error("FetchQuery", error))?;
@@ -806,6 +883,7 @@ fn validate_rfps_correctness(
         ));
     }
     Ok(CorrectnessReport {
+        measured_trials: 1,
         candidate_count: run.locate.candidates.len(),
         selected_count: run.locate.selected_candidates.len(),
         exact_fetch_reconstruction,
@@ -830,8 +908,12 @@ fn run_rfps(
     let config = &report.configuration;
     let context = ServerTextCtPtRfpsStaged::from_config(
         cbpir_search::CkksConfig {
-            ring_dimension: Some(config.ckks_ring_dimension as u32),
-            batch_size: config.transform_len as u32,
+            ring_dimension: Some(
+                u32::try_from(config.ckks_ring_dimension)
+                    .map_err(|error| execution_error("RFPS ring", error))?,
+            ),
+            batch_size: u32::try_from(config.transform_len)
+                .map_err(|error| execution_error("RFPS batch", error))?,
             multiplicative_depth: 1,
             scaling_modulus_bits: 24,
             first_modulus_bits: 60,
@@ -898,7 +980,7 @@ fn run_rfps(
     }
 
     let mut communication = None;
-    let mut correctness = None;
+    let mut correctness = Vec::new();
     let mut repeated_sizes_identical = true;
     for run_id in 0..config.trials {
         let randomizer = crate::fresh_rfps_weights_for_seed(
@@ -951,7 +1033,7 @@ fn run_rfps(
             communication: raw_sizes,
             correctness: check.clone(),
         });
-        correctness = Some(check);
+        correctness.push(check);
     }
     let samples = report
         .measurements
@@ -968,10 +1050,9 @@ fn run_rfps(
         communication.ok_or_else(|| execution_error("RFPS communication", "no measured trial"))?;
     communication.repeated_sizes_identical = repeated_sizes_identical;
     report.communication.insert("rfps".into(), communication);
-    report.correctness.insert(
-        "rfps".into(),
-        correctness.ok_or_else(|| execution_error("RFPS correctness", "no measured trial"))?,
-    );
+    report
+        .correctness
+        .insert("rfps".into(), aggregate_correctness(&correctness)?);
     Ok(())
 }
 
