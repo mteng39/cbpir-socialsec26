@@ -1,21 +1,17 @@
+use clap::Parser;
 use std::io::Write;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let args: Vec<_> = std::env::args().skip(1).collect();
-    if args
-        .first()
-        .is_some_and(|arg| arg == "run" || arg == "--help")
-    {
-        use clap::Parser;
-        let cli = cbpir::Cli::parse();
-        if let Some(cbpir::Command::Run(args)) = cli.command {
+    let cli = cbpir::Cli::parse();
+    match cli.command {
+        Some(cbpir::Command::Run(args)) => {
             if cli.quick || cli.match_backend != "ct_ct" {
                 return Err("legacy smoke flags cannot be combined with run".into());
             }
-            return run_interactive(args);
+            run_interactive(args)
         }
+        None => run_smoke(cli.quick, cbpir::MatchBackend::parse(&cli.match_backend)?),
     }
-    run_smoke(&args)
 }
 
 fn run_interactive(args: cbpir::RunArgs) -> Result<(), Box<dyn std::error::Error>> {
@@ -37,25 +33,7 @@ fn run_interactive(args: cbpir::RunArgs) -> Result<(), Box<dyn std::error::Error
     Ok(())
 }
 
-fn run_smoke(args: &[String]) -> Result<(), Box<dyn std::error::Error>> {
-    let mut quick = false;
-    let mut backend = cbpir::MatchBackend::CtCt;
-    let mut index = 0;
-    while index < args.len() {
-        match args[index].as_str() {
-            "--quick" => quick = true,
-            "--match-backend" if index + 1 < args.len() => {
-                index += 1;
-                backend = cbpir::MatchBackend::parse(&args[index])?;
-            }
-            _ => {
-                return Err(
-                    "usage: cbpir [--quick] [--match-backend ct_ct|server_text_ct_pt]".into(),
-                );
-            }
-        }
-        index += 1;
-    }
+fn run_smoke(quick: bool, backend: cbpir::MatchBackend) -> Result<(), Box<dyn std::error::Error>> {
     let report = cbpir::report::experiment_with_match_backend(quick, backend);
     println!("{}", serde_json::to_string_pretty(&report)?);
     if report["bounded_fixture_gate_passed"] != true {

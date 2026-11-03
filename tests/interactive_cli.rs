@@ -158,6 +158,15 @@ fn rejects_declared_constraint_violations() {
 }
 
 #[test]
+fn overflow_errors_identify_supplied_dimensions() {
+    let mut args = valid_run_args();
+    args.searchable_bytes = usize::MAX;
+    let error = validate_run_args(&args).unwrap_err().to_string();
+    assert!(error.contains(&usize::MAX.to_string()));
+    assert!(error.contains("128"));
+}
+
+#[test]
 fn selects_smallest_supported_search_and_fetch_rings() {
     let config = validate_run_args(&valid_run_args()).unwrap();
     assert_eq!(config.text_bytes, 128 * 24 + 127);

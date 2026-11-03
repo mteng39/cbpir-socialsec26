@@ -600,6 +600,19 @@ fn finish_mode(report: &mut InteractiveReport, mode: &str) -> Result<(), Experim
     Ok(())
 }
 
+fn prepare_fetch_context(config: &CliConfig) -> Result<FormalFetchContext, ExperimentError> {
+    FormalFetchContext::from_config(
+        "BGV-interactive",
+        BgvCpirConfig {
+            ring_dimension: config.bgv_ring_dimension,
+            plaintext_modulus: 786_433,
+            record_slots: config.record_slots,
+            multiplicative_depth: 1,
+        },
+    )
+    .map_err(|error| execution_error("Fetch context", error))
+}
+
 fn run_fps(
     report: &mut InteractiveReport,
     records: Vec<LogicalRecord>,
@@ -628,16 +641,7 @@ fn run_fps(
     .map_err(|error| execution_error("FPS parameters", format!("{error:?}")))?;
     let context = ServerTextCtPtFpsStaged::from_parameters(parameters, config.transform_len, 0.5)
         .map_err(|error| execution_error("FPS context", format!("{error:?}")))?;
-    let fetch_context = FormalFetchContext::from_config(
-        "BGV-interactive",
-        BgvCpirConfig {
-            ring_dimension: config.bgv_ring_dimension,
-            plaintext_modulus: 786_433,
-            record_slots: config.record_slots,
-            multiplicative_depth: 1,
-        },
-    )
-    .map_err(|error| execution_error("Fetch context", error))?;
+    let fetch_context = prepare_fetch_context(config)?;
     let fps_runtime = context.runtime_profile();
     let fetch_runtime = fetch_context.runtime_profile().clone();
     let setup_started = Instant::now();
@@ -915,16 +919,7 @@ fn run_rfps(
         0.5,
     )
     .map_err(|error| execution_error("RFPS context", format!("{error:?}")))?;
-    let fetch_context = FormalFetchContext::from_config(
-        "BGV-interactive",
-        BgvCpirConfig {
-            ring_dimension: config.bgv_ring_dimension,
-            plaintext_modulus: 786_433,
-            record_slots: config.record_slots,
-            multiplicative_depth: 1,
-        },
-    )
-    .map_err(|error| execution_error("Fetch context", error))?;
+    let fetch_context = prepare_fetch_context(config)?;
     let rfps_runtime = context.runtime_profile();
     let fetch_runtime = fetch_context.runtime_profile().clone();
     let setup_started = Instant::now();

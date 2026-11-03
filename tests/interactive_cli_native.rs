@@ -15,7 +15,7 @@ fn legacy_invalid_option_still_reports_usage() {
         .output()
         .unwrap();
     assert!(!output.status.success());
-    assert!(String::from_utf8_lossy(&output.stderr).contains("usage: cbpir [--quick]"));
+    assert!(String::from_utf8_lossy(&output.stderr).contains("unexpected argument '--invalid'"));
 }
 
 #[test]

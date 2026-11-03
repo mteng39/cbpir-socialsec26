@@ -148,11 +148,20 @@ pub fn validate_run_args(args: &RunArgs) -> Result<CliConfig, ConfigError> {
         .num_records
         .checked_mul(args.searchable_bytes)
         .and_then(|value| value.checked_add(args.num_records - 1))
-        .ok_or_else(|| ConfigError("searchable text length overflow".into()))?;
+        .ok_or_else(|| {
+            ConfigError(format!(
+                "searchable text length overflow: num-records {}, searchable-bytes {}",
+                args.num_records, args.searchable_bytes
+            ))
+        })?;
     let transform_len = text_bytes
         .checked_add(1)
         .and_then(usize::checked_next_power_of_two)
-        .ok_or_else(|| ConfigError("Search transform length overflow".into()))?;
+        .ok_or_else(|| {
+            ConfigError(format!(
+                "Search transform length overflow for text length {text_bytes}"
+            ))
+        })?;
     let ckks_ring_dimension = CKKS_RINGS
         .iter()
         .copied()
@@ -163,10 +172,15 @@ pub fn validate_run_args(args: &RunArgs) -> Result<CliConfig, ConfigError> {
                 CKKS_RINGS.last().copied().unwrap_or_default() / 2
             ))
         })?;
-    let required_fetch_slots = args
-        .num_records
-        .checked_mul(args.record_slots)
-        .ok_or_else(|| ConfigError("Fetch slot count overflow".into()))?;
+    let required_fetch_slots =
+        args.num_records
+            .checked_mul(args.record_slots)
+            .ok_or_else(|| {
+                ConfigError(format!(
+                    "Fetch slot count overflow: num-records {}, record-slots {}",
+                    args.num_records, args.record_slots
+                ))
+            })?;
     let bgv_ring_dimension = BGV_RINGS
         .iter()
         .copied()
