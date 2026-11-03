@@ -18,7 +18,7 @@ Bootstrap verifies OpenFHE 1.5.1 commit
 ## Build and smoke test
 
 ```bash
-cargo test --workspace --locked
+cargo test --workspace --locked -- --test-threads=1
 cargo build --release --features native --bins --locked
 cargo run --release --features native --locked --bin cbpir -- --quick
 ```
@@ -26,6 +26,19 @@ cargo run --release --features native --locked --bin cbpir -- --quick
 Success requires `bounded_fixture_gate_passed: true` in smoke JSON.
 
 ## Evidence checks
+
+Interactive exploratory runs:
+
+```bash
+cargo run --release --features native --locked --bin cbpir -- run \
+  --num-records 128 --searchable-bytes 16 --payload-bytes 16 \
+  --record-slots 64 --capacity 16 --pattern-length 4 \
+  --search-mode both --warmups 1 --trials 5
+```
+
+Interactive runs generate new workloads and retain both Online statistics.
+They do not replace frozen Table 2, R1.4, R2.10, or derived BF-COIE evidence.
+Native tests run serially because OpenFHE maintains process-global state.
 
 ```bash
 PYTHONDONTWRITEBYTECODE=1 python3 scripts/test_public_layout.py

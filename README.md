@@ -4,133 +4,159 @@ Rust implementation and reproducibility package for **CBPIR: Content-Based
 Private Information Retrieval over Structured Databases via Homomorphic
 Encryption** (SocialSec 2026).
 
-- [Paper and citation status](paper/README.md)
-- [SocialSec 2026 presentation](slides/cbpir-socialsec26-slides.pdf)
+[Paper and citation](paper/README.md) ·
+[Presentation](slides/cbpir-socialsec26-slides.pdf)
 
-CBPIR has three online stages:
+CBPIR searches structured records privately and retrieves at most `K` selected
+payloads. Search uses CKKS FPS/RFPS, Locate maps alignments to unique record IDs
+on the client, and Fetch uses one packed BGV query and one encrypted response.
 
-1. **Search** — CKKS-based FPS or RFPS finds matching alignments.
-2. **Locate** — client maps alignments to record IDs, deduplicates, and selects at
-   most `K` records.
-3. **Fetch** — BGV retrieves selected records with one packed encrypted query and
-   one encrypted response.
+## Running
 
-## Requirements
+### Requirements
 
-- Linux on x86-64 with AVX support
-- Rust 1.91.1, CMake, C++ compiler, Git, and Python 3
-- At least 4 GiB RAM; native release builds can take several minutes
+Linux x86-64 with AVX, Rust 1.91.1, CMake, a C++ compiler, Git, and Python 3.
+Allow at least 4 GiB RAM. Large profiles can require more memory.
 
-## Quick start
+### Build
 
 ```bash
 git clone https://github.com/mteng39/cbpir-socialsec26.git
 cd cbpir-socialsec26
-
 OPENFHE_BUILD_JOBS=1 ./openfhe/bootstrap_openfhe.sh
 export OPENFHE_INSTALL_DIR="$PWD/openfhe/.openfhe/openfhe-1.5.1/install"
 export LD_LIBRARY_PATH="$OPENFHE_INSTALL_DIR/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 export CARGO_BUILD_JOBS=1 OMP_NUM_THREADS=1 OMP_DYNAMIC=FALSE
-
 cargo build --release --features native --locked
+```
+
+First native build takes several minutes; subsequent runs reuse Cargo artifacts.
+
+### Quick run
+
+```bash
 cargo run --release --features native --locked --bin cbpir -- --quick
 ```
 
-This workflow was tested in the project Linux container with one build job and
-one OpenMP thread. First native build is slow; later runs reuse Cargo artifacts.
+Success produces JSON with `bounded_fixture_gate_passed: true`.
+Legacy `--match-backend ct_ct|server_text_ct_pt` remains available.
 
-## Running
+### Interactive run
 
-Root package exposes one smoke command and four experiment interfaces:
+```bash
+cargo run --release --features native --locked --bin cbpir -- run \
+  --num-records 128 --searchable-bytes 16 --payload-bytes 16 \
+  --record-slots 64 --capacity 16 --pattern-length 4 \
+  --search-mode both --warmups 1 --trials 5 \
+  --output target/reproduction/interactive/example.json
+```
 
-| Binary | Purpose | Input |
-|---|---|---|
-| `cbpir` | End-to-end correctness smoke test | CLI flags |
-| `benchmark` | Formal Table 2 pipeline | JSON on stdin |
-| `search_correctness` | FPS/RFPS correctness campaign | JSON on stdin |
-| `pattern_length` | Pattern-length campaign | JSON on stdin |
-| `scalability` | Larger-database campaign | JSON on stdin |
+Stdout contains JSON; `--output` writes identical bytes to a file. Generated
+workloads and timings are exploratory measurements. Native serialization files
+are temporary and stay below `target/reproduction/interactive/`.
 
-Smoke options:
+## Options
 
 ```text
-cbpir [--quick] [--match-backend ct_ct|server_text_ct_pt]
+cbpir run [OPTIONS]
+  --dataset <DATASET>          bgl (default)
+  --num-records <N>            128,256,512,1024
+  --searchable-bytes <BYTES>   Exact searchable bytes per record
+  --payload-bytes <BYTES>      Exact retrieved payload bytes per record
+  --record-slots <SLOTS>       64,128,224,256,384,512
+  --capacity <K>               1,4,8,16
+  --pattern-length <M>         1,4,8,16 bytes
+  --search-mode <MODE>         fps,rfps,both
+  --warmups <COUNT>            Default 1
+  --trials <COUNT>             Default 5
+  --output <PATH>              Optional JSON file
+  --help
 ```
 
-Use `--quick` for onboarding. Omit it for complete retained fixture matrix.
+Options without defaults are required. CBPIR has one client per execution;
+there is no cross-client batching or `--num-clients` option.
 
-### Interpreting output
+## Record and Item Sizes
 
-Smoke output is JSON. Main fields:
+Searchable text and retrieved payload are separate byte fields. Interactive BGL
+runs take the first eligible source records in deterministic order. Each field
+is truncated or extended by repeating its original message bytes to its requested
+length. Stable IDs and record boundaries are preserved. The query is an
+in-record substring with record support nearest requested `K`.
 
-- `bounded_fixture_gate_passed`: every required fixture and correctness gate
-  passed.
-- `cases[].run.decisions`: Search scores and acceptance decisions.
-- `cases[].run.locate`: client-local candidate mapping and bounded selection.
-- `cases[].run.output`: recovered Fetch output for that fixture.
-- `cases[].run.timings` and `performance`: in-process prototype timings, not
-  network latency.
-- `serialization`: serialized query/response sizes per execution.
-- `cases[].run.exact_selection_agreement`: selected records agree with the
-  exact oracle; `bounded_fixture_gate_passed` summarizes all required gates.
+Payloads are 1–114 bytes. The frame adds a 14-byte header, so
+`14 + payload_bytes <= record_slots`. Pattern length must not exceed searchable
+bytes. “Item size in bits” would conflate these two fields.
 
-## Validate retained evidence
+Search chooses the smallest supported CKKS ring with enough complex slots for
+transform length `L`. Fetch chooses the smallest supported BGV ring fitting
+`num_records * record_slots`, up to 131072, with plaintext modulus 786433.
+Search and Fetch rings can differ. Excessive combinations fail before HE setup;
+accepted dimensions do not guarantee a machine has sufficient memory.
 
-```bash
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/test_public_layout.py
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/benchmark/test_reports.py
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/bf-coie/test_estimator.py
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/search-correctness/test_contract.py
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/pattern-length/test_contract.py
-PYTHONDONTWRITEBYTECODE=1 python3 scripts/scalability/test_contract.py
-PYTHONDONTWRITEBYTECODE=1 python3 evaluation/final-paper/test_recompute_final_comparison.py
-```
+## Interpreting Measurements
 
-Native experiment drivers:
+Reports use schema `cbpir-interactive-v1` and include the complete generated
+workload, source checksum, selected pattern, HE parameters, and RFPS seed.
 
-```bash
-python3 scripts/benchmark/run.py --verify
-python3 scripts/search-correctness/run.py --validate-only
-python3 scripts/pattern-length/run.py
-python3 scripts/scalability/run.py
-```
+- `setup`: context generation, key generation, and database preparation.
+- `measurements.raw`: each measured execution, procedure times in nanoseconds,
+  candidate/selected counts, randomizer, serialized sizes, and correctness.
+- Search = SearchQuery + SearchResponse.
+- Locate includes decryption, inverse transform, boundary filtering,
+  deduplication, and bounded selection.
+- Fetch = FetchQuery + FetchResponse + Recover.
+- Online excludes Setup and serialization. Reports retain both median of
+  per-run Online sums and the R1.3 sum of independent stage medians.
+- Summaries give mean, median, population standard deviation, and nearest-rank
+  p95. Warmups are excluded.
+- Communication counts serialized Search and Fetch query/response bytes per
+  execution. Repeated-size equality is checked; raw rows preserve variation.
+- Correctness checks exact reconstruction separately from Search decisions.
+  FPS must agree with the literal oracle. RFPS reports threshold disagreements,
+  intrinsic cancellations, and threshold-only matches.
 
-See [REPRODUCE.md](REPRODUCE.md) for full commands and boundaries.
+These are local computation measurements, not network latency. `both` runs FPS
+then RFPS and releases contexts between modes.
 
-## Repository map
+## Reproducing the Paper
+
+Retained evidence and interactive generated workloads have separate purposes:
+
+| Evidence | Reproduction entry |
+|---|---|
+| Frozen Table 2 measurements | [Formal benchmark](evaluation/formal-benchmark/README.md) |
+| Search decisions and error attribution | [Search correctness](evaluation/search-correctness/README.md) |
+| R1.4 pattern-length extension | [Pattern length](evaluation/pattern-length-v1/README.md) |
+| R2.10 512/1024-record extension | [Scalability](evaluation/scalability-v1/README.md) |
+| Derived BF-COIE estimates and sensitivity | [BF-COIE estimator](evaluation/bf-coie-baseline/README.md) |
+| Final aggregate ratios and R1.3 convention | [Final comparison](evaluation/final-paper/README.md) |
+
+BF-COIE was not reimplemented or locally measured. Frozen evidence must not be
+overwritten. See [REPRODUCE.md](REPRODUCE.md) for validation and campaign commands.
+
+## Repository Structure
 
 | Path | Purpose |
 |---|---|
-| `src/` | Composed protocol and supported binaries |
+| `src/` | Primary crate, interactive CLI, protocol, benchmark binaries |
 | `crates/ckks-search/` | CKKS FPS/RFPS Search |
-| `crates/bgv-cpir/` | BGV packed CPIR core |
-| `crates/multi-fetch/` | Bounded multi-record Fetch |
-| `openfhe/` | Pinned OpenFHE bootstrap |
-| `scripts/` | Benchmark and validation drivers |
-| `data/` | Pinned workloads and BGL source fixture |
-| `evaluation/` | Frozen raw results, summaries, and comparison evidence |
-| `tools/` | Historical studies and diagnostics |
-| `paper/` | Paper citation and publisher-link status |
-| `slides/` | Conference presentation |
+| `crates/bgv-cpir/` | BGV packed retrieval |
+| `crates/multi-fetch/` | Multi-record Fetch |
+| `openfhe/` | Pinned dependency bootstrap |
+| `scripts/` | Campaign drivers and validators |
+| `data/` | Pinned BGL fixture and workloads |
+| `evaluation/` | Retained raw results and summaries |
+| `design/` | Approved interface specification |
+| `tools/` | Historical diagnostics and studies |
+| `paper/`, `slides/` | Publication information and presentation |
 
-## Evidence
+## Acknowledgements
 
-- [Formal benchmark](evaluation/formal-benchmark/README.md) — Table 2 CBPIR data.
-- [Search correctness](evaluation/search-correctness/README.md) — FPS/RFPS record
-  decisions for `m={1,4,8,16}`.
-- [Pattern length](evaluation/pattern-length-v1/README.md) — 24 configurations,
-  480 measured executions.
-- [Database scale](evaluation/scalability-v1/README.md) — 512-record control and
-  measured 1,024-record full pipeline.
-- [BF-COIE](evaluation/bf-coie-baseline/README.md) — derived estimator,
-  provenance, sensitivity, and limits. These are not local measurements.
-- [Final comparison](evaluation/final-paper/README.md) — camera-ready aggregate
-  recomputation and R1.3 Online convention.
+Built with OpenFHE, OpenFHE-rs, and the Loghub BGL dataset. Upstream software
+and data retain their respective licenses.
 
-Frozen paper evidence must not be overwritten. New campaigns need new versioned
-output directories.
-
-## Citation
+## Citing
 
 ```bibtex
 @inproceedings{iasenovets2026cbpir,

@@ -3,7 +3,7 @@
 ## Implementation
 
 - `Cargo.toml`, `Cargo.lock`, `build.rs` — root package and workspace.
-- `src/` — composed protocol, Locate, and five supported binaries.
+- `src/` — composed protocol, interactive benchmark CLI, Locate, and five supported binaries.
 - `crates/ckks-search/` — CKKS FPS/RFPS Search.
 - `crates/bgv-cpir/` — BGV packed CPIR.
 - `crates/multi-fetch/` — bounded multi-record Fetch.
