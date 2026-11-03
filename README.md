@@ -4,6 +4,9 @@ Rust implementation and reproducibility package for **CBPIR: Content-Based
 Private Information Retrieval over Structured Databases via Homomorphic
 Encryption** (SocialSec 2026).
 
+- [Paper and citation status](paper/README.md)
+- [SocialSec 2026 presentation](slides/cbpir-socialsec26-slides.pdf)
+
 CBPIR has three online stages:
 
 1. **Search** — CKKS-based FPS or RFPS finds matching alignments.
@@ -107,6 +110,8 @@ See [REPRODUCE.md](REPRODUCE.md) for full commands and boundaries.
 | `data/` | Pinned workloads and BGL source fixture |
 | `evaluation/` | Frozen raw results, summaries, and comparison evidence |
 | `tools/` | Historical studies and diagnostics |
+| `paper/` | Paper citation and publisher-link status |
+| `slides/` | Conference presentation |
 
 ## Evidence
 
@@ -138,5 +143,13 @@ output directories.
 
 ## License
 
-No repository-wide reuse license file has been selected. Loghub input retains its
-upstream license under `data/source/loghub/LICENSE`.
+Original software and project documentation are available under the
+[MIT License](LICENSE).
+
+This license does not cover:
+
+- the Loghub input under `data/source/loghub/`, which retains its upstream
+  license;
+- the conference slides under `slides/`;
+- the paper and any future manuscript copy under `paper/`; or
+- third-party dependencies, which remain under their own licenses.

@@ -26,6 +26,11 @@ of supported root interface.
 - `evaluation/pattern-length-v1/` — pattern-length extension.
 - `evaluation/scalability-v1/` — 512/1,024-record extension.
 
+## Publication material
+
+- `paper/` — citation and publisher-link status; no manuscript PDF.
+- `slides/` — final SocialSec 2026 presentation PDF.
+
 ## Paper-to-evidence map
 
 | Paper result | Support |
@@ -40,7 +45,15 @@ of supported root interface.
 
 ## Excluded
 
-- Manuscript, slides, reviewer files, submission packages.
+- Manuscript PDF/source, presentation source, reviewer files, submission
+  packages.
 - Superseded generations retained in Git history.
 - Generated build/install/cache/editor state.
 - Credentials and personal administrative files.
+
+## Licensing boundaries
+
+- Original software and project documentation: root `LICENSE` (MIT).
+- Loghub input: `data/source/loghub/LICENSE`.
+- Slides and paper: excluded from root MIT license; see their local README files.
+- Third-party dependencies: their upstream licenses.
