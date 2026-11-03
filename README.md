@@ -16,7 +16,7 @@ on the client, and Fetch uses one packed BGV query and one encrypted response.
 ### Requirements
 
 Linux x86-64 with AVX, Rust 1.91.1, CMake, a C++ compiler, Git, and Python 3.
-Allow at least 4 GiB RAM. Large profiles can require more memory.
+At least 4 GiB RAM.
 
 ### Build
 
@@ -30,8 +30,6 @@ export CARGO_BUILD_JOBS=1 OMP_NUM_THREADS=1 OMP_DYNAMIC=FALSE
 cargo build --release --features native --locked
 ```
 
-First native build takes several minutes; subsequent runs reuse Cargo artifacts.
-
 ### Quick run
 
 ```bash
@@ -39,7 +37,6 @@ cargo run --release --features native --locked --bin cbpir -- --quick
 ```
 
 Success produces JSON with `bounded_fixture_gate_passed: true`.
-Legacy `--match-backend ct_ct|server_text_ct_pt` remains available.
 
 ### Interactive run
 
@@ -51,9 +48,7 @@ cargo run --release --features native --locked --bin cbpir -- run \
   --output target/reproduction/interactive/example.json
 ```
 
-Stdout contains JSON; `--output` writes identical bytes to a file. Generated
-workloads and timings are exploratory measurements. Native serialization files
-are temporary and stay below `target/reproduction/interactive/`.
+Results print as JSON; `--output` also saves them to a file.
 
 ## Options
 
@@ -75,70 +70,59 @@ Options:
   -h, --help                                 Print help
 ```
 
-Options without defaults are required. CBPIR has one client per execution;
-there is no cross-client batching or `--num-clients` option.
+Options without defaults are required.
 
 ## Record and Item Sizes
 
-Searchable text and retrieved payload are separate byte fields. Interactive BGL
-runs take the first eligible source records in deterministic order. Each field
-is truncated or extended by repeating its original message bytes to its requested
-length. Stable IDs and record boundaries are preserved. The query is an
-in-record substring with record support nearest requested `K`.
+`--searchable-bytes` sets searchable text length; `--payload-bytes` sets retrieved
+payload length. BGL messages are truncated or repeated to these lengths.
+Queries are deterministic in-record substrings with support nearest `K`.
 
-Payloads are 1–114 bytes. The frame adds a 14-byte header, so
-`14 + payload_bytes <= record_slots`. Pattern length must not exceed searchable
-bytes. “Item size in bits” would conflate these two fields.
+Payloads allow 1–114 bytes and require a 14-byte header:
+`14 + payload_bytes <= record_slots`. Pattern length must fit searchable text.
 
-Search chooses the smallest supported CKKS ring with enough complex slots for
-transform length `L`. Fetch chooses the smallest supported BGV ring fitting
-`num_records * record_slots`, up to 131072, with plaintext modulus 786433.
-Search and Fetch rings can differ. Excessive combinations fail before HE setup;
-accepted dimensions do not guarantee a machine has sufficient memory.
+Supported values: `n={128,256,512,1024}`, `K={1,4,8,16}`, `m={1,4,8,16}`,
+and record slots `{64,128,224,256,384,512}`. Ring dimensions are selected
+automatically; Fetch supports up to 131072 slots.
 
 ## Interpreting Measurements
 
-Reports use schema `cbpir-interactive-v1` and include the complete generated
-workload, source checksum, selected pattern, HE parameters, and RFPS seed.
+Times are local computation in nanoseconds. Warmups are excluded.
 
-- `setup`: context generation, key generation, and database preparation.
-- `measurements.raw`: each measured execution, procedure times in nanoseconds,
-  candidate/selected counts, randomizer, serialized sizes, and correctness.
-- Search = SearchQuery + SearchResponse.
-- Locate includes decryption, inverse transform, boundary filtering,
-  deduplication, and bounded selection.
-- Fetch = FetchQuery + FetchResponse + Recover.
-- Online excludes Setup and serialization. Reports retain both median of
-  per-run Online sums and the R1.3 sum of independent stage medians.
-- Summaries give mean, median, population standard deviation, and nearest-rank
-  p95. Warmups are excluded.
-- Candidate and selected counts have summaries in count units. Top-level
-  correctness counts sum across measured trials; its flags require every trial
-  to pass. Each raw row retains its own correctness results.
-- Communication counts serialized Search and Fetch query/response bytes per
-  execution. Repeated-size equality is checked; raw rows preserve variation.
-- Correctness checks exact reconstruction separately from Search decisions.
-  FPS must agree with the literal oracle. RFPS reports threshold disagreements,
-  intrinsic cancellations, and threshold-only matches.
+- **Search:** SearchQuery + SearchResponse.
+- **Locate:** score recovery, boundary filtering, deduplication, and selection.
+- **Fetch:** FetchQuery + FetchResponse + Recover.
+- **Online:** Search + Locate + Fetch; excludes Setup and serialization.
+- **Communication:** serialized query/response bytes per execution.
 
-These are local computation measurements, not network latency. `both` runs FPS
-then RFPS and releases contexts between modes.
+JSON includes workload, parameters, raw trials, and mean/median/standard-deviation/
+p95 summaries. Both Online statistics are retained: median of per-run sums and
+sum of stage medians. Correctness reports exact Fetch reconstruction separately
+from FPS/RFPS search errors. Top-level correctness counts sum across trials;
+flags require all trials to pass.
 
 ## Reproducing the Paper
 
-Retained evidence and interactive generated workloads have separate purposes:
+Rerun the paper's fixed workloads:
+
+```bash
+python3 scripts/benchmark/run.py --verify
+```
+
+Interactive runs generate different workloads and use BGV modulus 786433;
+Table 2 uses 65537. Fresh timings vary; retained data reproduce published totals.
 
 | Evidence | Reproduction entry |
 |---|---|
 | Frozen Table 2 measurements | [Formal benchmark](evaluation/formal-benchmark/README.md) |
 | Search decisions and error attribution | [Search correctness](evaluation/search-correctness/README.md) |
-| R1.4 pattern-length extension | [Pattern length](evaluation/pattern-length-v1/README.md) |
-| R2.10 512/1024-record extension | [Scalability](evaluation/scalability-v1/README.md) |
+| Pattern-length extension | [Pattern length](evaluation/pattern-length-v1/README.md) |
+| 512/1024-record extension | [Scalability](evaluation/scalability-v1/README.md) |
 | Derived BF-COIE estimates and sensitivity | [BF-COIE estimator](evaluation/bf-coie-baseline/README.md) |
-| Final aggregate ratios and R1.3 convention | [Final comparison](evaluation/final-paper/README.md) |
+| Final aggregate ratios | [Final comparison](evaluation/final-paper/README.md) |
 
-BF-COIE was not reimplemented or locally measured. Frozen evidence must not be
-overwritten. See [REPRODUCE.md](REPRODUCE.md) for validation and campaign commands.
+BF-COIE values are derived estimates. See [REPRODUCE.md](REPRODUCE.md) for
+validation and experiment commands.
 
 ## Repository Structure
 
@@ -152,8 +136,6 @@ overwritten. See [REPRODUCE.md](REPRODUCE.md) for validation and campaign comman
 | `scripts/` | Campaign drivers and validators |
 | `data/` | Pinned BGL fixture and workloads |
 | `evaluation/` | Retained raw results and summaries |
-| `design/` | Approved interface specification |
-| `tools/` | Historical diagnostics and studies |
 | `paper/`, `slides/` | Publication information and presentation |
 
 ## Acknowledgements
