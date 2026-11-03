@@ -9,6 +9,7 @@
 - `crates/multi-fetch/` — bounded multi-record Fetch.
 - `openfhe/` — pinned OpenFHE bootstrap.
 - `scripts/` — experiment drivers and validators.
+- `design/` — approved additive interface designs.
 
 Supported binaries: `cbpir`, `benchmark`, `pattern_length`, `scalability`, and
 `search_correctness`. Historical diagnostics/studies under `tools/` are not part
