@@ -147,4 +147,4 @@ Original software and project documentation are available under the
 [MIT License](LICENSE).
 
 This license does not cover the Loghub input, conference slides, paper, or
-third-party dependencies, which retain their respective licenses.
+third-party dependencies.
