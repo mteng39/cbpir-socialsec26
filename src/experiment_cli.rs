@@ -419,6 +419,72 @@ fn mode_summary(samples: &[RawMeasurement]) -> Result<ModeSummary, ExperimentErr
     })
 }
 
+fn verify_fetch(
+    catalog: &Catalog,
+    fetch: &FormalFetchDatabase,
+    locate: &MultiLocateTrace,
+    recovered: &FormalFetchRecovered,
+    fetch_query: &FormalFetchQuery,
+    fetch_response: &FormalFetchResponse,
+    selected_ids: &[RecordId],
+) -> Result<(bool, bool, bool, bool), ExperimentError> {
+    let exact_fetch_reconstruction = recovered.records.len() == selected_ids.len()
+        && recovered
+            .records
+            .iter()
+            .zip(selected_ids)
+            .all(|(output, id)| {
+                catalog
+                    .records()
+                    .iter()
+                    .find(|record| record.id == *id)
+                    .is_some_and(|record| output.id == *id && output.payload == record.payload)
+            });
+    let selected_indices = locate
+        .selected_candidates
+        .iter()
+        .map(|candidate| candidate.physical_index)
+        .collect::<std::collections::BTreeSet<_>>();
+    let mut selected_windows_exact = true;
+    let mut unselected_windows_zero = true;
+    for index in 0..fetch.capacity() {
+        let start = index * fetch.record_slots();
+        let end = start + fetch.record_slots();
+        if selected_indices.contains(&index) {
+            selected_windows_exact &= recovered.slots[start..end]
+                == fetch.packed_records()[index]
+                    .iter()
+                    .copied()
+                    .map(u64::from)
+                    .collect::<Vec<_>>();
+        } else {
+            unselected_windows_zero &= recovered.slots[start..end].iter().all(|value| *value == 0);
+        }
+    }
+    let used_slots = fetch.capacity() * fetch.record_slots();
+    let unused_tail_zero = recovered.slots[used_slots..]
+        .iter()
+        .all(|value| *value == 0);
+    if !exact_fetch_reconstruction
+        || !selected_windows_exact
+        || !unselected_windows_zero
+        || !unused_tail_zero
+        || fetch_query.ciphertext_count() != 1
+        || fetch_response.ciphertext_count() != 1
+    {
+        return Err(execution_error(
+            "Fetch correctness",
+            "encrypted Fetch reconstruction or packed-window invariant failed",
+        ));
+    }
+    Ok((
+        exact_fetch_reconstruction,
+        selected_windows_exact,
+        unselected_windows_zero,
+        unused_tail_zero,
+    ))
+}
+
 fn validate_fps_correctness(
     catalog: &Catalog,
     fetch: &FormalFetchDatabase,
@@ -456,59 +522,20 @@ fn validate_fps_correctness(
             "encrypted Search/Locate differs from literal oracle",
         ));
     }
-    let exact_fetch_reconstruction = run.recovered.records.len() == selected_ids.len()
-        && run
-            .recovered
-            .records
-            .iter()
-            .zip(&selected_ids)
-            .all(|(output, id)| {
-                catalog
-                    .records()
-                    .iter()
-                    .find(|record| record.id == *id)
-                    .is_some_and(|record| output.id == *id && output.payload == record.payload)
-            });
-    let selected_indices = run
-        .locate
-        .selected_candidates
-        .iter()
-        .map(|candidate| candidate.physical_index)
-        .collect::<std::collections::BTreeSet<_>>();
-    let mut selected_windows_exact = true;
-    let mut unselected_windows_zero = true;
-    for index in 0..fetch.capacity() {
-        let start = index * fetch.record_slots();
-        let end = start + fetch.record_slots();
-        if selected_indices.contains(&index) {
-            selected_windows_exact &= run.recovered.slots[start..end]
-                == fetch.packed_records()[index]
-                    .iter()
-                    .copied()
-                    .map(u64::from)
-                    .collect::<Vec<_>>();
-        } else {
-            unselected_windows_zero &= run.recovered.slots[start..end]
-                .iter()
-                .all(|value| *value == 0);
-        }
-    }
-    let used_slots = fetch.capacity() * fetch.record_slots();
-    let unused_tail_zero = run.recovered.slots[used_slots..]
-        .iter()
-        .all(|value| *value == 0);
-    if !exact_fetch_reconstruction
-        || !selected_windows_exact
-        || !unselected_windows_zero
-        || !unused_tail_zero
-        || run.fetch_query.ciphertext_count() != 1
-        || run.fetch_response.ciphertext_count() != 1
-    {
-        return Err(execution_error(
-            "Fetch correctness",
-            "encrypted Fetch reconstruction or packed-window invariant failed",
-        ));
-    }
+    let (
+        exact_fetch_reconstruction,
+        selected_windows_exact,
+        unselected_windows_zero,
+        unused_tail_zero,
+    ) = verify_fetch(
+        catalog,
+        fetch,
+        &run.locate,
+        &run.recovered,
+        &run.fetch_query,
+        &run.fetch_response,
+        &selected_ids,
+    )?;
     Ok(CorrectnessReport {
         measured_trials: 1,
         candidate_count: run.locate.candidates.len(),
@@ -541,6 +568,36 @@ fn communication_report(
         fetch_response_bytes: fetch.response_bytes,
         repeated_sizes_identical: true,
     }
+}
+
+fn finish_mode(report: &mut InteractiveReport, mode: &str) -> Result<(), ExperimentError> {
+    let samples = report
+        .measurements
+        .raw
+        .iter()
+        .filter(|sample| sample.mode == mode)
+        .cloned()
+        .collect::<Vec<_>>();
+    let first = samples
+        .first()
+        .ok_or_else(|| execution_error("report", "no measured trial"))?;
+    let mut communication = first.communication.clone();
+    communication.repeated_sizes_identical = samples
+        .iter()
+        .all(|sample| sample.communication == first.communication);
+    let correctness = samples
+        .iter()
+        .map(|sample| sample.correctness.clone())
+        .collect::<Vec<_>>();
+    report
+        .measurements
+        .summary
+        .insert(mode.into(), mode_summary(&samples)?);
+    report.communication.insert(mode.into(), communication);
+    report
+        .correctness
+        .insert(mode.into(), aggregate_correctness(&correctness)?);
+    Ok(())
 }
 
 fn run_fps(
@@ -621,9 +678,6 @@ fn run_fps(
         )?;
     }
 
-    let mut communication = None;
-    let mut correctness = Vec::new();
-    let mut repeated_sizes_identical = true;
     for run_id in 0..config.trials {
         let run = fps_once(
             &context,
@@ -653,12 +707,6 @@ fn run_fps(
             )
             .map_err(|error| execution_error("Fetch serialization", error))?;
         let sizes = communication_report(search_sizes, fetch_sizes);
-        let raw_sizes = sizes.clone();
-        if let Some(first) = &communication {
-            repeated_sizes_identical &= first == &sizes;
-        } else {
-            communication = Some(sizes);
-        }
         report.measurements.raw.push(RawMeasurement {
             run_id,
             mode: "fps",
@@ -666,30 +714,11 @@ fn run_fps(
             candidate_count: run.locate.candidates.len(),
             selected_count: run.locate.selected_candidates.len(),
             durations: run.durations,
-            communication: raw_sizes,
-            correctness: check.clone(),
+            communication: sizes,
+            correctness: check,
         });
-        correctness.push(check);
     }
-    let samples = report
-        .measurements
-        .raw
-        .iter()
-        .filter(|sample| sample.mode == "fps")
-        .cloned()
-        .collect::<Vec<_>>();
-    report
-        .measurements
-        .summary
-        .insert("fps".into(), mode_summary(&samples)?);
-    let mut communication =
-        communication.ok_or_else(|| execution_error("FPS communication", "no measured trial"))?;
-    communication.repeated_sizes_identical = repeated_sizes_identical;
-    report.communication.insert("fps".into(), communication);
-    report
-        .correctness
-        .insert("fps".into(), aggregate_correctness(&correctness)?);
-    Ok(())
+    finish_mode(report, "fps")
 }
 
 struct RfpsRun {
@@ -804,10 +833,10 @@ fn validate_rfps_correctness(
             randomizer: randomizer.to_vec(),
         },
     };
-    let exact = oracle(catalog, &request).map_err(|error| execution_error("FPS oracle", error))?;
+    let exact = oracle(catalog, &request).map_err(|error| execution_error("RFPS oracle", error))?;
     let comparisons = compare(&exact, &run.scores, 0.5)
-        .map_err(|error| execution_error("FPS comparison", error))?;
-    let fps_oracle_disagreements = comparisons
+        .map_err(|error| execution_error("RFPS comparison", error))?;
+    let rfps_disagreements = comparisons
         .iter()
         .filter(|row| row.ckks_false_positive || row.ckks_false_negative)
         .count();
@@ -825,63 +854,24 @@ fn validate_rfps_correctness(
         .collect::<Vec<_>>();
     if selected_ids.len() > capacity {
         return Err(execution_error(
-            "FPS correctness",
-            "encrypted Search/Locate differs from literal oracle",
+            "RFPS correctness",
+            "selected record count exceeds retrieval capacity",
         ));
     }
-    let exact_fetch_reconstruction = run.recovered.records.len() == selected_ids.len()
-        && run
-            .recovered
-            .records
-            .iter()
-            .zip(&selected_ids)
-            .all(|(output, id)| {
-                catalog
-                    .records()
-                    .iter()
-                    .find(|record| record.id == *id)
-                    .is_some_and(|record| output.id == *id && output.payload == record.payload)
-            });
-    let selected_indices = run
-        .locate
-        .selected_candidates
-        .iter()
-        .map(|candidate| candidate.physical_index)
-        .collect::<std::collections::BTreeSet<_>>();
-    let mut selected_windows_exact = true;
-    let mut unselected_windows_zero = true;
-    for index in 0..fetch.capacity() {
-        let start = index * fetch.record_slots();
-        let end = start + fetch.record_slots();
-        if selected_indices.contains(&index) {
-            selected_windows_exact &= run.recovered.slots[start..end]
-                == fetch.packed_records()[index]
-                    .iter()
-                    .copied()
-                    .map(u64::from)
-                    .collect::<Vec<_>>();
-        } else {
-            unselected_windows_zero &= run.recovered.slots[start..end]
-                .iter()
-                .all(|value| *value == 0);
-        }
-    }
-    let used_slots = fetch.capacity() * fetch.record_slots();
-    let unused_tail_zero = run.recovered.slots[used_slots..]
-        .iter()
-        .all(|value| *value == 0);
-    if !exact_fetch_reconstruction
-        || !selected_windows_exact
-        || !unselected_windows_zero
-        || !unused_tail_zero
-        || run.fetch_query.ciphertext_count() != 1
-        || run.fetch_response.ciphertext_count() != 1
-    {
-        return Err(execution_error(
-            "Fetch correctness",
-            "encrypted Fetch reconstruction or packed-window invariant failed",
-        ));
-    }
+    let (
+        exact_fetch_reconstruction,
+        selected_windows_exact,
+        unselected_windows_zero,
+        unused_tail_zero,
+    ) = verify_fetch(
+        catalog,
+        fetch,
+        &run.locate,
+        &run.recovered,
+        &run.fetch_query,
+        &run.fetch_response,
+        &selected_ids,
+    )?;
     Ok(CorrectnessReport {
         measured_trials: 1,
         candidate_count: run.locate.candidates.len(),
@@ -891,7 +881,7 @@ fn validate_rfps_correctness(
         unselected_windows_zero,
         unused_tail_zero,
         fps_oracle_disagreements: 0,
-        rfps_threshold_disagreements: fps_oracle_disagreements,
+        rfps_threshold_disagreements: rfps_disagreements,
         rfps_intrinsic_cancellations: comparisons
             .iter()
             .filter(|row| row.intrinsic_cancellation)
@@ -979,9 +969,6 @@ fn run_rfps(
         )?;
     }
 
-    let mut communication = None;
-    let mut correctness = Vec::new();
-    let mut repeated_sizes_identical = true;
     for run_id in 0..config.trials {
         let randomizer = crate::fresh_rfps_weights_for_seed(
             0xCB91_27DF_60A4_135B ^ run_id as u64,
@@ -1017,12 +1004,6 @@ fn run_rfps(
             )
             .map_err(|error| execution_error("Fetch serialization", error))?;
         let sizes = communication_report(search_sizes, fetch_sizes);
-        let raw_sizes = sizes.clone();
-        if let Some(first) = &communication {
-            repeated_sizes_identical &= first == &sizes;
-        } else {
-            communication = Some(sizes);
-        }
         report.measurements.raw.push(RawMeasurement {
             run_id,
             mode: "rfps",
@@ -1030,30 +1011,11 @@ fn run_rfps(
             candidate_count: run.locate.candidates.len(),
             selected_count: run.locate.selected_candidates.len(),
             durations: run.durations,
-            communication: raw_sizes,
-            correctness: check.clone(),
+            communication: sizes,
+            correctness: check,
         });
-        correctness.push(check);
     }
-    let samples = report
-        .measurements
-        .raw
-        .iter()
-        .filter(|sample| sample.mode == "rfps")
-        .cloned()
-        .collect::<Vec<_>>();
-    report
-        .measurements
-        .summary
-        .insert("rfps".into(), mode_summary(&samples)?);
-    let mut communication =
-        communication.ok_or_else(|| execution_error("RFPS communication", "no measured trial"))?;
-    communication.repeated_sizes_identical = repeated_sizes_identical;
-    report.communication.insert("rfps".into(), communication);
-    report
-        .correctness
-        .insert("rfps".into(), aggregate_correctness(&correctness)?);
-    Ok(())
+    finish_mode(report, "rfps")
 }
 
 pub fn run_interactive(

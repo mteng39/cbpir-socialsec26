@@ -9,6 +9,32 @@ use cbpir::{Cli, Command, build_bgl_workload, run_interactive, validate_run_args
 use clap::Parser;
 
 #[test]
+fn legacy_invalid_option_still_reports_usage() {
+    let output = std::process::Command::new(env!("CARGO_BIN_EXE_cbpir"))
+        .arg("--invalid")
+        .output()
+        .unwrap();
+    assert!(!output.status.success());
+    assert!(String::from_utf8_lossy(&output.stderr).contains("usage: cbpir [--quick]"));
+}
+
+#[test]
+#[ignore = "runs the native smoke fixture"]
+fn legacy_quick_smoke_remains_available() {
+    let output = std::process::Command::new(env!("CARGO_BIN_EXE_cbpir"))
+        .arg("--quick")
+        .output()
+        .unwrap();
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    let report: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+    assert_eq!(report["bounded_fixture_gate_passed"], true);
+}
+
+#[test]
 fn generated_help_matches_readme() {
     let output = std::process::Command::new(env!("CARGO_BIN_EXE_cbpir"))
         .args(["run", "--help"])

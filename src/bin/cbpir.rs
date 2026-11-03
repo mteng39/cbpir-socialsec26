@@ -12,24 +12,32 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             if cli.quick || cli.match_backend != "ct_ct" {
                 return Err("legacy smoke flags cannot be combined with run".into());
             }
-            let config = cbpir::validate_run_args(&args)?;
-            let workload = cbpir::build_bgl_workload(&config)?;
-            let report = cbpir::run_interactive(config, workload)?;
-            let mut bytes = serde_json::to_vec_pretty(&report)?;
-            bytes.push(b'\n');
-            if let Some(path) = args.output {
-                if let Some(parent) = path
-                    .parent()
-                    .filter(|parent| !parent.as_os_str().is_empty())
-                {
-                    std::fs::create_dir_all(parent)?;
-                }
-                std::fs::write(path, &bytes)?;
-            }
-            std::io::stdout().lock().write_all(&bytes)?;
-            return Ok(());
+            return run_interactive(args);
         }
     }
+    run_smoke(&args)
+}
+
+fn run_interactive(args: cbpir::RunArgs) -> Result<(), Box<dyn std::error::Error>> {
+    let config = cbpir::validate_run_args(&args)?;
+    let workload = cbpir::build_bgl_workload(&config)?;
+    let report = cbpir::run_interactive(config, workload)?;
+    let mut bytes = serde_json::to_vec_pretty(&report)?;
+    bytes.push(b'\n');
+    if let Some(path) = args.output {
+        if let Some(parent) = path
+            .parent()
+            .filter(|parent| !parent.as_os_str().is_empty())
+        {
+            std::fs::create_dir_all(parent)?;
+        }
+        std::fs::write(path, &bytes)?;
+    }
+    std::io::stdout().lock().write_all(&bytes)?;
+    Ok(())
+}
+
+fn run_smoke(args: &[String]) -> Result<(), Box<dyn std::error::Error>> {
     let mut quick = false;
     let mut backend = cbpir::MatchBackend::CtCt;
     let mut index = 0;

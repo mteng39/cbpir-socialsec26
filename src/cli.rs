@@ -86,7 +86,7 @@ fn require_member(value: usize, allowed: &[usize], label: &str) -> Result<(), Co
         Ok(())
     } else {
         Err(ConfigError(format!(
-            "{label} must be one of {}",
+            "{label} {value} is invalid; expected {}",
             allowed
                 .iter()
                 .map(usize::to_string)
@@ -98,36 +98,50 @@ fn require_member(value: usize, allowed: &[usize], label: &str) -> Result<(), Co
 
 pub fn validate_run_args(args: &RunArgs) -> Result<CliConfig, ConfigError> {
     if args.dataset != "bgl" {
-        return Err(ConfigError("dataset must be bgl".into()));
+        return Err(ConfigError(format!(
+            "dataset '{}' is invalid; expected bgl",
+            args.dataset
+        )));
     }
     require_member(args.num_records, &RECORD_COUNTS, "num-records")?;
     require_member(args.capacity, &CAPACITIES, "capacity")?;
     require_member(args.pattern_length, &PATTERN_LENGTHS, "pattern-length")?;
     require_member(args.record_slots, &RECORD_SLOTS, "record-slots")?;
     if args.searchable_bytes == 0 {
-        return Err(ConfigError("searchable-bytes must be positive".into()));
-    }
-    if args.pattern_length > args.searchable_bytes {
         return Err(ConfigError(
-            "pattern-length must not exceed searchable-bytes".into(),
+            "searchable-bytes 0 is invalid; expected a positive value".into(),
         ));
     }
+    if args.pattern_length > args.searchable_bytes {
+        return Err(ConfigError(format!(
+            "pattern-length {} exceeds searchable-bytes {}",
+            args.pattern_length, args.searchable_bytes
+        )));
+    }
     if args.payload_bytes == 0 {
-        return Err(ConfigError("payload-bytes must be positive".into()));
+        return Err(ConfigError(
+            "payload-bytes 0 is invalid; expected 1–114".into(),
+        ));
     }
     if args.payload_bytes > 114 {
-        return Err(ConfigError("payload-bytes must not exceed 114".into()));
+        return Err(ConfigError(format!(
+            "payload-bytes {} is invalid; expected 1–114",
+            args.payload_bytes
+        )));
     }
     if 14_usize
         .checked_add(args.payload_bytes)
         .is_none_or(|required| required > args.record_slots)
     {
-        return Err(ConfigError(
-            "14 + payload-bytes must not exceed record-slots".into(),
-        ));
+        return Err(ConfigError(format!(
+            "14 + payload-bytes {} exceeds record-slots {}",
+            args.payload_bytes, args.record_slots
+        )));
     }
     if args.trials == 0 {
-        return Err(ConfigError("trials must be positive".into()));
+        return Err(ConfigError(
+            "trials 0 is invalid; expected a positive value".into(),
+        ));
     }
 
     let text_bytes = args

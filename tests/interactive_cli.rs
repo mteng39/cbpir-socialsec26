@@ -90,48 +90,51 @@ fn rejects_declared_constraint_violations() {
     let cases: Vec<InvalidCase> = vec![
         (
             Box::new(|a| a.dataset = "other".into()),
-            "dataset must be bgl",
+            "dataset 'other' is invalid; expected bgl",
         ),
         (
             Box::new(|a| a.num_records = 64),
-            "num-records must be one of 128,256,512,1024",
+            "num-records 64 is invalid; expected 128,256,512,1024",
         ),
         (
             Box::new(|a| a.capacity = 2),
-            "capacity must be one of 1,4,8,16",
+            "capacity 2 is invalid; expected 1,4,8,16",
         ),
         (
             Box::new(|a| a.pattern_length = 2),
-            "pattern-length must be one of 1,4,8,16",
+            "pattern-length 2 is invalid; expected 1,4,8,16",
         ),
         (
             Box::new(|a| a.record_slots = 32),
-            "record-slots must be one of 64,128,224,256,384,512",
+            "record-slots 32 is invalid; expected 64,128,224,256,384,512",
         ),
         (
             Box::new(|a| a.searchable_bytes = 0),
-            "searchable-bytes must be positive",
+            "searchable-bytes 0 is invalid; expected a positive value",
         ),
         (
             Box::new(|a| a.searchable_bytes = 1),
-            "pattern-length must not exceed searchable-bytes",
+            "pattern-length 4 exceeds searchable-bytes 1",
         ),
         (
             Box::new(|a| a.payload_bytes = 0),
-            "payload-bytes must be positive",
+            "payload-bytes 0 is invalid; expected 1–114",
         ),
         (
             Box::new(|a| a.payload_bytes = 115),
-            "payload-bytes must not exceed 114",
+            "payload-bytes 115 is invalid; expected 1–114",
         ),
         (
             Box::new(|a| {
                 a.payload_bytes = 60;
                 a.record_slots = 64;
             }),
-            "14 + payload-bytes must not exceed record-slots",
+            "14 + payload-bytes 60 exceeds record-slots 64",
         ),
-        (Box::new(|a| a.trials = 0), "trials must be positive"),
+        (
+            Box::new(|a| a.trials = 0),
+            "trials 0 is invalid; expected a positive value",
+        ),
         (
             Box::new(|a| {
                 a.num_records = 1024;
