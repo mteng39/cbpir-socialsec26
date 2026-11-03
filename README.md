@@ -7,10 +7,6 @@ Encryption** (SocialSec 2026).
 [Paper and citation](paper/README.md) ·
 [Presentation](slides/cbpir-socialsec26-slides.pdf)
 
-CBPIR searches structured records privately and retrieves at most `K` selected
-payloads. Search uses CKKS FPS/RFPS, Locate maps alignments to unique record IDs
-on the client, and Fetch uses one packed BGV query and one encrypted response.
-
 ## Running
 
 ### Requirements
@@ -78,7 +74,8 @@ Options without defaults are required.
 payload length. BGL messages are truncated or repeated to these lengths.
 Queries are deterministic in-record substrings with support nearest `K`.
 
-Payloads allow 1–114 bytes and require a 14-byte header:
+Payloads allow 1–114 bytes. Each record includes a 14-byte header:
+4-byte format marker, 8-byte record ID, and 2-byte payload length.
 `14 + payload_bytes <= record_slots`. Pattern length must fit searchable text.
 
 Supported values: `n={128,256,512,1024}`, `K={1,4,8,16}`, `m={1,4,8,16}`,
